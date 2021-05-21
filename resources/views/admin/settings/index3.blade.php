@@ -3,14 +3,14 @@
 @section('title', 'Empresa')
 
 @section('content_header')
-    <h1>Configuraciones</h1>
+    <h1>Configuraciones2</h1>
 @stop
 
 @livewireScripts
 
 @section('content')
-{{-- @livewire('bene') --}}
-    <p>Menú principal de Configuraciones</p>
+
+<p>Menú principal de Configuraciones</p>
 @stop
 
 @section('css')

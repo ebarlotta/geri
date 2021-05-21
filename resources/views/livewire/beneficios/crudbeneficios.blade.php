@@ -1,8 +1,18 @@
 
+@extends('adminlte::page')
+
+@section('title', 'Empresa')
+
+@section('content_header')
+
+@stop
+
+@section('content')
+<h1>Empresa</h1>
 <div class="py-12">
-    {{-- <x-slot name="header">
+    <x-slot name="header">
         <h2 class="text-center">CRUD Beneficios</h2>
-    </x-slot> --}}
+    </x-slot>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
             @if (session()->has('message'))
@@ -48,3 +58,12 @@
     </div>
 </div>
 
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

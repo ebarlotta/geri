@@ -7,7 +7,9 @@
 @stop
 @section('plugins.SweetAlert2',true)
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Welcome to this beautiful admin panel.
+        Utilizando view/admin/index
+    </p>
 @stop
 
 @section('css')

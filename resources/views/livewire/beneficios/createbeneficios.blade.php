@@ -1,3 +1,13 @@
+@extends('adminlte::page')
+
+@section('title', 'Empresa')
+
+@section('content_header')
+    <h1>Empresa</h1>
+@stop
+@section('plugins.SweetAlert2',true)
+@section('content')
+
 <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" style="background-color: beige; ">
         <div class="fixed inset-0 transition-opacity">
@@ -40,3 +50,13 @@
         </div>
     </div>
 </div>
+
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop
