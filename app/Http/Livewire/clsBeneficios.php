@@ -9,18 +9,21 @@ class clsBeneficios extends Component
 {
     public $descripcionbeneficio, $beneficio_id;
     public $beneficios;
-    public $isModalOpen = 0;
+    public $isModalOpen = false;
 
     public function render()
     {
         $this->beneficios = Beneficios::all();
-        return view('livewire.beneficios.crudbeneficios');
-    }
+        //return view('liveware.crudbeneficios')->with('isModalOpen', $this->isModalOpen)->with('beneficios', $this->beneficios);
+        return view('livewire.beneficios.crudbeneficios')->with('isModalOpen', $this->isModalOpen)->with('beneficios', $this->beneficios);
+}
 
     public function create()
     {
-        $this->resetCreateForm();
+        $this->resetCreateForm();   
         $this->openModalPopover();
+        $this->isModalOpen=true;
+        return view('livewire.beneficios.crudbeneficios')->with('isModalOpen', $this->isModalOpen)->with('beneficios', $this->beneficios);
     }
 
     public function openModalPopover()
@@ -65,7 +68,7 @@ class clsBeneficios extends Component
     
     public function delete($id)
     {
-        Student::find($id)->delete();
+        Beneficios::find($id)->delete();
         session()->flash('message', 'Beneficio Eliminado.');
     }
 }

@@ -251,6 +251,22 @@ return [
                     'text' => 'Beneficios',
                     'url'  => 'admin/settings/beneficios',
                 ],
+                [
+                    'text' => 'Estados Civiles',
+                    'url'  => 'admin/settings/estadosciviles',
+                ],
+                [
+                    'text' => 'Tipo de Persona',
+                    'url'  => 'admin/settings/tipospersonas',
+                ],
+                [
+                    'text' => 'Tipos de Documentos',
+                    'url'  => 'admin/settings/tiposdocumentos',
+                ],
+                [
+                    'text' => 'Otras Cosas',
+                    'url'  => 'admin/otrascosas',
+                ],
             ],
         ],
         [

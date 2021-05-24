@@ -1,7 +1,3 @@
-<!-- @extends('adminlte::page') -->
-  
-@section('content')
-
 <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" style="background-color: beige; ">
         <div class="fixed inset-0 transition-opacity">
@@ -20,8 +16,8 @@
                             <input type="text"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="exampleFormControlInput1" placeholder="Ingrese descripción"
-                                wire:model="descripcionbeneficio">
-                            @error('descripcionbeneficio') <span
+                                wire:model="tipodepersona">
+                            @error('tipodepersona') <span
                                 class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -44,5 +40,3 @@
         </div>
     </div>
 </div>
-
-@endsection

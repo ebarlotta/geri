@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+<!-- @extends('adminlte::page') -->
 
 @section('title', 'Empresa')
 
@@ -6,10 +6,13 @@
     <h1>Empresa</h1>
 @stop
 @section('plugins.SweetAlert2',true)
+
+@include('livewire.beneficios.crudbeneficios')
 @section('content')
     <p>Welcome to this beautiful admin panel.
         Utilizando view/admin/index
     </p>
+    
 @stop
 
 @section('css')

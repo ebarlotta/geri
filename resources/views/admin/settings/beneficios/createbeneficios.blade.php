@@ -1,4 +1,4 @@
-<!-- @extends('adminlte::page') -->
+@extends('posts.layout')
   
 @section('content')
 

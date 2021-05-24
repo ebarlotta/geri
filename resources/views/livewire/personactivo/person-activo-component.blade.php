@@ -1,5 +1,6 @@
+
 <div>
-    <h1>Empresa / Beneficios</h1>
+    <h1>Empresa / Estados Personas</h1>
     <div class="py-12">
         <x-slot name="header">  
             <div class="flex">
@@ -8,6 +9,7 @@
                 <!-- Navigation Links -->
                 @livewire('submenu')
             </div>
+
         </x-slot>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -20,12 +22,9 @@
                     </div>
                 </div>
                 @endif
-                <button onclick="executeExample('sweetAlert')">Boton</button>
-                <!-- <button wire:click="create()" class="bg-green text-blue font-bold py-2 px-4 rounded my-3">Crear -->
-                <button wire:click="create()" class="bg-green text-blue font-bold py-2 px-4 rounded my-3">Crear
-                    Beneficio</button>
+                <button wire:click="create()" class="bg-green text-blue font-bold py-2 px-4 rounded my-3">Crear Estado de Personas</button>
                 @if ($isModalOpen)
-                @include('livewire.beneficios.createbeneficios')
+                    @include('livewire.personactivo.createpersonactivo')
                 @endif
                 <table class="table-fixed w-full">
                     <thead>
@@ -36,14 +35,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($beneficios as $beneficio)
+                        @foreach ($estados as $estado)
                         <tr>
-                            <td class="border px-4 py-2">{{ $beneficio->id }}</td>
-                            <td class="border px-4 py-2">{{ $beneficio->descripcionbeneficio }}</td>
+                            <td class="border px-4 py-2">{{ $estado->id }}</td>
+                            <td class="border px-4 py-2">{{ $estado->estado }}</td>
                             <td>
-                                <button wire:click="edit({{ $beneficio->id }})" class="bg-blue text-blue font-bold py-2 px-4 rounded">
+                                <button wire:click="edit({{ $estado->id }})" class="bg-blue text-blue font-bold py-2 px-4 rounded">
                                     Editar
-                                    <button wire:click="delete({{ $beneficio->id }})" class="bg-red hover:bg-red-700 text-blue font-bold py-2 px-4 rounded">Eliminar</button>
+                                    <button wire:click="delete({{ $estado->id }})" class="bg-red hover:bg-red-700 text-blue font-bold py-2 px-4 rounded">Eliminar</button>
                             </td>
                         </tr>
                         @endforeach
@@ -54,12 +53,3 @@
     </div>
 </div>
 
-<script>
-    Swal.executeExample(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-    )
-</script>
-
-@stack('modals')
