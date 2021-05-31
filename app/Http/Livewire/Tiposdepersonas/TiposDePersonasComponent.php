@@ -61,7 +61,8 @@ class TiposDePersonasComponent extends Component
     {
         $tipodepersona = TipoDePersona::findOrFail($id);
         $this->id = $id;
-        $this->tipodepersona = $tipodepersona->tipodepersona;
+        $this->tipodepersona_id=$id;
+        $this->tipodepersona_id = $tipodepersona->tipodepersona_id;
         
         $this->openModalPopover();
     }

@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Settings;
-use App\Http\Livewire\clsBeneficios;
 use App\Http\Controllers\ClsOtrasCosasController;
+
+use App\Http\Livewire\Beneficios\clsBeneficios;
 use App\Http\Livewire\Estadosciviles\EstadosCivilesComponent;
 use App\Http\Livewire\Tiposdepersonas\TiposDePersonasComponent;
 use App\Http\Livewire\Tiposdedocumentos\TiposDeDocumentosComponent;
@@ -13,7 +14,7 @@ use App\Http\Livewire\Personactivo\PersonActivoComponent;
 
 //Route::get('',[HomeController::class,'index'])->name('admin.index');
 
-Route::get('',clsBeneficios::class)->name('crudBeneficios');
+Route::get('beneficios',clsBeneficios::class)->name('crudBeneficios');
 Route::get('estadosciviles',EstadosCivilesComponent::class)->name('crudEstadosCiviles');
 Route::get('tiposdepersonas',TiposDePersonasComponent::class)->name('crudTiposDePersonas');
 Route::get('tiposdedocumentos',TiposDeDocumentosComponent::class)->name('crudTiposDeDocumentos');

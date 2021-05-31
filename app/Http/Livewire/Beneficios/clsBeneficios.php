@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Beneficios;
 use Livewire\Component;
 use App\Models\Beneficios;
-
 
 class clsBeneficios extends Component
 {
     public $descripcionbeneficio, $beneficio_id;
     public $beneficios;
     public $isModalOpen = false;
-
+    //public $control = 0;
+    
     public function render()
     {
         $this->beneficios = Beneficios::all();
         //return view('liveware.crudbeneficios')->with('isModalOpen', $this->isModalOpen)->with('beneficios', $this->beneficios);
-        return view('livewire.beneficios.crudbeneficios')->with('isModalOpen', $this->isModalOpen)->with('beneficios', $this->beneficios);
+        return view('livewire.beneficios.crudbeneficios')
+            ->with('isModalOpen', $this->isModalOpen)
+            ->with('beneficios', $this->beneficios);
 }
 
     public function create()
@@ -61,6 +63,7 @@ class clsBeneficios extends Component
     {
         $beneficio = Beneficios::findOrFail($id);
         $this->id = $id;
+        $this->beneficio_id = $id;
         $this->descripcionbeneficio = $beneficio->descripcionbeneficio;
     
         $this->openModalPopover();

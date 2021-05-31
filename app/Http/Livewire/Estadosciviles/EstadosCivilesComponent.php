@@ -61,6 +61,7 @@ class EstadosCivilesComponent extends Component
     {
         $estadocivil = EstadosCiviles::findOrFail($id);
         $this->id = $id;
+        $this->estadocivil_id=$id;
         $this->estadocivil = $estadocivil->estadocivil;
         
         $this->openModalPopover();

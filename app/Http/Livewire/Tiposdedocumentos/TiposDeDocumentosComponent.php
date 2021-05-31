@@ -59,6 +59,7 @@ class TiposDeDocumentosComponent extends Component
     {
         $tipodedocumento = TiposDocumentos::findOrFail($id);
         $this->id = $id;
+        $this->tipodedocumento_id=$id;
         $this->tipodedocumento = $tipodedocumento->tipodedocumento;
         
         $this->openModalPopover();

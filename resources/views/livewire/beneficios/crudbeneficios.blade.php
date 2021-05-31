@@ -1,7 +1,7 @@
 <div>
-    <h1>Empresa / Beneficios</h1>
-    <div class="py-12">
-        <x-slot name="header">  
+    <x-titulo>Beneficios</x-titulo>
+    <div>
+        <x-slot name="header">
             <div class="flex">
                 <!-- //Comienza en submenu de encabezado -->
 
@@ -20,17 +20,14 @@
                     </div>
                 </div>
                 @endif
-                <button onclick="executeExample('sweetAlert')">Boton</button>
-                <!-- <button wire:click="create()" class="bg-green text-blue font-bold py-2 px-4 rounded my-3">Crear -->
-                <button wire:click="create()" class="bg-green text-blue font-bold py-2 px-4 rounded my-3">Crear
-                    Beneficio</button>
+                <x-crear>Nuevo Beneficio</x-crear>
                 @if ($isModalOpen)
                 @include('livewire.beneficios.createbeneficios')
                 @endif
                 <table class="table-fixed w-full">
                     <thead>
                         <tr class="bg-gray-100">
-                            <th class="px-4 py-2 w-20">No.</th>
+                            <!-- <th class="px-4 py-2 w-20">No.</th> -->
                             <th class="px-4 py-2">Descripción</th>
                             <th class="px-4 py-2">Opciones</th>
                         </tr>
@@ -38,12 +35,15 @@
                     <tbody>
                         @foreach ($beneficios as $beneficio)
                         <tr>
-                            <td class="border px-4 py-2">{{ $beneficio->id }}</td>
+                            <!-- <td class="border px-4 py-2">{{ $beneficio->id }}</td> -->
                             <td class="border px-4 py-2">{{ $beneficio->descripcionbeneficio }}</td>
-                            <td>
-                                <button wire:click="edit({{ $beneficio->id }})" class="bg-blue text-blue font-bold py-2 px-4 rounded">
-                                    Editar
-                                    <button wire:click="delete({{ $beneficio->id }})" class="bg-red hover:bg-red-700 text-blue font-bold py-2 px-4 rounded">Eliminar</button>
+                            <td class="border px-4 py-2">
+                                <div class="flex justify-center">
+                                    <!-- Editar  -->
+                                    <x-editar id="{{$beneficio->id}}"></x-editar>
+                                    <!-- Eliminar -->
+                                    <x-eliminar id="{{$beneficio->id}}"></x-eliminar>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
@@ -53,13 +53,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    Swal.executeExample(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-    )
-</script>
-
-@stack('modals')

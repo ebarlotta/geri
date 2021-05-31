@@ -59,6 +59,7 @@ class PersonActivoComponent extends Component
     {
         $estado = PersonActivo::findOrFail($id);
         $this->id = $id;
+        $this->estado_id=$id;
         $this->estado = $estado->estado;
         
         $this->openModalPopover();
