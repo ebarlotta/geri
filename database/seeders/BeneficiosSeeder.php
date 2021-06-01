@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use \App\Models\Beneficios;
+use Illuminate\Support\Facades\DB;
 
 class BeneficiosSeeder extends Seeder
 {
@@ -14,11 +14,8 @@ class BeneficiosSeeder extends Seeder
      */
     public function run()
     {
-        $Beneficio = new Beneficios();
-        $Beneficio->descripcionbeneficio = "PARTICULAR";
-        $Beneficio->save();
-        $Beneficio1 = new Beneficios();
-        $Beneficio1->descripcionbeneficio = "PAMI";
-        $Beneficio1->save();
+        DB::table('beneficios')->truncate();
+        DB::table('beneficios')->insert(['descripcionbeneficio'=>'PARTICULAR',]);
+        DB::table('beneficios')->insert(['descripcionbeneficio'=>'PAMI',]);
     }
 }

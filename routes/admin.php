@@ -10,6 +10,14 @@ use App\Http\Livewire\Estadosciviles\EstadosCivilesComponent;
 use App\Http\Livewire\Tiposdepersonas\TiposDePersonasComponent;
 use App\Http\Livewire\Tiposdedocumentos\TiposDeDocumentosComponent;
 use App\Http\Livewire\Personactivo\PersonActivoComponent;
+use App\Http\Livewire\Areas\AreasComponent;
+use App\Http\Livewire\Escolaridades\EscolaridadesComponent;
+use App\Http\Livewire\Gradodependencia\GradodependenciaComponent;
+use App\Http\Livewire\Localidades\LocalidadesComponent;
+use App\Http\Livewire\Motivoegreso\MotivoegresoComponent;
+use App\Http\Livewire\Nacionalidades\NacionalidadesComponent;
+use App\Http\Livewire\Provincias\ProvinciasComponent;
+
 
 
 //Route::get('',[HomeController::class,'index'])->name('admin.index');
@@ -19,6 +27,13 @@ Route::get('estadosciviles',EstadosCivilesComponent::class)->name('crudEstadosCi
 Route::get('tiposdepersonas',TiposDePersonasComponent::class)->name('crudTiposDePersonas');
 Route::get('tiposdedocumentos',TiposDeDocumentosComponent::class)->name('crudTiposDeDocumentos');
 Route::get('personactivo',PersonActivoComponent::class)->name('crudPersonActivo');
+Route::get('areas',AreasComponent::class)->name('areas');
+Route::get('escolaridades',EscolaridadesComponent::class)->name('escolaridades');
+Route::get('nacionalidades',NacionalidadesComponent::class)->name('nacionalidades');
+Route::get('localidades',LocalidadesComponent::class)->name('localidades');
+Route::get('provincias',ProvinciasComponent::class)->name('provincias');
+Route::get('gradodependencia',GradodependenciaComponent::class)->name('gradodependencia');
+Route::get('motivoegreso',MotivoegresoComponent::class)->name('motivoegreso');
 
 
 Route::get('settings',[Settings::class,'index'])->name('admin.settings.index');

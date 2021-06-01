@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
+//use App\Models\TipoDePersona;
 use Illuminate\Database\Seeder;
-use \App\Models\PersonActivo;
+/*use \App\Models\PersonActivo;
 use \App\Models\Beneficios;
 use \App\Models\TiposDocumentos;
 use \App\Models\EstadosCiviles;
-use \App\Models\TipoDePersona;
-
+use \App\Models\TipoDePersona;*/
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Person::factory(10)->create();
         // \App\Models\PersonActivo::factory(3)->create();   Desactivado hasta que aprenda a poner varios valores en un vector
         //$this->call(Person::class);
-        $Activos1 = new PersonActivo();
+         /*$Activos1 = new PersonActivo();
         $Activos1->estado = "Activo";
         $Activos1->save();
         $Activos2 = new PersonActivo();
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         $Beneficio1->descripcionbeneficio = "PAMI";
         $Beneficio1->save();
 
-        $TiposDocumentos = new TiposDocumentos();
+       $TiposDocumentos = new TiposDocumentos();
         $TiposDocumentos->tipodocumento = "DNI";
         $TiposDocumentos->save();
         $TiposDocumentos1 = new TiposDocumentos();
@@ -73,7 +73,19 @@ class DatabaseSeeder extends Seeder
         $TipoDePersona->save();
         $TipoDePersona = new TipoDePersona();
         $TipoDePersona->tipodepersona = "Referente";
-        $TipoDePersona->save();
+        $TipoDePersona->save();*/
         
+        $this->call(AreasSeeder::class);
+        $this->call(EscolaridadesSeeder::class);
+        //$this->call(TipoDePersona::class);
+        //$this->call(EstadosCiviles::class);
+        //$this->call(TiposDocumentos::class);
+        //$this->call(Beneficios::class);
+        //$this->call(PersonActivo::class);
+        $this->call(NacionalidadesSeeder::class);
+        $this->call(LocalidadesSeeder::class);
+        $this->call(ProvinciasSeeder::class);
+        $this->call(GradoDependenciaSeeder::class);
+        $this->call(MotivosEgresosSeeder::class);
     }
 }

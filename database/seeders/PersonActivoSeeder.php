@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use \App\Models\PersonalActivo;
+use Illuminate\Support\Facades\DB;
 
 class PersonActivoSeeder extends Seeder
 {
@@ -14,17 +14,9 @@ class PersonActivoSeeder extends Seeder
      */
     public function run()
     {
-        $Activos1 = new PersonActivo();
-        $Activos1->estado = "Activo";
-        $Activos1->save();
-        $Activos2 = new PersonActivo();
-        $Activos2->estado = "Baja";
-        $Activos2->save();
-        $Activos3 = new PersonActivo();
-        $Activos3->estado = "En proceso de baja";
-        $Activos3->save();
-        $Activos4 = new PersonActivo();
-        $Activos4->estado = "Otros";
-        $Activos4->save();
+        DB::table('person_activos')->truncate();
+        DB::table('person_activos')->insert(['estado'=>'Alta',]);
+        DB::table('person_activos')->insert(['estado'=>'Baja',]);
+        DB::table('person_activos')->insert(['estado'=>'En proceso de Baja',]);
     }
 }
