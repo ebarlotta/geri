@@ -37,6 +37,15 @@
             <x-jet-nav-link href="{{ route('motivoegreso') }}" :active="request()->routeIs('motivoegreso')">
                 Motivo de Egresos
             </x-jet-nav-link>
+            <x-jet-nav-link href="{{ route('estadocama') }}" :active="request()->routeIs('estadocama')">
+                Estado de Camas
+            </x-jet-nav-link>
+            <x-jet-nav-link href="{{ route('personascampos') }}" :active="request()->routeIs('personascampos')">
+                Personas Campos
+            </x-jet-nav-link>
+            <x-jet-nav-link href="{{ route('interfaces') }}" :active="request()->routeIs('interfaces')">
+                Gestión Interfaces
+            </x-jet-nav-link>
         </div>
     </div>
 </div>

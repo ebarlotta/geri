@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecursosTable extends Migration
+class CreateInterfacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateRecursosTable extends Migration
      */
     public function up()
     {
-        Schema::create('recursos', function (Blueprint $table) {
+        Schema::create('interfaces', function (Blueprint $table) {
             $table->id();
-            $table->text('descriptionrecurso');
-            $table->text('Permiso',10);
-            $table->integer('Area_id');
+            $table->text('NombreInterface');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateRecursosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recursos');
+        Schema::dropIfExists('interfaces');
     }
 }

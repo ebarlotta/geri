@@ -20,17 +20,17 @@ class CreatePeopleTable extends Migration
             $table->string('email')->nullable();
             $table->date('email_verified_at');
             $table->date('nacimiento');
-            $table->integer('idestado')->foreign('idestado')->references('id')->on('personactivo');
+            $table->integer('estado_id')->foreign('estado_id')->references('id')->on('personactivo');
             $table->text('alias');
-            $table->integer('idbeneficio')->foreign('idbeneficio')->references('id')->on('beneficio');
+            $table->integer('beneficio_id')->foreign('beneficio_id')->references('id')->on('beneficio');
             $table->integer('documento');
-            $table->integer('idtipodocumento')->foreign('idtipodocumento')->references('id')->on('tiposdocumentos');
+            $table->integer('tipodocumento_id')->foreign('tipodocumento_id')->references('id')->on('tiposdocumentos');
             $table->text('domicilio');
             $table->text('localidad');
             $table->integer('sexo');
             $table->text('nacionalidad');
-            $table->integer('idestadocivil')->foreign('idestadocivil')->references('id')->on('estadosciviles');
-            $table->integer('idtipopersona')->foreign('idtipopersona')->references('id')->on('tiposdepersonas');
+            $table->integer('estadocivil_id')->foreign('estadocivil_id')->references('id')->on('estadosciviles');
+            $table->integer('tipopersona_id')->foreign('tipopersona_id')->references('id')->on('tiposdepersonas');
 
             $table->timestamps();
         });

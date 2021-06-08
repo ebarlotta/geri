@@ -15,6 +15,10 @@ class CreateCamasTable extends Migration
     {
         Schema::create('camas', function (Blueprint $table) {
             $table->id();
+            $table->integer('NroHabitacion');
+            $table->integer('NroCama');
+            $table->integer('EstadoCama');  // 1 Habilitada  0 Desabilitada
+            $table->integer('SexoCama');    // 1 masculino   0 Femenina
             $table->timestamps();
         });
     }

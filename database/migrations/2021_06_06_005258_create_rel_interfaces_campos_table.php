@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecursosTable extends Migration
+class CreateRelInterfacesCamposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRecursosTable extends Migration
      */
     public function up()
     {
-        Schema::create('recursos', function (Blueprint $table) {
+        Schema::create('rel_interfaces_campos', function (Blueprint $table) {
             $table->id();
-            $table->text('descriptionrecurso');
-            $table->text('Permiso',10);
-            $table->integer('Area_id');
+            $table->integer('interface_id');
+            $table->integer('campo_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateRecursosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recursos');
+        Schema::dropIfExists('rel_interfaces_campos');
     }
 }

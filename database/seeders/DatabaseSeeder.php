@@ -77,15 +77,17 @@ class DatabaseSeeder extends Seeder
         
         $this->call(AreasSeeder::class);
         $this->call(EscolaridadesSeeder::class);
-        //$this->call(TipoDePersona::class);
-        //$this->call(EstadosCiviles::class);
-        //$this->call(TiposDocumentos::class);
-        //$this->call(Beneficios::class);
-        //$this->call(PersonActivo::class);
+        $this->call(TipoDePersonaSeeder::class);
+        $this->call(EstadosCivilesSeeder::class);
+        $this->call(TiposDocumentosSeeder::class);
+        $this->call(BeneficiosSeeder::class);
+        $this->call(PersonActivoSeeder::class);
         $this->call(NacionalidadesSeeder::class);
         $this->call(LocalidadesSeeder::class);
         $this->call(ProvinciasSeeder::class);
         $this->call(GradoDependenciaSeeder::class);
         $this->call(MotivosEgresosSeeder::class);
+        $this->call(CamasSeeder::class);
+        $this->call(PersonasCamposSeeder::class);
     }
 }

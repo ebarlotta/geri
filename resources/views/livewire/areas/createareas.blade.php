@@ -17,7 +17,6 @@
                             <input type="checkbox" class="shadow appearance-none border rounded w-5 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Ingrese Descripcion" wire:model="AreasHabilitada">
 
                             @error('AreasDescripcion') <span class="text-red-500">{{ $message }}</span>@enderror
-                            @error('AreasDescripcion') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
                 </div>

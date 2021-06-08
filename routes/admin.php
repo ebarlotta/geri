@@ -12,12 +12,14 @@ use App\Http\Livewire\Tiposdedocumentos\TiposDeDocumentosComponent;
 use App\Http\Livewire\Personactivo\PersonActivoComponent;
 use App\Http\Livewire\Areas\AreasComponent;
 use App\Http\Livewire\Escolaridades\EscolaridadesComponent;
+use App\Http\Livewire\Estadocama\EstadocamaComponent;
 use App\Http\Livewire\Gradodependencia\GradodependenciaComponent;
+use App\Http\Livewire\Interfaces\InterfacesComponent;
 use App\Http\Livewire\Localidades\LocalidadesComponent;
 use App\Http\Livewire\Motivoegreso\MotivoegresoComponent;
 use App\Http\Livewire\Nacionalidades\NacionalidadesComponent;
+use App\Http\Livewire\PersonaCampos\PersonasCamposComponent;
 use App\Http\Livewire\Provincias\ProvinciasComponent;
-
 
 
 //Route::get('',[HomeController::class,'index'])->name('admin.index');
@@ -34,7 +36,9 @@ Route::get('localidades',LocalidadesComponent::class)->name('localidades');
 Route::get('provincias',ProvinciasComponent::class)->name('provincias');
 Route::get('gradodependencia',GradodependenciaComponent::class)->name('gradodependencia');
 Route::get('motivoegreso',MotivoegresoComponent::class)->name('motivoegreso');
-
+Route::get('estadocama',EstadocamaComponent::class)->name('estadocama');
+Route::get('personascampos',PersonasCamposComponent::class)->name('personascampos');
+Route::get('interfaces',InterfacesComponent::class)->name('interfaces');
 
 Route::get('settings',[Settings::class,'index'])->name('admin.settings.index');
 //Route::get('settings/beneficios',[clsBeneficios::class,'index'])->name('admin.settings.beneficios.index');
