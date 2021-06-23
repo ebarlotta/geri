@@ -15,8 +15,11 @@ class CreateEstadosCivilesTable extends Migration
     {
         Schema::create('estados_civiles', function (Blueprint $table) {
             $table->id();
-            $table->text('estadocivil');
+            $table->string('estadocivil');
+            //$table->unsignedBigInteger('estados_civiles_id')->nullable(true);
             $table->timestamps();
+
+            //$table->foreign('estados_civiles_id')->references('id')->on('people')->onDelete('cascade');
         });
     }
 

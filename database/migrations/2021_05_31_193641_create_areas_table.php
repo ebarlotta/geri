@@ -15,7 +15,7 @@ class CreateAreasTable extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
-            $table->text('AreasDescripcion')->nullable(true);
+            $table->string('AreasDescripcion')->nullable(false);
             $table->boolean('AreasHabilitada')->default(true);
             $table->timestamps();
         });

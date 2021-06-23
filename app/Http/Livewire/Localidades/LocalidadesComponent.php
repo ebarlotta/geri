@@ -9,7 +9,7 @@ use Livewire\Component;
 class LocalidadesComponent extends Component
 {
 
-    public $localidadDescripcion, $localidadCP, $localidad_id;
+    public $localidad_descripcion, $localidad_cp, $localidad_id;
     public $localidades;
     public $isModalOpen = false;
 
@@ -27,7 +27,7 @@ class LocalidadesComponent extends Component
         $this->isModalOpen=true;
         return view('livewire.localidades.localidades-component')
             ->with('isModalOpen', $this->isModalOpen)
-            ->with('localidadDescripcion', $this->localidadDescripcion);
+            ->with('localidad_descripcion', $this->localidad_descripcion);
     }
 
     public function openModalPopover()
@@ -42,20 +42,20 @@ class LocalidadesComponent extends Component
 
     private function resetCreateForm(){
         $this->localidad_id = '';
-        $this->localidadDescripcion = '';
-        $this->localidadCP = '';
+        $this->localidad_descripcion = '';
+        $this->localidad_cp = '';
     }
     
     public function store()
     {
         $this->validate([
-            'localidadDescripcion' => 'required',
-            'localidadCP' => 'required',
+            'localidad_descripcion' => 'required',
+            'localidad_cp' => 'required',
         ]);
     
         Localidades::updateOrCreate(['id' => $this->localidad_id], [
-            'localidadDescripcion' => $this->localidadDescripcion,
-            'localidadCP' => $this->localidadCP,
+            'localidad_descripcion' => $this->localidad_descripcion,
+            'localidad_cp' => $this->localidad_cp,
         ]);
 
         session()->flash('message', $this->localidad_id ? 'Localidad Actualizada.' : 'Localidad Creada.');
@@ -69,8 +69,8 @@ class LocalidadesComponent extends Component
         $localidad = Localidades::findOrFail($id);
         $this->id = $id;
         $this->localidad_id=$id;
-        $this->localidadDescripcion = $localidad->localidadDescripcion;
-        $this->localidadCP = $localidad->localidadCP;
+        $this->localidad_descripcion = $localidad->localidad_descripcion;
+        $this->localidad_cp = $localidad->localidad_cp;
         
         $this->openModalPopover();
     }

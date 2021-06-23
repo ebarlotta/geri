@@ -31,7 +31,6 @@
                         <th class="px-4 py-2">Nombre del Campo</th>
                         <th class="px-4 py-2">Tipo de Campo</th>
                         <th class="px-4 py-2">Orden</th>
-                        <th class="px-4 py-2">Tipo de Persona</th>
                         <th class="px-4 py-2">LabelCampo</th>
                         <th class="px-4 py-2">Opciones</th>
                     </tr>
@@ -46,11 +45,7 @@
                                 {{ $PersonaCampo->OrdenCampo }}
                             </div>
                         </td>
-                        <td class="border px-4 py-2">
-                            <div class="flex justify-center">
-                                {{ $PersonaCampo->TipoPersona_id }}
-                            </div>
-                        </td>
+                        
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">{{ $PersonaCampo->LabelCampo}}</div>
                         </td>

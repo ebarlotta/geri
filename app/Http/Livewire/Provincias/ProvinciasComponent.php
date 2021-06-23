@@ -7,7 +7,7 @@ use App\Models\Provincias;
 
 class ProvinciasComponent extends Component
 {
-    public $provinciaDescripcion, $provincia_id;
+    public $provincia_descripcion, $provincia_id;
     public $provincias;
     public $isModalOpen = false;
 
@@ -23,7 +23,7 @@ class ProvinciasComponent extends Component
         $this->resetCreateForm();   
         $this->openModalPopover();
         $this->isModalOpen=true;
-        return view('livewire.provincias.provincias-component')->with('isModalOpen', $this->isModalOpen)->with('provinciaDescripcion', $this->provinciaDescripcion);
+        return view('livewire.provincias.provincias-component')->with('isModalOpen', $this->isModalOpen)->with('provincia_descripcion', $this->provincia_descripcion);
     }
 
     public function openModalPopover()
@@ -38,17 +38,17 @@ class ProvinciasComponent extends Component
 
     private function resetCreateForm(){
         $this->provincia_id = '';
-        $this->provinciaDescripcion = '';
+        $this->provincia_descripcion = '';
     }
     
     public function store()
     {
         $this->validate([
-            'provinciaDescripcion' => 'required',
+            'provincia_descripcion' => 'required',
         ]);
     
         Provincias::updateOrCreate(['id' => $this->provincia_id], [
-            'provinciaDescripcion' => $this->provinciaDescripcion,
+            'provincia_descripcion' => $this->provincia_descripcion,
         ]);
 
         session()->flash('message', $this->provincia_id ? 'Provincia Actualizada.' : 'Provincia Creada.');
@@ -62,7 +62,7 @@ class ProvinciasComponent extends Component
         $provincia = Provincias::findOrFail($id);
         $this->id = $id;
         $this->provincia_id=$id;
-        $this->provinciaDescripcion = $provincia->provinciaDescripcion;
+        $this->provincia_descripcion = $provincia->provincia_descripcion;
         
         $this->openModalPopover();
     }

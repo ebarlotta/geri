@@ -19,6 +19,7 @@
                             <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Tipo del Campo</label>
                             
                             <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" wire:model="TipoCampo">
+                                <option value="">-</option>
                                 <option value="Texto">Texto</option>
                                 <option value="Numérico">Numérico</option>
                                 <option value="Fecha">Fecha</option>
@@ -31,19 +32,7 @@
                             <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Orden del Campo</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Ingrese Orden del Campo" wire:model="OrdenCampo">
                             @error('OrdenCampo') <span class="text-red-500">{{ $message }}</span>@enderror
-                            <!-- Grupo de Persona -->
-                            <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Grupo de Persona</label>
-
-                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" wire:model="TipoPersona_id">
-                            @foreach($TipoDePersonas as $TipoDePersona)
-                                <option value="{{ $TipoDePersona->id}}">{{ $TipoDePersona->tipodepersona}}</option>
-
-                            @endforeach
-                            </select>
-                            <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Ingrese Grupo de Persona" wire:model="TipoPersona_id"> -->
-
-
-                            @error('TipoPersona_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                            
                             <!-- Label Campo -->
                             <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Label del Campo</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Ingrese Label del Campo" wire:model="LabelCampo">

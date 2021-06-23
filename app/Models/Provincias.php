@@ -10,6 +10,7 @@ class Provincias extends Model
     use HasFactory;
 
     protected $fillable=[
-        'provinciaDescripcion',
+        'provincia_descripcion',
+        'nacionalidads_id',
     ];
 }

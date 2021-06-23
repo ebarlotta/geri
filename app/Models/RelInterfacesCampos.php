@@ -13,4 +13,9 @@ class RelInterfacesCampos extends Model
         'interface_id',
         'campo_id',
     ];
+
+    public function tipospersonas()
+    {
+        return $this->hasMany('App\Models\TipoDePersona');
+    }
 }

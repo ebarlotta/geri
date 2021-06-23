@@ -15,9 +15,9 @@ class ProvinciasSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('provincias')->truncate();
-        DB::table('provincias')->insert(['provinciaDescripcion'=>'Mendoza']);
-        DB::table('provincias')->insert(['provinciaDescripcion'=>'San Juan']);
-        DB::table('provincias')->insert(['provinciaDescripcion'=>'San Luis']);
+        //DB::table('provincias')->truncate();
+        DB::table('provincias')->insert(['provincia_descripcion'=>'Mendoza','nacionalidads_id'=>1]);
+        DB::table('provincias')->insert(['provincia_descripcion'=>'San Juan','nacionalidads_id'=>1]);
+        DB::table('provincias')->insert(['provincia_descripcion'=>'San Luis','nacionalidads_id'=>1]);
     }
 }

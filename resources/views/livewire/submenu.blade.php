@@ -1,6 +1,6 @@
 <div>
     <div class="content-center flex">
-        <div class="sm:space-x-8 sm:flex sm:-my-px sm:ml-10 sm:mx-auto ">
+        <div class="sm:space-x-8 sm:-my-px sm:ml-10 sm:mx-auto justify-between ">
             <x-jet-nav-link href="{{ route('crudBeneficios') }}" :active="request()->routeIs('crudBeneficios')">
                 Tipos de Beneficios
             </x-jet-nav-link>
@@ -22,8 +22,8 @@
             <x-jet-nav-link href="{{ route('escolaridades') }}" :active="request()->routeIs('escolaridades')">
                 Escolaridades
             </x-jet-nav-link>
-            <x-jet-nav-link href="{{ route('nacionalidades') }}" :active="request()->routeIs('nacionalidades')">
-                Nacionalidades
+            <x-jet-nav-link href="{{ route('nacionalidad') }}" :active="request()->routeIs('nacionalidad')">
+                Nacionalidad
             </x-jet-nav-link>
             <x-jet-nav-link href="{{ route('localidades') }}" :active="request()->routeIs('localidades')">
                 Localidades

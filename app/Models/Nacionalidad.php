@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nacionalidades extends Model
+class Nacionalidad extends Model
 {
     use HasFactory;
 
     protected $fillable=[
-        'nacionalidadDescripcion',
+        'nacionalidad_descripcion',
     ];
 }

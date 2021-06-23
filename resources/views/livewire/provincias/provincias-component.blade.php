@@ -34,7 +34,7 @@
                 <tbody>
                     @foreach ($provincias as $provincia)
                     <tr>
-                        <td class="border px-4 py-2">{{ $provincia->provinciaDescripcion }}</td>
+                        <td class="border px-4 py-2">{{ $provincia->provincia_descripcion }}</td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 <!-- Editar  -->

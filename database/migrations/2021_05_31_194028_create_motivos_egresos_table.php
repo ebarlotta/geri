@@ -15,7 +15,7 @@ class CreateMotivosEgresosTable extends Migration
     {
         Schema::create('motivos_egresos', function (Blueprint $table) {
             $table->id();
-            $table->text('motivoegresoDescripcion');
+            $table->string('motivoegresoDescripcion')->unique();
             $table->timestamps();
         });
     }

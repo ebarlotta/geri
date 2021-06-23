@@ -15,7 +15,7 @@ class CreatePersonActivosTable extends Migration
     {
         Schema::create('person_activos', function (Blueprint $table) {
             $table->id();
-            $table->text('estado')->require();
+            $table->string('estado')->require();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

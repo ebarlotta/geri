@@ -15,7 +15,7 @@ class CreateBeneficiosTable extends Migration
     {
         Schema::create('beneficios', function (Blueprint $table) {
             $table->id();
-            $table->text('descripcionbeneficio');
+            $table->string('descripcionbeneficio');
             $table->timestamps();
         });
     }

@@ -15,29 +15,46 @@
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Ingrese Nombre de la Interface" wire:model="NombreInterface">
                             @error('NombreInterface') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
+
+                        <div class="mb-4">
+                            <!-- Tipo de Persona -->
+                            <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Tipo de Persona</label>
+                            <select wire:model="tipo_de_persona_id">
+                                <option value="">-</option>
+                                @if($tipos)
+                                @foreach($tipos as $tipo)
+                                <option value="{{ $tipo->id }}">{{ $tipo->tipodepersona}}</option>
+                                @endforeach
+                                @endif
+                            </select>
+                            @error('tipo_de_persona_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
+                @if(!$creando)
                 <div class="flex">
                     <div class="block w-full ml-4 mr-2 bg-red-100 ">
+
                         Campos Diponibles<br>
                         @if($disponibles)
                         @foreach($disponibles as $disponible)
-                        <button class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded">{{$disponible->NombreCampo}}</button>
+                        <div class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded" wire:click="DarAlta({{ $disponible->id }})">{{$disponible->NombreCampo}}</div>
                         @endforeach
                         @endif
-                        
+
 
                     </div>
-                    <div class="block w-full ml-2 mr-4 bg-green-100">Camps Utilizados<br>
-                    @if($utilizados)
+                    <div class="block w-full ml-2 mr-4 bg-green-100">Campos Utilizados<br>
+                        @if($utilizados)
                         @foreach($utilizados as $utilizado)
-                        <button class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded">{{$utilizado->NombreCampo}}  {{$utilizado->id}} {{$Interfacex->id}}</button>
-                        
+                        <div class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded" wire:click="DarBaja({{ $utilizado->id }})">{{$utilizado->NombreCampo}}</div>
+
                         @endforeach
                         @endif
                     </div>
-                    
+
                 </div>
+                @endif
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <x-guardar></x-guardar>
                     <x-cerrar></x-cerrar>

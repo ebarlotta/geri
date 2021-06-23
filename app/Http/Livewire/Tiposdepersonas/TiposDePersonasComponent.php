@@ -8,13 +8,16 @@ use Livewire\Component;
 class TiposDePersonasComponent extends Component
 {
 
-    public $tipodepersona, $tiposdepersonas, $tipodepersona_id;
+    public $tipodepersona, $tiposdepersonas, $tipo_de_persona_id;
     public $isModalOpen = false;
 
     public function render()
     {
-        $this->tiposdepersonas = TipoDePersona::all();
+        $this->tiposdepersonas = TipoDePersona::paginate(2)->all();
+        //$coments = TipoDePersona::find(2)->interfaces;
+        //dd($coments);
         return view('livewire.tiposdepersonas.tipos-de-personas-component')->with('isModalOpen', $this->isModalOpen)->with('tiposdepersonas', $this->tiposdepersonas);
+        //return view('livewire.tiposdepersonas.tipos-de-personas-component', ['tiposdepersonas' => TipoDePersona::paginate(2)->all()]);
     }
 
 
@@ -37,7 +40,7 @@ class TiposDePersonasComponent extends Component
     }
 
     private function resetCreateForm(){
-        $this->tipodepersona_id = '';
+        $this->tipo_de_persona_id = '';
         $this->tipodepersona = '';
     }
     
@@ -47,11 +50,11 @@ class TiposDePersonasComponent extends Component
             'tipodepersona' => 'required',
         ]);
     
-        TipoDePersona::updateOrCreate(['id' => $this->tipodepersona_id], [
+        TipoDePersona::updateOrCreate(['id' => $this->tipo_de_persona_id], [
             'tipodepersona' => $this->tipodepersona,
         ]);
 
-        session()->flash('message', $this->tipodepersona_id ? 'Tipo de Perona Actualizado.' : 'Tipo de Perona Creado.');
+        session()->flash('message', $this->tipo_de_persona_id ? 'Tipo de Perona Actualizado.' : 'Tipo de Perona Creado.');
 
         $this->closeModalPopover();
         $this->resetCreateForm();
@@ -61,8 +64,8 @@ class TiposDePersonasComponent extends Component
     {
         $tipodepersona = TipoDePersona::findOrFail($id);
         $this->id = $id;
-        $this->tipodepersona_id=$id;
-        $this->tipodepersona_id = $tipodepersona->tipodepersona_id;
+        $this->tipo_de_persona_id=$id;
+        $this->tipo_de_persona_id = $tipodepersona->tipo_de_persona_id;
         
         $this->openModalPopover();
     }

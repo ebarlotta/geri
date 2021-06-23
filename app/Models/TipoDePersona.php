@@ -13,4 +13,8 @@ class TipoDePersona extends Model
         'tipodepersona',
     ];
 
+    public function interfaces()
+    {
+        return $this->hasMany('App\Models\Interfaces');
+    }
 }

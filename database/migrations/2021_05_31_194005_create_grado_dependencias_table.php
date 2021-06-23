@@ -15,7 +15,7 @@ class CreateGradoDependenciasTable extends Migration
     {
         Schema::create('grado_dependencias', function (Blueprint $table) {
             $table->id();
-            $table->text('gradodependenciaDescripcion');
+            $table->string('gradodependenciaDescripcion')->unique();
             $table->timestamps();
         });
     }

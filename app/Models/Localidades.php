@@ -10,7 +10,7 @@ class Localidades extends Model
     use HasFactory;
 
     protected $fillable=[
-        'localidadDescripcion',
-        'localidadCP',
+        'localidad_descripcion',
+        'localidad_cp',
     ];
 }

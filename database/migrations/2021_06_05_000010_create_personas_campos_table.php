@@ -15,11 +15,10 @@ class CreatePersonasCamposTable extends Migration
     {
         Schema::create('personas_campos', function (Blueprint $table) {
             $table->id();
-            $table->text('NombreCampo');
-            $table->text('TipoCampo');
+            $table->string('NombreCampo');
+            $table->string('TipoCampo');
             $table->integer('OrdenCampo');
-            $table->integer('TipoPersona_id');
-            $table->text('LabelCampo');
+            $table->string('LabelCampo');
             $table->timestamps();
         });
     }

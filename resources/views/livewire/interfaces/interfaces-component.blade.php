@@ -29,6 +29,7 @@
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2">Nombre de la Interface</th>
+                        <th class="px-4 py-2">Tipo de Persona</th>
                         <th class="px-4 py-2">Opciones</th>
                     </tr>
                 </thead>
@@ -36,6 +37,9 @@
                     @foreach ($Interfaces as $Interfacex)
                     <tr>
                         <td class="border px-4 py-2" wire:click="mostrar({{ $Interfacex->id }})">{{ $Interfacex->NombreInterface }}</td>
+                        <td class="border px-4 py-2">
+                        {{ $Interfacex->tipodepersonas }}
+                        </td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 <!-- Editar  -->

@@ -13,7 +13,6 @@ class PersonasCampos extends Model
         'NombreCampo',
         'TipoCampo',
         'OrdenCampo',
-        'TipoPersona_id',
         'LabelCampo',
     ];
 }

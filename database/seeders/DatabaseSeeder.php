@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Person::factory(10)->create();
+    
         // \App\Models\PersonActivo::factory(3)->create();   Desactivado hasta que aprenda a poner varios valores en un vector
         //$this->call(Person::class);
          /*$Activos1 = new PersonActivo();
@@ -82,12 +82,14 @@ class DatabaseSeeder extends Seeder
         $this->call(TiposDocumentosSeeder::class);
         $this->call(BeneficiosSeeder::class);
         $this->call(PersonActivoSeeder::class);
-        $this->call(NacionalidadesSeeder::class);
+        $this->call(NacionalidadSeeder::class);
         $this->call(LocalidadesSeeder::class);
         $this->call(ProvinciasSeeder::class);
         $this->call(GradoDependenciaSeeder::class);
         $this->call(MotivosEgresosSeeder::class);
         $this->call(CamasSeeder::class);
         $this->call(PersonasCamposSeeder::class);
+
+        \App\Models\Person::factory(10)->create();
     }
 }

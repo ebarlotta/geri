@@ -15,7 +15,7 @@ class CreateEscolaridadesTable extends Migration
     {
         Schema::create('escolaridades', function (Blueprint $table) {
             $table->id();
-            $table->text('escolaridadDescripcion')->unique(true);
+            $table->string('escolaridadDescripcion')->unique(true);
             $table->timestamps();
         });
     }

@@ -26,17 +26,17 @@ class PersonFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'nacimiento' => $this->faker->date(),
-            'estado_id' => $this->faker->randomElement([0,1,2]),
+            'estado_id' => $this->faker->randomElement([1,2]),
             'alias' => $this->faker->word,
-            'beneficio_id' => $this->faker->randomElement([0,1,2]),
+            'beneficio_id' => $this->faker->randomElement([1,2]),
             'documento' => $this->faker->numberBetween(100000,4000000),
-            'idtipodocumento' => $this->faker->randomElement([0,1,2]),
+            'tipodocumento_id' => $this->faker->randomElement([1,2]),
             'domicilio'=> $this->faker->streetName . $this->faker->buildingNumber,
             'localidad' => $this->faker->state,
-            'sexo'=> $this->faker->randomElement([0,1,2]),
+            'sexo'=> $this->faker->randomElement([1,2]),
             'nacionalidad'=> $this->faker->country,
-            'estadocivil_id'=> $this->faker->randomElement([0,1,2,3]),
-            'tipopersona_id' => $this->faker->randomElement([0,1]),
+            'estadocivil_id'=> $this->faker->randomElement([1,2,3]),
+            'tipopersona_id' => $this->faker->randomElement([1,2]),
         ];
     }
 }

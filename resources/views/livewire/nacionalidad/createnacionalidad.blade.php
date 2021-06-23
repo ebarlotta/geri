@@ -11,8 +11,8 @@
                     <div class="">
                         <div class="mb-4">
                             <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Descripción</label>
-                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Ingrese descripción" wire:model="nacionalidadDescripcion">
-                            @error('nacionalidadDescripcion') <span class="text-red-500">{{ $message }}</span>@enderror
+                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="Ingrese descripción" wire:model="nacionalidad_descripcion">
+                            @error('nacionalidad_descripcion') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
                 </div>

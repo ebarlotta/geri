@@ -15,8 +15,12 @@ class CreateInterfacesTable extends Migration
     {
         Schema::create('interfaces', function (Blueprint $table) {
             $table->id();
-            $table->text('NombreInterface');
+            $table->string('NombreInterface');
+            $table->unsignedBigInteger('tipo_de_persona_id');
             $table->timestamps();
+
+            $table->foreign('tipo_de_persona_id')->references('id')->on('tipo_de_personas')->onDelete('cascade');
+
         });
     }
 

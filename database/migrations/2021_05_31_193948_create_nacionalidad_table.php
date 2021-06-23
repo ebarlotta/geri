@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBorrarsTable extends Migration
+class CreateNacionalidadTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateBorrarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('borrars', function (Blueprint $table) {
+        Schema::create('nacionalidad', function (Blueprint $table) {
             $table->id();
-            $table->string('Campo1');
-            $table->unsignedBigInteger('Campo2_id');
-
-            $table->foreign('Campo2_id')->references('id')->on('people');
+            $table->string('nacionalidad_descripcion')->unique();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateBorrarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('borrars');
+        Schema::dropIfExists('nacionalidad');
     }
 }

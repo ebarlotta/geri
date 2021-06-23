@@ -14,7 +14,7 @@ class PersonActivoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('person_activos')->truncate();
+        //DB::table('person_activos')->truncate();
         DB::table('person_activos')->insert(['estado'=>'Alta',]);
         DB::table('person_activos')->insert(['estado'=>'Baja',]);
         DB::table('person_activos')->insert(['estado'=>'En proceso de Baja',]);

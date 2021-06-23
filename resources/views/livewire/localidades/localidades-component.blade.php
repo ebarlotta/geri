@@ -35,8 +35,8 @@
                 <tbody>
                     @foreach ($localidades as $localidad)
                     <tr>
-                        <td class="border px-4 py-2">{{ $localidad->localidadDescripcion }}</td>
-                        <td class="border px-4 py-2">{{ $localidad->localidadCP }}</td>
+                        <td class="border px-4 py-2">{{ $localidad->localidad_descripcion }}</td>
+                        <td class="border px-4 py-2">{{ $localidad->localidad_cp }}</td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 <!-- Editar  -->

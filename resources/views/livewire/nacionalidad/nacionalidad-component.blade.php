@@ -22,7 +22,7 @@
             @endif
             <x-crear>Nueva Nacionalidad</x-crear>
             @if ($isModalOpen)
-                @include('livewire.nacionalidades.createnacionalidades')
+                @include('livewire.nacionalidad.createnacionalidad')
             @endif
             <table class="table-fixed w-full">
                 <thead>
@@ -34,7 +34,7 @@
                 <tbody>
                     @foreach ($nacionalidades as $nacionalidad)
                     <tr>
-                        <td class="border px-4 py-2">{{ $nacionalidad->nacionalidadDescripcion }}</td>
+                        <td class="border px-4 py-2">{{ $nacionalidad->nacionalidad_descripcion }}</td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 <!-- Editar  -->

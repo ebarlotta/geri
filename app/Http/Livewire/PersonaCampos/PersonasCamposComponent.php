@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\PersonaCampos;
 
 use App\Models\PersonasCampos;
-use App\Models\TipoDePersona;
 
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -11,9 +10,9 @@ use Livewire\Component;
 class PersonasCamposComponent extends Component
 {
     
-    public $NombreCampo, $TipoCampo, $OrdenCampo, $TipoPersona_id, $LabelCampo;  
+    public $NombreCampo, $TipoCampo, $OrdenCampo, $LabelCampo;  
     public $personasCampos_id;
-    public $PersonasCampos, $TipoDePersonas;
+    public $PersonasCampos;
     public $isModalOpen = false;
 
     public function render()
@@ -31,9 +30,7 @@ class PersonasCamposComponent extends Component
         $this->resetCreateForm();   
         $this->openModalPopover();
         $this->isModalOpen=true;
-        $this->TipoDePersonas=TipoDePersona::all();
-        //dd($this->TipoDePersonas);
-        return view('livewire.persona-campos.personas-campos')->with('isModalOpen', $this->isModalOpen)->with('TipoDePersonas',$this->TipoDePersonas);
+        return view('livewire.persona-campos.personas-campos')->with('isModalOpen', $this->isModalOpen);
     }
 
     public function openModalPopover()
@@ -51,7 +48,6 @@ class PersonasCamposComponent extends Component
         $this->NombreCampo = '';
         $this->TipoCampo = '';
         $this->OrdenCampo = '';
-        $this->TipoPersona_id = '';
         $this->LabelCampo = '';
     }
     
@@ -61,7 +57,6 @@ class PersonasCamposComponent extends Component
             'NombreCampo' => 'required',
             'TipoCampo' => 'required',
             'OrdenCampo' => 'required|integer',
-            'TipoPersona_id' => 'required|integer',
             'LabelCampo' => 'required',
         ]);
     
@@ -69,7 +64,6 @@ class PersonasCamposComponent extends Component
             'NombreCampo' => $this->NombreCampo,
             'TipoCampo' => $this->TipoCampo,
             'OrdenCampo' => $this->OrdenCampo,
-            'TipoPersona_id' => $this->TipoPersona_id,
             'LabelCampo' => $this->LabelCampo,
         ]);
 
@@ -88,7 +82,6 @@ class PersonasCamposComponent extends Component
         $this->NombreCampo = $Campo->NombreCampo;
         $this->TipoCampo = $Campo->TipoCampo;
         $this->OrdenCampo = $Campo->OrdenCampo;
-        $this->TipoPersona_id = $Campo->TipoPersona_id;
         $this->LabelCampo = $Campo->LabelCampo;
         
         $this->openModalPopover();

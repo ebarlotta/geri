@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\RelInterfacesCampos;
+use App\Models\Nacionalidad;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RelInterfacesCamposFactory extends Factory
+class NacionalidadFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = RelInterfacesCampos::class;
+    protected $model = Nacionalidad::class;
 
     /**
      * Define the model's default state.
