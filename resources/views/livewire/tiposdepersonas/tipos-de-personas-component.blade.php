@@ -47,7 +47,7 @@
                         </td>
                     </tr>
                     @endforeach
-                    {{ $tiposdepersonas->links() }}
+                    {{ $tiposdepersonas }}
                 </tbody>
             </table>
             

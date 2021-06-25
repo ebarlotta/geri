@@ -4,20 +4,22 @@ namespace App\Http\Livewire\Tiposdepersonas;
 use App\Models\TipoDePersona;
 
 use Livewire\Component;
-
+use Livewire\WithPagination;
 class TiposDePersonasComponent extends Component
 {
 
-    public $tipodepersona, $tiposdepersonas, $tipo_de_persona_id;
+    public $tipodepersona,  $tipo_de_persona_id;
     public $isModalOpen = false;
+    use WithPagination;
+    //$tiposdepersonas, // Se pasa como array en la vista, por eso no hace falta declararla
 
     public function render()
     {
-        $this->tiposdepersonas = TipoDePersona::paginate(2)->all();
+        ////$this->tiposdepersonas = TipoDePersona::paginate(2);
         //$coments = TipoDePersona::find(2)->interfaces;
         //dd($coments);
-        return view('livewire.tiposdepersonas.tipos-de-personas-component')->with('isModalOpen', $this->isModalOpen)->with('tiposdepersonas', $this->tiposdepersonas);
-        //return view('livewire.tiposdepersonas.tipos-de-personas-component', ['tiposdepersonas' => TipoDePersona::paginate(2)->all()]);
+        //return view('livewire.tiposdepersonas.tipos-de-personas-component')->with('isModalOpen', $this->isModalOpen)->with('tiposdepersonas', $this->tiposdepersonas);
+        return view('livewire.tiposdepersonas.tipos-de-personas-component', ['tiposdepersonas' => TipoDePersona::paginate(5),]);
     }
 
 
@@ -26,7 +28,7 @@ class TiposDePersonasComponent extends Component
         $this->resetCreateForm();   
         $this->openModalPopover();
         $this->isModalOpen=true;
-        return view('livewire.tiposdepersonas.tipos-de-personas-component')->with('isModalOpen', $this->isModalOpen)->with('tiposdepersonas', $this->tiposdepersonas);
+        return view('livewire.tiposdepersonas.tipos-de-personas-component',['isModalOpen'=> $this->isModalOpen,'tiposdepersonas' => TipoDePersona::class]);
     }
 
     public function openModalPopover()
@@ -63,9 +65,9 @@ class TiposDePersonasComponent extends Component
     public function edit($id)
     {
         $tipodepersona = TipoDePersona::findOrFail($id);
-        $this->id = $id;
-        $this->tipo_de_persona_id=$id;
-        $this->tipo_de_persona_id = $tipodepersona->tipo_de_persona_id;
+        $this->id = $tipodepersona->id;
+        $this->tipo_de_persona_id=$tipodepersona->id;
+        $this->tipodepersona = $tipodepersona->tipodepersona;
         
         $this->openModalPopover();
     }

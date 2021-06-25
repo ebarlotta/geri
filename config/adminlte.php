@@ -45,8 +45,9 @@ return [
     |
     */
 
-    'logo' => '<b>Empresa</b>',
+    'logo' => '<b>&nbsp;&nbsp;&nbsp;   Enzo</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    //'logo_img' => asset('images/avatars/Enzo.jpeg'),
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -245,23 +246,75 @@ return [
         [
             'text' => 'Configuraciones',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-cogs',
             'submenu' => [
                 [
                     'text' => 'Beneficios',
-                    'url'  => 'admin/settings/beneficios',
+                    'url'  => 'admin/beneficios',
+                    'icon' => 'fas fa-fw fa-usd',
                 ],
                 [
                     'text' => 'Estados Civiles',
-                    'url'  => 'admin/settings/estadosciviles',
+                    'url'  => 'admin/estadosciviles',
+                    'icon' => 'fas fa-fw fa-venus-mars',
                 ],
                 [
                     'text' => 'Tipo de Persona',
-                    'url'  => 'admin/settings/tipospersonas',
+                    'url'  => 'admin/tiposdepersonas',
+                    'icon' => 'fas fa-fw fa-object-group',
                 ],
                 [
                     'text' => 'Tipos de Documentos',
-                    'url'  => 'admin/settings/tiposdocumentos',
+                    'url'  => 'admin/tiposdedocumentos',
+                    'icon' => 'fas fa-fw fa-card',
+                ],
+                [
+                    'text' => 'Estado de Personas',
+                    'url'  => 'admin/personactivo',
+                    'icon' => 'fas fa-fw fa-bed',
+                ],
+                [
+                    'text' => 'Áreas',
+                    'url'  => 'admin/areas',
+                ],
+                [
+                    'text' => 'Escolaridades',
+                    'url'  => 'admin/escolaridades',
+                ],
+                [
+                    'text' => 'Nacionalidades',
+                    'url'  => 'admin/nacionalidad',
+                ],
+                [
+                    'text' => 'Localidades',
+                    'url'  => 'admin/localidades',
+                ],
+                [
+                    'text' => 'Provincias',
+                    'url'  => 'admin/provincias',
+                ],
+                [
+                    'text' => 'Grado de Dependencia',
+                    'url'  => 'admin/gradodependencia',
+                    'icon' => 'fas fa-fw fa-blind',
+                ],
+                [
+                    'text' => 'Motivos de Egresos',
+                    'url'  => 'admin/motivoegreso',
+                ],
+                [
+                    'text' => 'Estado de Camas',
+                    'url'  => 'admin/estadocama',
+                    'icon' => 'fas fa-fw fa-bed',
+                ],
+                [
+                    'text' => 'Personas Campos',
+                    'url'  => 'admin/personascampos',
+                    'icon' => 'fas fa-fw fa-child ',
+                ],
+                [
+                    'text' => 'Gestión de Interfaces',
+                    'url'  => 'admin/interfaces',
                 ],
                 [
                     'text' => 'Otras Cosas',
