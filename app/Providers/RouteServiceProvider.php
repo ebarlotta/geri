@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Schema;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -36,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
+        Schema::defaultStringLength(191);
 
         $this->routes(function () {
             Route::prefix('api')
