@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 //use App\Models\TipoDePersona;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 /*use \App\Models\PersonActivo;
 use \App\Models\Beneficios;
 use \App\Models\TiposDocumentos;
@@ -91,5 +93,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PersonasCamposSeeder::class);
 
         \App\Models\Person::factory(10)->create();
+
+        DB::table('empresas')->insert(['name' => 'Empresa de Pruebas','direccion' => 'Dirección','cuit' => '20123456789','ib' => '012345678','imagen' => 'BarBer.png','establecimiento' => '0','telefono' => '12345678','actividad' => 'Desarrollo','actividad1' => 'Software','email' => '','habilitada' => true,'nombretitular' => 'Juan de los Palotes','dnititular' => '1234',]);
+
+        \App\Models\Empresa::factory(4)->create();   //Crea una empresa de prueba para relacionar con los usuarios que se dan de alta
+        \App\Models\Unidad::factory(10)->create();
     }
 }

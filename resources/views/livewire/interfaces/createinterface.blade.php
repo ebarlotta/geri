@@ -41,8 +41,6 @@
                         <div class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded" wire:click="DarAltaCampo({{ $disponible->id }})">{{$disponible->NombreCampo}}</div>
                         @endforeach
                         @endif
-
-
                     </div>
                     <div class="block w-full ml-2 mr-4 bg-green-100">Campos Utilizados<br>
                         @if($utilizados)

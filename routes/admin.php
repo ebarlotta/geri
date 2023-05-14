@@ -11,6 +11,7 @@ use App\Http\Livewire\Tiposdepersonas\TiposDePersonasComponent;
 use App\Http\Livewire\Tiposdedocumentos\TiposDeDocumentosComponent;
 use App\Http\Livewire\Personactivo\PersonActivoComponent;
 use App\Http\Livewire\Areas\AreasComponent;
+use App\Http\Livewire\Empresa\EmpresaComponent;
 use App\Http\Livewire\Escolaridades\EscolaridadesComponent;
 use App\Http\Livewire\Estadocama\EstadocamaComponent;
 use App\Http\Livewire\Gradodependencia\GradodependenciaComponent;
@@ -20,6 +21,15 @@ use App\Http\Livewire\Motivoegreso\MotivoegresoComponent;
 use App\Http\Livewire\Nacionalidad\NacionalidadComponent;
 use App\Http\Livewire\PersonaCampos\PersonasCamposComponent;
 use App\Http\Livewire\Provincias\ProvinciasComponent;
+
+// use App\Http\Livewire\Empresa\EmpresaComponent;
+use App\Http\Livewire\EmpresaGestion\EmpresaGestion;
+use App\Http\Livewire\EmpresaModulos\EmpresaModulosComponent;
+use App\Http\Livewire\EmpresaUsuarios\EmpresaUsuariosComponent;
+use App\Http\Livewire\ModuloUsuarios\ModuloUsuariosComponent;
+use App\Http\Livewire\Unidad\UnidadComponent;
+
+
 
 
 //Route::get('',[HomeController::class,'index'])->name('admin.index');
@@ -53,3 +63,12 @@ Route::get('prueba',clsBeneficios::class);
 // Route::get('otrascosas',[ClsOtrasCosasController::class,'index'])->name('admin.otrascosas');
 Route::get('otrascosas',ClsOtrasCosasController::class)->name('admin.otrascosas');
 //Route::get('otrascosas',Liveotra::class)->name('admin.otrascosas');
+
+Route::get('empresas',EmpresaComponent::class)->name('empresas');
+Route::get('empresausuarios',EmpresaUsuariosComponent::class)->name('empresausuarios');
+Route::get('empresamodulos',EmpresaModulosComponent::class)->name('empresamodulos');
+Route::get('modulousuarios',ModuloUsuariosComponent::class)->name('modulousuarios');
+Route::get('empresagestion',EmpresaGestion::class)->name('empresagestion');
+Route::get('unidades',UnidadComponent::class)->name('unidades');
+
+session(['empresa_id' => 1]);  // HACER -> Hay que cargar la empresa cuando el usuario se loguee

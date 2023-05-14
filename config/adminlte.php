@@ -244,6 +244,33 @@ return [
         ],
         ['header' => 'account_settings'],
         [
+            'text' => 'Administración',
+            'url'  => 'tags',
+            'icon' => 'fas fa-fw fa-building',
+            'submenu' => [
+                [
+                    'text' => 'Usuarios x Empresa',
+                    'url'  => 'admin/empresausuarios',
+                    'icon' => 'fas fa-fw fa-users',
+                ],
+                [
+                    'text' => 'Usuarios x Módulo',
+                    'url'  => 'admin/modulousuarios',
+                    'icon' => 'fas fa-fw fa-user-cog',
+                ],
+                [
+                    'text' => 'Módulos x Empresa',
+                    'url'  => 'admin/empresamodulos',
+                    'icon' => 'fas fa-fw fa-chart-pie',
+                ],
+                [
+                    'text' => 'Gestión de empresas',
+                    'url'  => 'admin/empresagestion',
+                    'icon' => 'fas fa-fw fa-building',
+                ],
+            ],
+        ],
+        [
             'text' => 'Configuraciones',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-cogs',
@@ -315,6 +342,10 @@ return [
                 [
                     'text' => 'Gestión de Interfaces',
                     'url'  => 'admin/interfaces',
+                ],
+                [
+                    'text' => 'Unidades',
+                    'url'  => 'admin/unidades',
                 ],
                 [
                     'text' => 'Otras Cosas',
