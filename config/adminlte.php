@@ -45,13 +45,13 @@ return [
     |
     */
 
-    'logo' => '<b>&nbsp;&nbsp;&nbsp;   Enzo</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    //'logo' => '<b>&nbsp;&nbsp;&nbsp;   Enzo</b>',
+    //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     //'logo_img' => asset('images/avatars/Enzo.jpeg'),
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    //'logo_img_alt' => 'AdminLTE',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ return [
     |
     */
 
-    'layout_topnav' => null,
+    'layout_topnav' => false,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
@@ -145,7 +145,7 @@ return [
     |
     */
 
-    'sidebar_mini' => true,
+    'sidebar_mini' => false,
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
@@ -225,11 +225,11 @@ return [
     */
 
     'menu' => [
-        [
+        /*[
             'text' => 'search',
             'search' => true,
             'topnav' => true,
-        ],
+        ],*/
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -319,6 +319,10 @@ return [
                 [
                     'text' => 'Otras Cosas',
                     'url'  => 'admin/otrascosas',
+                ],
+                [
+                    'text' => 'Usuario',
+                    'url'  => 'user/profile',
                 ],
             ],
         ],

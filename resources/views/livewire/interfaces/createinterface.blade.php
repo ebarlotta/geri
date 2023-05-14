@@ -38,7 +38,7 @@
                         Campos Diponibles<br>
                         @if($disponibles)
                         @foreach($disponibles as $disponible)
-                        <div class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded" wire:click="DarAlta({{ $disponible->id }})">{{$disponible->NombreCampo}}</div>
+                        <div class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded" wire:click="DarAltaCampo({{ $disponible->id }})">{{$disponible->NombreCampo}}</div>
                         @endforeach
                         @endif
 
@@ -47,7 +47,7 @@
                     <div class="block w-full ml-2 mr-4 bg-green-100">Campos Utilizados<br>
                         @if($utilizados)
                         @foreach($utilizados as $utilizado)
-                        <div class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded" wire:click="DarBaja({{ $utilizado->id }})">{{$utilizado->NombreCampo}}</div>
+                        <div class="flex-inline bg-blue-300 hover:bg-blue-400 text-blue font-bold py-2 px-4 mt-1 mb-1 rounded" wire:click="DarBajaCampo({{ $utilizado->id }})">{{$utilizado->NombreCampo}}</div>
 
                         @endforeach
                         @endif

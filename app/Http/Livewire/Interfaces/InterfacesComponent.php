@@ -26,7 +26,7 @@ class InterfacesComponent extends Component
     public function render()
     {
         $this->Interfaces = Interfaces::all();
-
+        
          //$this->Interfaces->tipos = RelInterfacesCampos::find(1)->tipospersonas;
          //$comments = Interfaces::find(7);
          //dd($comments->tipodepersonas->tipodepersona);
@@ -41,7 +41,7 @@ class InterfacesComponent extends Component
         //$this->disponibles = PersonasCampos::all();
 
         //->where('TipoPersona_id','=','1')
-        //dd($this->disponibles);
+        // dd($this->disponibles);
         //$this->disponibles = DB::table('rel_interfaces_campos')
         //    ->join('personas_campos', 'rel_interfaces_campos.campo_id', '<>', 'personas_campos.id')
         //    ->get();
@@ -111,8 +111,15 @@ class InterfacesComponent extends Component
         $this->tipo_de_persona_id = $Interface->tipo_de_persona_id;
         
         $tipos = TipoDePersona::all();
-        //dd($tipos);
         $this->tipos = $tipos;
+        //SELECT * FROM rel_interfaces_campos, personas_campos WHERE interface_id=1 and campo_id=personas_campos.id;
+        
+        $this->disponibles=DB::select(DB::raw("SELECT * FROM personas_campos WHERE 1"));
+        $this->utilizados=DB::select(DB::raw("SELECT * FROM rel_interfaces_campos INNER join personas_campos on rel_interfaces_campos.campo_id=personas_campos.id and rel_interfaces_campos.interface_id=" . $id . ";"));
+        // $this->utilizados=DB::select(DB::raw("SELECT * FROM rel_interfaces_campos, personas_campos WHERE interface_id=".$id." and campo_id=personas_campos.id and rel_interfaces_campos.=".$id.";"));
+
+        //dd($this->disponibles);
+        //$this->disponibles=DB::table('personas_campos')->get();
 
         $this->creando = false;
         $this->openModalPopover();
@@ -133,13 +140,14 @@ class InterfacesComponent extends Component
             })
             ->where('rel_interfaces_campos.interface_id', '=', $id)
             ->get();
-
+            
         foreach ($this->campos as $cam) {
-            if ($cam->TipoCampo == 'text') {
+            if ($cam->TipoCampo == 'Texto') {
                 $a = $a . '<label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">' . $cam->LabelCampo . '</label>
                 <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="' . $cam->LabelCampo . '" wire:model="NombreInterface">';
             }
-            if ($cam->TipoCampo == 'integer') {
+            
+            if ($cam->TipoCampo == 'Numérico') {
                 $a = $a . '<label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">' . $cam->LabelCampo . '</label>
                 <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" placeholder="' . $cam->LabelCampo . '" wire:model="NombreInterface">';
             }
@@ -147,15 +155,28 @@ class InterfacesComponent extends Component
         $this->showCampos = $a;
     }
 
-    public function DarAlta($id)
+    public function DarAltaCampo($id)
     {
-        RelInterfacesCampos::create(['interface_id' => $this->interface_id, 'campo_id' => $id]);
+        
+        $registro1 = DB::select(DB::raw("SELECT * FROM rel_interfaces_campos WHERE interface_id=" . $this->interface_id . " and campo_id=" . $id)); 
+        if($registro1==[]) { 
+            RelInterfacesCampos::create(['interface_id' => $this->interface_id, 'campo_id' => $id]); 
+        } else{
+            session()->flash('message', 'Registro ya dado de alta');
+        }
+        $this->disponibles=DB::select(DB::raw("SELECT * FROM personas_campos WHERE 1"));
+        $this->utilizados=DB::select(DB::raw("SELECT * FROM rel_interfaces_campos INNER join personas_campos on rel_interfaces_campos.campo_id=personas_campos.id and rel_interfaces_campos.interface_id=" . $this->interface_id . ";"));
+        
     }
 
-    public function DarBaja($id)
+    public function DarBajaCampo($id)
     {
-        $registro = RelInterfacesCampos::find($id);
+        $registro1 = DB::select(DB::raw("SELECT * FROM rel_interfaces_campos WHERE interface_id=" . $this->interface_id . " and campo_id=" . $id)); 
+        $registro = RelInterfacesCampos::find($registro1[0]->id);
         $registro->delete();
+
+        $this->disponibles=DB::select(DB::raw("SELECT * FROM personas_campos WHERE 1"));
+        $this->utilizados=DB::select(DB::raw("SELECT * FROM rel_interfaces_campos INNER join personas_campos on rel_interfaces_campos.campo_id=personas_campos.id and rel_interfaces_campos.interface_id=" . $this->interface_id . ";"));
     }
     
     
