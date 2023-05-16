@@ -28,8 +28,9 @@ use App\Http\Livewire\EmpresaModulos\EmpresaModulosComponent;
 use App\Http\Livewire\EmpresaUsuarios\EmpresaUsuariosComponent;
 use App\Http\Livewire\ModuloUsuarios\ModuloUsuariosComponent;
 use App\Http\Livewire\Unidad\UnidadComponent;
-
-
+use App\Http\Livewire\Categorias\CategoriasComponent;
+use App\Http\Livewire\Ingredientes\IngredientesComponent;
+use App\Http\Livewire\Menu\MenuComponent;
 
 
 //Route::get('',[HomeController::class,'index'])->name('admin.index');
@@ -70,5 +71,9 @@ Route::get('empresamodulos',EmpresaModulosComponent::class)->name('empresamodulo
 Route::get('modulousuarios',ModuloUsuariosComponent::class)->name('modulousuarios');
 Route::get('empresagestion',EmpresaGestion::class)->name('empresagestion');
 Route::get('unidades',UnidadComponent::class)->name('unidades');
+Route::get('categorias',CategoriasComponent::class)->name('categorias');
+Route::get('ingredientes',IngredientesComponent::class)->name('ingredientes');
+Route::get('menu',MenuComponent::class)->name('menu');
+//Route::get('menugestionar',[MenuComponent::class,'show'])->name('menugestionar');
 
 session(['empresa_id' => 1]);  // HACER -> Hay que cargar la empresa cuando el usuario se loguee

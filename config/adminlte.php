@@ -348,6 +348,18 @@ return [
                     'url'  => 'admin/unidades',
                 ],
                 [
+                    'text' => 'Categorías',
+                    'url'  => 'admin/categorias',
+                ],
+                [
+                    'text' => 'Ingredientes',
+                    'url'  => 'admin/ingredientes',
+                ],
+                [
+                    'text' => 'Menúes',
+                    'url'  => 'admin/menu',
+                ],
+                [
                     'text' => 'Otras Cosas',
                     'url'  => 'admin/otrascosas',
                 ],
