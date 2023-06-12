@@ -351,14 +351,20 @@ return [
                     'text' => 'Categorías',
                     'url'  => 'admin/categorias',
                 ],
-                [
-                    'text' => 'Ingredientes',
-                    'url'  => 'admin/ingredientes',
-                ],
-                [
-                    'text' => 'Menúes',
-                    'url'  => 'admin/menu',
-                ],
+                    ['text' => 'Gestión Menú',
+                    'url'  => 'admin/settings',
+                    'icon' => 'fas fa-fw fa-cogs',
+                    'submenu' => [
+                        [
+                            'text' => 'Ingredientes',
+                            'url'  => 'admin/ingredientes',
+                        ],
+                        [
+                            'text' => 'Menúes',
+                            'url'  => 'admin/menu',
+                        ],        
+                    ],
+                    ],
                 [
                     'text' => 'Otras Cosas',
                     'url'  => 'admin/otrascosas',

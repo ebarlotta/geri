@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Menu;
 
 use Livewire\Component;
 use App\Models\Menu;
+use App\Models\Ingredientes;
+use App\Models\Menuingrediente;
 
 class MenuComponent extends Component
 {
@@ -11,13 +13,15 @@ class MenuComponent extends Component
     public $isModalOpenGestionar = false;
     public $menu, $menu_id;
     public $menues, $nombremenu, $menuactivo, $tiempopreparacion;
+    public $ingredientesdelmenu, $ingredientes, $ingredienteagestionar, $cantidad; 
 
     public $empresa_id;
 
     public function render()
     {
         $this->empresa_id=session('empresa_id');
-        $this->menues = Menu::where('empresa_id', $this->empresa_id)->get();
+        $this->menues = Menu::where('empresa_id', $this->empresa_id)->orderby('nombremenu')->get();
+        $this->ingredientes = Ingredientes::where('empresa_id', $this->empresa_id)->orderby('nombreingrediente')->get();
         return view('livewire.menu.menu-component',['datos'=> Menu::where('empresa_id', $this->empresa_id)->paginate(3),])->extends('layouts.adminlte');
     }
 
@@ -33,8 +37,20 @@ class MenuComponent extends Component
     {
         $this->openModalPopoverGestionar();
         $menu = Menu::where('id',$id)->get();
-        //dd($menu);
         $this->menu = $menu;
+        $this->menu_id = $id;
+        //$this->ingredientes = Ingredientes::all();
+        $this->ingredientesdelmenu = Ingredientes::where('menu_id',$id)
+        ->where('ingredientes.empresa_id',session('empresa_id'))
+        ->join('menuingredientes','ingredientes.id','=','menuingredientes.ingrediente_id')
+        ->join('unidads','ingredientes.unidad_id','=','unidads.id')
+        ->get();
+        // $this->ingredientesdelmenu = Menuingrediente::where('menu_id',$id)
+        // ->join('ingredientes','ingredientes.id','=','menuingredientes.ingrediente_id')
+        // ->join('ingredientes','ingredientes.unidad_id','=','unidads.id')
+        // ->get();
+        //dd($this->ingredientesdelmenu);
+
         return view('livewire.menu.gestionarmenu')->with('isModalOpen', $this->isModalOpen)->with('menu', $menu);
     }
 
@@ -95,5 +111,32 @@ class MenuComponent extends Component
     {
         Menu::find($id)->delete();
         session()->flash('message', 'Menu Eliminadao.');
+    }
+
+    public function AgregarElementoAlMenu() {
+        // dd($this->cantidad);
+        //Si Cantidad es numerico, si es positivo, si no es nulo
+        $this->validate([
+            'cantidad' => 'required|min:0.00001|numeric',
+            'ingredienteagestionar' => 'required|unique:menuingredientes,ingrediente_id,menu_id',
+        ]);
+        if(is_null($this->ingredienteagestionar)) {
+            session()->flash('message', 'Debe seleccionar un ingrediente');
+            // dd($this->menu_id);
+        } else {
+            Menuingrediente::create([
+                'menu_id' => $this->menu_id,
+                'ingrediente_id' => $this->ingredienteagestionar,
+                'cantidad' => $this->cantidad,
+            ]);
+            // $this->show($this->menu_id);
+            // $this->mount();
+            $this->ingredientesdelmenu = Ingredientes::where('menu_id',$this->menu_id)
+        ->where('ingredientes.empresa_id',session('empresa_id'))
+        ->join('menuingredientes','ingredientes.id','=','menuingredientes.ingrediente_id')
+        ->join('unidads','ingredientes.unidad_id','=','unidads.id')
+        ->get();
+            session()->flash('message', 'Se agregó el ingrediente');
+        }
     }
 }
