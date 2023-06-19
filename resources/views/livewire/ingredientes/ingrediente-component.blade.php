@@ -33,9 +33,37 @@
                         <div class="w-1/2 justify-end">{{ $datos->links() }}</div>
                     </div>
                     <div style="display: block">
-                        @foreach ($datos as $ingrediente)
+                        {{-- @foreach ($datos as $ingrediente) --}}
 
-                            <div class="p-2 shadow-lg" style="background:linear-gradient(90deg, lightblue 20%, white 50%); width:93%; height:100px; display: flex; margin: 1.25rem; border-radius: 10px; height: 100%;">
+                        <table class="table table-sm table-bordered">
+                            {{-- <tr class="border-b dark:border-neutral-500">
+                                <td colspan="2" align="left" class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">Ingredientes del menú</td>
+                            </tr> --}}
+                            <thead class="border-b font-medium dark:border-neutral-500">
+                                <th class="col-9 border-r px-6 dark:border-neutral-500">Ingredientes</th>
+                                <th class="col-2 border-r px-6 dark:border-neutral-500">Cantidad</th>
+                                <th class="col-1 border-r px-6 dark:border-neutral-500">Unidad</th>
+                                <th class="col-1 border-r px-6 dark:border-neutral-500">Opciones</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($datos as $ingrediente)
+                                    <tr>
+                                        <td>{{$ingrediente->nombreingrediente}}</td>
+                                        <td>{{$ingrediente->categorias['nombrecategoria']}}</td> <!-- Imprime la unidad -->
+                                        <td>{{$ingrediente->unidades['name']}}</td>
+                                        <td style="width: 20%;">
+                                            <div style="display: flex">
+                                                <!-- Editar  -->
+                                                <x-editar id="{{ $ingrediente->id }}"></x-editar>
+                                                <!-- Eliminar -->
+                                                <x-eliminar id="{{ $ingrediente->id }}"></x-eliminar>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                        </table>
+
+                            {{-- <div class="p-2 shadow-lg" style="background:linear-gradient(90deg, lightblue 20%, white 50%); width:93%; height:100px; display: flex; margin: 1.25rem; border-radius: 10px; height: 100%;">
                                 <div style="width:90%;">
                                     <div style="width:100%; display: flex">
                                         <p class="shadow-md m-1" style="font-size: 18px; background-color: rgb(226, 230, 230); border-radius: 10px; padding: 3px;">{{ $ingrediente->nombreingrediente }}</p>
@@ -62,8 +90,8 @@
                                         <x-eliminar id="{{ $ingrediente->id }}"></x-eliminar>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            </div> --}}
+                        {{-- @endforeach --}}
                     </div>
                 </div>
             </div>

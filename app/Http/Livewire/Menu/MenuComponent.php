@@ -14,9 +14,9 @@ class MenuComponent extends Component
     public $menu, $menu_id;
     public $menues, $nombremenu, $menuactivo, $tiempopreparacion;
     public $ingredientesdelmenu, $ingredientes, $ingredienteagestionar, $cantidad; 
-
+    
     public $empresa_id;
-
+    
     public function render()
     {
         $this->empresa_id=session('empresa_id');
@@ -54,9 +54,15 @@ class MenuComponent extends Component
         return view('livewire.menu.gestionarmenu')->with('isModalOpen', $this->isModalOpen)->with('menu', $menu);
     }
 
+    
     public function openModalPopoverGestionar()
     {
         $this->isModalOpenGestionar = true;
+    }
+
+    public function closeModalPopoverGestionar()
+    {
+        $this->isModalOpenGestionar = false;
     }
 
     public function openModalPopover()

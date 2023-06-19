@@ -24,11 +24,11 @@
             @if ($isModalOpen)
             @include('livewire.estadocama.createcama')
             @endif
-            <div style="width: 100%">
-            <table style="display: block; overflow-x: auto; sm:max-width: 450px">  <!--  table-fixed  class="w-full "-->
+            <div>
+            <table class="w-full" style="display: block; overflow-x: auto;">  <!--  table-fixed  class="w-full "-->
                 <thead>
                     <tr class="bg-gray-100">
-                        <th class=" py-2">Habi tación</th>
+                        <th class=" py-2">Habitación</th>
                         <th class=" py-2">Cama</th>
                         <th class=" py-2">Estado</th>
                         <th class=" py-2">Sexo Asig.</th>

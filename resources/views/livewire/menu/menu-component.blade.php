@@ -27,39 +27,52 @@
                     @if ($isModalOpenGestionar)
                         @include('livewire.menu.gestionarmenu')
                     @else
-                    
-                    
-                    <div class="flex justify-around">
-                        <x-crear>Nuevo Menú</x-crear>
-                        @if ($isModalOpen)
-                            @include('livewire.menu.createmenu')
-                        @endif
-                        
-                        <div class="w-1/2 justify-end">{{ $datos->links() }}</div>
-                    </div>
-                    <div style="display: block">
-                        @foreach ($datos as $menu)
-
-                            <div class="p-2 shadow-lg" style="background:linear-gradient(90deg, lightblue 20%, white 50%); width:93%; height:100px; display: flex; margin: 1.25rem; border-radius: 10px; height: 100%;">
-                                <div style="width:90%;">
-                                    <div style="width:100%; display: flex">
-                                        <p class="shadow-md m-1" style="font-size: 18px; background-color: rgb(226, 230, 230); border-radius: 10px; padding: 3px;">{{ $menu->nombremenu }}</p>
-                                        
-                                    </div>
-                                </div>
-                                <div style="width:10%;">
-                                    <div class="block justify-center" style="width: 20%; margin: auto; justify-content: space-around;align-items: center;">
-                                        <!-- Gestionar  -->
-                                        <x-gestionar id="{{ $menu->id }}"></x-gestionar>
-                                        <!-- Editar  -->
-                                        <x-editar id="{{ $menu->id }}"></x-editar>
-                                        <!-- Eliminar -->
-                                        <x-eliminar id="{{ $menu->id }}"></x-eliminar>
-                                    </div>
-                                </div>
+                        <div class="flex justify-around">
+                            <x-crear>Nuevo Menú</x-crear>
+                            @if ($isModalOpen)
+                                @include('livewire.menu.createmenu')
+                            @endif
+                            <div><a href="{{ route('ingredientes') }}">
+                                    <button wire:click="create()"
+                                        class="bg-green-300 hover:bg-green-400 text-white-900 font-bold py-2 px-4 rounded my-3">
+                                        Nuevo Ingrediente
+                                    </button>
+                                </a>
                             </div>
-                        @endforeach
-                    </div>
+                            <div class="w-1/2 justify-end">{{ $datos->links() }}</div>
+                        </div>
+                        <div style="display: block">
+
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre del Menú</th>
+                                        <th scope="col">Activo</th>
+                                        <th scope="col">Tiempo de Preparción</th>
+                                        <th scope="col">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($datos as $menu)
+                                        <tr>
+                                            <td>{{ $menu->nombremenu }}</td>
+                                            <td>{{ $menu->menuactivo }}</td>
+                                            <td>{{ $menu->tiempopreparacion }}</td>
+                                            <td style="width: 20%;">
+                                                <div style="display: flex">
+                                                    <!-- Gestionar  -->
+                                                    <x-gestionar id="{{ $menu->id }}"></x-gestionar>
+                                                    <!-- Editar  -->
+                                                    <x-editar id="{{ $menu->id }}"></x-editar>
+                                                    <!-- Eliminar -->
+                                                    <x-eliminar id="{{ $menu->id }}"></x-eliminar>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endif
                 </div>
             </div>

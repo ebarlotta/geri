@@ -30,6 +30,7 @@ use App\Http\Livewire\ModuloUsuarios\ModuloUsuariosComponent;
 use App\Http\Livewire\Unidad\UnidadComponent;
 use App\Http\Livewire\Categorias\CategoriasComponent;
 use App\Http\Livewire\Ingredientes\IngredientesComponent;
+use App\Http\Livewire\Habitacion\Habitacion;
 use App\Http\Livewire\Menu\MenuComponent;
 
 
@@ -73,6 +74,8 @@ Route::get('empresagestion',EmpresaGestion::class)->name('empresagestion');
 Route::get('unidades',UnidadComponent::class)->name('unidades');
 Route::get('categorias',CategoriasComponent::class)->name('categorias');
 Route::get('ingredientes',IngredientesComponent::class)->name('ingredientes');
+Route::get('habitaciones',Habitacion::class)->name('habitaciones');
+
 Route::get('menu',MenuComponent::class)->name('menu');
 //Route::get('menugestionar',[MenuComponent::class,'show'])->name('menugestionar');
 

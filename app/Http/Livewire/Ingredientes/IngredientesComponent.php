@@ -24,6 +24,7 @@ class IngredientesComponent extends Component
         $this->categorias = Categorias::where('empresa_id', $this->empresa_id)->get();
         $this->unidades = Unidad::where('empresa_id', $this->empresa_id)->get();
         $this->ingredientes = Ingredientes::where('empresa_id', $this->empresa_id)->get();
+        //dd($this->ingredientes->categorias['nombrecategoria']);
         return view('livewire.ingredientes.ingrediente-component',['datos'=> Ingredientes::where('empresa_id', $this->empresa_id)->paginate(3),])->extends('layouts.adminlte');
     }
 
