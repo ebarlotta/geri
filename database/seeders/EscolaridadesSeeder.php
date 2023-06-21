@@ -15,7 +15,7 @@ class EscolaridadesSeeder extends Seeder
     public function run()
     {
         
-        DB::table('escolaridades')->truncate();
+        // DB::table('escolaridades')->truncate();
         DB::table('escolaridades')->insert(['escolaridadDescripcion'=>'Primaria Incompleta',]);
         DB::table('escolaridades')->insert(['escolaridadDescripcion'=>'Primaria Completa',]);
         DB::table('escolaridades')->insert(['escolaridadDescripcion'=>'Secundaria Incompleta',]);

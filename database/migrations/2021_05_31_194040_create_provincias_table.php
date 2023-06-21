@@ -19,7 +19,7 @@ class CreateProvinciasTable extends Migration
             $table->unsignedBigInteger('nacionalidads_id');
             $table->timestamps();
 
-            $table->foreign('nacionalidads_id')->references('id')->on('nacionalidad');
+            $table->foreign('nacionalidads_id')->references('id')->on('nacionalidads');
             //$table->foreign('estado_id')->references('id')->on('person_activos')->onDelete('cascade');
 
         });

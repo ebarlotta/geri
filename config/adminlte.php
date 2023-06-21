@@ -281,55 +281,6 @@ return [
                     'icon' => 'fas fa-fw fa-usd',
                 ],
                 [
-                    'text' => 'Estados Civiles',
-                    'url'  => 'admin/estadosciviles',
-                    'icon' => 'fas fa-fw fa-venus-mars',
-                ],
-                [
-                    'text' => 'Tipo de Persona',
-                    'url'  => 'admin/tiposdepersonas',
-                    'icon' => 'fas fa-fw fa-object-group',
-                ],
-                [
-                    'text' => 'Tipos de Documentos',
-                    'url'  => 'admin/tiposdedocumentos',
-                    'icon' => 'fas fa-fw fa-card',
-                ],
-                [
-                    'text' => 'Estado de Personas',
-                    'url'  => 'admin/personactivo',
-                    'icon' => 'fas fa-fw fa-bed',
-                ],
-                [
-                    'text' => 'Áreas',
-                    'url'  => 'admin/areas',
-                ],
-                [
-                    'text' => 'Escolaridades',
-                    'url'  => 'admin/escolaridades',
-                ],
-                [
-                    'text' => 'Nacionalidades',
-                    'url'  => 'admin/nacionalidad',
-                ],
-                [
-                    'text' => 'Localidades',
-                    'url'  => 'admin/localidades',
-                ],
-                [
-                    'text' => 'Provincias',
-                    'url'  => 'admin/provincias',
-                ],
-                [
-                    'text' => 'Grado de Dependencia',
-                    'url'  => 'admin/gradodependencia',
-                    'icon' => 'fas fa-fw fa-blind',
-                ],
-                [
-                    'text' => 'Motivos de Egresos',
-                    'url'  => 'admin/motivoegreso',
-                ],
-                [
                     'text' => 'Estado de Camas',
                     'url'  => 'admin/estadocama',
                     'icon' => 'fas fa-fw fa-bed',
@@ -340,25 +291,74 @@ return [
                     'icon' => 'fas fa-fw fa-bed',
                 ],
                 [
-                    'text' => 'Personas Campos',
-                    'url'  => 'admin/personascampos',
-                    'icon' => 'fas fa-fw fa-child ',
-                ],
-                [
-                    'text' => 'Gestión de Interfaces',
-                    'url'  => 'admin/interfaces',
-                ],
-                [
-                    'text' => 'Unidades',
-                    'url'  => 'admin/unidades',
-                ],
-                [
-                    'text' => 'Categorías',
-                    'url'  => 'admin/categorias',
-                ],
-                    ['text' => 'Gestión Menú',
-                    'url'  => 'admin/settings',
+                    'text' => 'Personas',
                     'icon' => 'fas fa-fw fa-cogs',
+                    'submenu' => [
+                        [
+                            'text' => 'Gestión de Personas',
+                            'url'  => 'admin/personas',
+                            'icon' => 'fas fa-fw fa-card',
+                        ],
+                        [
+                            'text' => 'Tipos de Documentos',
+                            'url'  => 'admin/tiposdedocumentos',
+                            'icon' => 'fas fa-fw fa-card',
+                        ],
+                        [
+                            'text' => 'Tipo de Persona',
+                            'url'  => 'admin/tiposdepersonas',
+                            'icon' => 'fas fa-fw fa-object-group',
+                        ],
+                        [
+                            'text' => 'Estado de Personas',
+                            'url'  => 'admin/personactivo',
+                            'icon' => 'fas fa-fw fa-bed',
+                        ],
+                        [
+                            'text' => 'Escolaridades',
+                            'url'  => 'admin/escolaridades',
+                        ],
+                        [
+                            'text' => 'Grado de Dependencia',
+                            'url'  => 'admin/gradodependencia',
+                            'icon' => 'fas fa-fw fa-blind',
+                        ],
+                        [
+                            'text' => 'Estados Civiles',
+                            'url'  => 'admin/estadosciviles',
+                            'icon' => 'fas fa-fw fa-venus-mars',
+                        ],
+                        [
+                            'text' => 'Motivos de Egresos',
+                            'url'  => 'admin/motivoegreso',
+                        ],
+                        [
+                            'text' => 'Áreas',
+                            'url'  => 'admin/areas',
+                        ],
+                        [
+                            'text' => 'Localización',
+                            'icon' => 'fas fa-fw fa-cogs',
+                            'submenu' => [
+                                [
+                                    'text' => 'Nacionalidades',
+                                    'url'  => 'admin/nacionalidad',
+                                ],
+                                [
+                                    'text' => 'Localidades',
+                                    'url'  => 'admin/localidades',
+                                ],
+                                [
+                                    'text' => 'Provincias',
+                                    'url'  => 'admin/provincias',
+                                ],
+                            ],
+                        ]
+                    ],
+                ],                
+                ['text' => 'Gestión Menú',
+                'url'  => 'admin/settings',
+                'icon' => 'fas fa-fw fa-cogs',
                     'submenu' => [
                         [
                             'text' => 'Ingredientes',
@@ -369,75 +369,39 @@ return [
                             'url'  => 'admin/menu',
                         ],        
                     ],
-                    ],
-                [
-                    'text' => 'Otras Cosas',
-                    'url'  => 'admin/otrascosas',
                 ],
-                [
-                    'text' => 'Usuario',
-                    'url'  => 'user/profile',
-                ],
-            ],
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'Configuraciones',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
+                ['text' => 'Generales',
+                'url'  => 'admin/settings',
+                'icon' => 'fas fa-fw fa-cogs',
                     'submenu' => [
                         [
-                            'text' => 'level_two',
-                            'url'  => '#',
+                            'text' => 'Otras Cosas',
+                            'url'  => 'admin/otrascosas',
                         ],
                         [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
+                            'text' => 'Usuario',
+                            'url'  => 'user/profile',
+                        ],    
+                        [
+                            'text' => 'Personas Campos',
+                            'url'  => 'admin/personascampos',
+                            'icon' => 'fas fa-fw fa-child ',
                         ],
+                        [
+                            'text' => 'Gestión de Interfaces',
+                            'url'  => 'admin/interfaces',
+                        ],
+                        [
+                            'text' => 'Unidades',
+                            'url'  => 'admin/unidades',
+                        ],
+                        [
+                            'text' => 'Categorías',
+                            'url'  => 'admin/categorias',
+                        ],    
                     ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
+                ],                
             ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => 'admin/prueba',
         ],
     ],
 

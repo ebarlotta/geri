@@ -5,25 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Person extends Model
+class Persona extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
+        'email',
         'nacimiento',
-        'activo',
         'alias',
-        'beneficio_id',
         'documento',
-        'tipodocumento_id',
         'domicilio',
-        'localidad',
         'sexo',
-        'nacionalidad',
+        'cama_id',
+        'nacionalidad_id',
+        'localidad_id',
+        'estado_id',
+        'beneficio_id',
+        'tipodocumento_id',
         'estadocivil_id',
         'tipopersona_id',
-        'email',
+        'gradodependencia_id', 
+        'escolaridad_id',
     ];
 
 }

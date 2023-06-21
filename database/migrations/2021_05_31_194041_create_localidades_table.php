@@ -18,6 +18,10 @@ class CreateLocalidadesTable extends Migration
             $table->string('localidad_descripcion')->unique();
             $table->integer('localidad_cp');
             $table->timestamps();
+
+            $table->unsignedBigInteger('provincia_id');
+
+            $table->foreign('provincia_id')->references('id')->on('provincias');
         });
     }
 

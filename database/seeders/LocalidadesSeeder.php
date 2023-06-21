@@ -14,11 +14,11 @@ class LocalidadesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('localidades')->truncate();
-        DB::table('localidades')->insert(['localidad_descripcion'=>'Ciudad','localidad_cp'=>5500]);
-        DB::table('localidades')->insert(['localidad_descripcion'=>'San Martín','localidad_cp'=>5570]);
-        DB::table('localidades')->insert(['localidad_descripcion'=>'Palmira','localidad_cp'=>5570]);
-        DB::table('localidades')->insert(['localidad_descripcion'=>'Rivadavia','localidad_cp'=>5570]);
-        DB::table('localidades')->insert(['localidad_descripcion'=>'Junín','localidad_cp'=>5570]);
+        // DB::table('localidades')->truncate();
+        DB::table('localidades')->insert(['localidad_descripcion'=>'Ciudad','localidad_cp'=>5500,'provincia_id'=>1]);
+        DB::table('localidades')->insert(['localidad_descripcion'=>'San Martín','localidad_cp'=>5570,'provincia_id'=>1]);
+        DB::table('localidades')->insert(['localidad_descripcion'=>'Palmira','localidad_cp'=>5570,'provincia_id'=>1]);
+        DB::table('localidades')->insert(['localidad_descripcion'=>'Rivadavia','localidad_cp'=>5570,'provincia_id'=>1]);
+        DB::table('localidades')->insert(['localidad_descripcion'=>'Junín','localidad_cp'=>5570,'provincia_id'=>1]);
     }
 }

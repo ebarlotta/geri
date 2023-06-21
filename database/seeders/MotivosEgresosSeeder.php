@@ -14,7 +14,7 @@ class MotivosEgresosSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('motivos_egresos')->truncate();
+        // DB::table('motivos_egresos')->truncate();
         DB::table('motivos_egresos')->insert(['motivoegresoDescripcion'=>'Fallecimiento']);
         DB::table('motivos_egresos')->insert(['motivoegresoDescripcion'=>'Traslado a Domicilio']);
         DB::table('motivos_egresos')->insert(['motivoegresoDescripcion'=>'Traslado a II Nivel']);

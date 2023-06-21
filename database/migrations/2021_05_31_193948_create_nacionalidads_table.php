@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNacionalidadTable extends Migration
+class CreateNacionalidadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNacionalidadTable extends Migration
      */
     public function up()
     {
-        Schema::create('nacionalidad', function (Blueprint $table) {
+        Schema::create('nacionalidads', function (Blueprint $table) {
             $table->id();
             $table->string('nacionalidad_descripcion')->unique();
             $table->timestamps();
