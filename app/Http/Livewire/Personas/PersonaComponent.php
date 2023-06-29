@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Beneficios;
 use App\Models\Camas;
+use App\Models\Cliente;
+use App\Models\empresa;
 use App\Models\Escolaridades;
 use App\Models\EstadosCiviles;
 use App\Models\GradoDependencia;
@@ -24,7 +26,7 @@ class PersonaComponent extends Component
     public $isModalOpen = false;
     public $tipos_documentos, $estados_civiles, $tipos_de_personas, $nacionalidades, $localidades, $beneficios, $grados_dependencias, $escolaridades, $camas, $person_activos;
 
-    public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo, $tipopersona_id, $estado_id;
+    public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo, $tipopersona_id, $estado_id, $email_verified_at;
 
     public function render()
     {
@@ -122,7 +124,8 @@ class PersonaComponent extends Component
         $persona = Persona::findOrFail($id);
         $this->id = $id;
         $this->persona_id=$id;
-
+        $cliente = new empresa;
+        dd($cliente->nombre);
         $this->name = $persona->name;
         $this->alias = $persona->alias;
         $this->domicilio = $persona->domicilio;
