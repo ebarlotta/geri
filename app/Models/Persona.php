@@ -5,52 +5,56 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Persona extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'email',
-        'nacimiento',
-        'alias',
+        'tipodocumento_id',
         'documento',
+        'alias',
+        'nacimiento',
         'domicilio',
+        'estadocivil_id',
         'sexo',
-        'cama_id',
+        'email',
+        'cama_id', //no esta
         'nacionalidad_id',
-        'localidad_id',
+        'localidad_id', 
+        //Obra social no esta
+        'escolaridad_id',
+        //telefono no esta
         'estado_id',
         'beneficio_id',
-        'tipodocumento_id',
-        'estadocivil_id',
         'tipopersona_id',
         'gradodependencia_id', 
-        'escolaridad_id',
     ];
-
 }
 
-class PersonaClass {
+class Actor extends Model {
     public $id;
     public $nombre='';
-    public $telefono;
-    public $email;
-    public $direccion;
-    public $localidad_id;
-    public $nacimiento;
-    public $documentonro;
     public $documentotipo_id;
-    public $sexo_id;
-    public $nacionalidad_id;
+    public $documentonro;
+    //public $alias
+    public $nacimiento;
+    public $direccion;
     public $estadocivil_id;
-    public $escolaridad_id;
+    public $sexo_id;
+    public $email;
+    //Tipo de persona
+    public $nacionalidad_id;
+    public $localidad_id;
     public $obrasocial_id;
+    public $escolaridad_id;
+    public $telefono;
     public $empresa_id;
-    public $Activo;
+    public $activo;
 }
 
-class Personas extends PersonaClass {
+class Personas extends Actor {
     public $modalidad;
     public $ultimaocupacion;
     public $viviendapropia;
@@ -58,11 +62,11 @@ class Personas extends PersonaClass {
     public $canthijasmujeres;
 }
 
-class Referente extends PersonaClass {
+class Referente extends Actor {
     public $vinculo;
 }
 
-class Personal extends PersonaClass {
+class Personal extends Actor {
     public $modalidad;
     public $fingreso;
     public $iminimo;
@@ -72,7 +76,7 @@ class Personal extends PersonaClass {
     public $nrocta;
 }
 
-class Agente extends PersonaClass {
+class Agente extends Actor {
     public $fingreso;
     public $fegreso;
     public $alias;
@@ -87,25 +91,37 @@ class Agente extends PersonaClass {
     public $informes_id;
 }
 
-class Proveedor extends PersonaClass {
+class Proveedor extends Actor {
     public $iva_id;
 }
 
-class Cliente extends PersonaClass {
+class Cliente extends Actor {
     public $iva_id;
 }
 
-class Vendedor extends PersonaClass {
+class Vendedor extends Actor {
     public $iva_id;
 }
 
-class empresa extends PersonaClass {
+class empresa extends Actor {
     public $iva_id;
     public $actividad;
     public $caracterdeltitular;
     public $titular_id;  //Hace referencia a Persona
 
-    //public function __constructor() {
-    //    $this->titular = new PersonaClass;
-    //}
+    public $nacimiento;
+    public $estadocivil_id;
+    public $sexo_id;
+    public $nacionalidad_id;
+    public $obrasocial_id;
+    public $escolaridad_id;
+
+    function __construct() {
+        $this->nacimiento=date('Y-m-d');
+        $this->estadocivil_id=0; // 0 = sin especificar
+        $this->sexo_id=0;        // 0 = sin especificar
+        $this->nacionalidad_id=0;// 0 = sin especificar
+        $this->obrasocial_id=0;  // 0 = sin especificar
+        $this->escolaridad_id=0; // 0 = sin especificar
+    }
 }
