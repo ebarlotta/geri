@@ -99,5 +99,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Empresa::factory(4)->create();   //Crea una empresa de prueba para relacionar con los usuarios que se dan de alta
         \App\Models\Unidad::factory(10)->create();
         $this->call(ModuloSeeder::class);
+
+        $this->call(SexoSeeder::class);
+        $this->call(ObraSocialSeeder::class);
+
     }
 }

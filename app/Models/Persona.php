@@ -50,6 +50,7 @@ class Actor extends Model {
     public $obrasocial_id;
     public $escolaridad_id;
     public $telefono;
+    public $avatar;
     public $empresa_id;
     public $activo;
 }
