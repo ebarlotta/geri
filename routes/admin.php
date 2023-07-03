@@ -32,7 +32,7 @@ use App\Http\Livewire\Categorias\CategoriasComponent;
 use App\Http\Livewire\Ingredientes\IngredientesComponent;
 use App\Http\Livewire\Habitacion\Habitacion;
 use App\Http\Livewire\Menu\MenuComponent;
-use App\Http\Livewire\Personas\PersonaComponent;
+use App\Http\Livewire\Actores\ActorComponent;
 
 
 //Route::get('',[HomeController::class,'index'])->name('admin.index');
@@ -78,7 +78,7 @@ Route::get('ingredientes',IngredientesComponent::class)->name('ingredientes');
 Route::get('habitaciones',Habitacion::class)->name('habitaciones');
 
 Route::get('menu',MenuComponent::class)->name('menu');
-Route::get('personas',PersonaComponent::class)->name('personas');
+Route::get('actores',ActorComponent::class)->name('actores');
 
 //Route::get('menugestionar',[MenuComponent::class,'show'])->name('menugestionar');
 

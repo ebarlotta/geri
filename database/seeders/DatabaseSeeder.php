@@ -102,6 +102,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SexoSeeder::class);
         $this->call(ObraSocialSeeder::class);
+        \App\Models\Actor::factory(10)->create();
 
     }
 }

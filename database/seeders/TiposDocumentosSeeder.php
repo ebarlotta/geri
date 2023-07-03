@@ -15,7 +15,10 @@ class TiposDocumentosSeeder extends Seeder
     public function run()
     {
         //DB::table('tipos_documentos')->truncate();
-        DB::table('tipos_documentos')->insert(['tipodocumento'=>'DNI',]);
+        DB::table('tipos_documentos')->insert(['tipodocumento'=>'Sin especificar',]);
         DB::table('tipos_documentos')->insert(['tipodocumento'=>'LC',]);
+        DB::table('tipos_documentos')->insert(['tipodocumento'=>'CUIT',]);
+        DB::table('tipos_documentos')->insert(['tipodocumento'=>'CUIL',]);
+        DB::table('tipos_documentos')->insert(['tipodocumento'=>'DNI',]);
     }
 }

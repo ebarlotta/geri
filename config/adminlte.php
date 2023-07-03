@@ -291,12 +291,12 @@ return [
                     'icon' => 'fas fa-fw fa-bed',
                 ],
                 [
-                    'text' => 'Personas',
+                    'text' => 'Actores',
                     'icon' => 'fas fa-fw fa-cogs',
                     'submenu' => [
                         [
-                            'text' => 'Gestión de Personas',
-                            'url'  => 'admin/personas',
+                            'text' => 'Gestión de Actores',
+                            'url'  => 'admin/actores',
                             'icon' => 'fas fa-fw fa-card',
                         ],
                         [
@@ -305,12 +305,12 @@ return [
                             'icon' => 'fas fa-fw fa-card',
                         ],
                         [
-                            'text' => 'Tipo de Persona',
+                            'text' => 'Tipo de Actor',
                             'url'  => 'admin/tiposdepersonas',
                             'icon' => 'fas fa-fw fa-object-group',
                         ],
                         [
-                            'text' => 'Estado de Personas',
+                            'text' => 'Estado de Actores',
                             'url'  => 'admin/personactivo',
                             'icon' => 'fas fa-fw fa-bed',
                         ],

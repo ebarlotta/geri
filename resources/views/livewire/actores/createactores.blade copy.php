@@ -113,7 +113,7 @@
                             </select>
                             @error('localidad_id') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
-                        <div class="mb-2 col-3">
+                        <!-- <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de Beneficio</label>
                             <select name="beneficio_id" id="" wire:model="beneficio_id">
                                 <option value="">-</option>
@@ -122,7 +122,7 @@
                                 @endforeach
                             </select>
                             @error('beneficio_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </div>
+                        </div> -->
                         <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Grado de Dependencia</label>
                             <select name="gradodependencia_id" id="" wire:model="gradodependencia_id">
