@@ -145,4 +145,11 @@ class MenuComponent extends Component
             session()->flash('message', 'Se agregó el ingrediente');
         }
     }
+
+    public function habilitar($id,$estado)
+    {
+        $menu = Menu::find($id);
+        if($estado) { $menu->menuactivo = 0; } else { $menu->menuactivo = 1; }
+        $menu->save();
+    }
 }

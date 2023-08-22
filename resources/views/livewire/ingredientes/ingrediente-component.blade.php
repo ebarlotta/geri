@@ -27,6 +27,11 @@
 
                     <div class="flex justify-around">
                         <x-crear>Nuevo Ingrediente</x-crear>
+                        <a href="menu">
+                            <button class="bg-green-300 hover:bg-green-400 text-white-900 font-bold py-2 px-4 rounded my-3">
+                                Volver al nmenú
+                            </button>
+                        </a>
                         @if ($isModalOpen)
                             @include('livewire.ingredientes.createingrediente')
                         @endif

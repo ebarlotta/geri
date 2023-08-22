@@ -396,7 +396,7 @@ return [
                             'url'  => 'admin/unidades',
                         ],
                         [
-                            'text' => 'Categorías',
+                            'text' => 'Categorías Ingredientes',
                             'url'  => 'admin/categorias',
                         ],    
                     ],

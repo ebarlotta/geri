@@ -56,7 +56,22 @@
                                     @foreach ($datos as $menu)
                                         <tr>
                                             <td>{{ $menu->nombremenu }}</td>
-                                            <td>{{ $menu->menuactivo }}</td>
+                                            <td>
+                                                <div class="flex justify-center">
+                                                    @if($menu->menuactivo)
+                                                        <span class="border rounded-full border-grey bg-green-400 flex items-center cursor-pointer w-12 justify-start" wire:click="habilitar({{ $menu->id }}, {{ $menu->menuactivo }})">
+                                                            <span class="rounded-full border w-6 h-6 border-grey shadow-inner bg-white shadow">
+                                                            </span>
+                                                        </span>
+                                                        @else
+                                                        <!------- on ----->
+                                                        <span class="border rounded-full border-grey flex items-center cursor-pointer w-12 bg-red-500 justify-end"  wire:click="habilitar({{ $menu->id }}, {{ $menu->menuactivo }})">
+                                                            <span class="rounded-full border w-6 h-6 border-grey shadow-inner bg-white shadow">
+                                                            </span>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </td>
                                             <td>{{ $menu->tiempopreparacion }}</td>
                                             <td style="width: 20%;">
                                                 <div style="display: flex">

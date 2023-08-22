@@ -53,7 +53,7 @@
                             @error('actividad1') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-4 mr-3">
                             <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">E-Mail</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 pl-2 -mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" wire:model="email">
                             @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
@@ -65,7 +65,7 @@
                             @error('nombretitular') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-4 mr-3">
                             <label for="exampleFormControlInput1" class="block text-gray-700 text-sm font-bold mb-2">Documento del Titular</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 pl-2 -mr-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput1" wire:model="dnititular">
                             @error('dnititular') <span class="text-red-500">{{ $message }}</span>@enderror

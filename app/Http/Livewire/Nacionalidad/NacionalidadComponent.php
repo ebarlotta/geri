@@ -17,7 +17,7 @@ class NacionalidadComponent extends Component
     public function render()
     {
         //dd(Nacionalidad::all());
-        $this->nacionalidades = DB::table('nacionalidad')->get();
+        $this->nacionalidades = DB::table('nacionalidads')->get();
         return view('livewire.nacionalidad.nacionalidad-component')->with('isModalOpen', $this->isModalOpen)->with('nacionalidades', $this->nacionalidades);
         //return "Hola";
     }

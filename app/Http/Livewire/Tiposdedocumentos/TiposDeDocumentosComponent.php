@@ -8,7 +8,7 @@ use Livewire\Component;
 class TiposDeDocumentosComponent extends Component
 {
 
-    public $tipodedocumento, $tiposdedocumentos, $tipodedocumento_id;
+    public $tipodocumento, $tiposdedocumentos, $tipodedocumento_id;
     public $isModalOpen = false;
 
     public function render()
@@ -36,17 +36,17 @@ class TiposDeDocumentosComponent extends Component
 
     private function resetCreateForm(){
         $this->tipodedocumento_id = '';
-        $this->tipodedocumento = '';
+        $this->tipodocumento = '';
     }
     
     public function store()
     {
         $this->validate([
-            'tipodedocumento' => 'required',
+            'tipodocumento' => 'required',
         ]);
     
         TiposDocumentos::updateOrCreate(['id' => $this->tipodedocumento_id], [
-            'tipodocumento' => $this->tipodedocumento,
+            'tipodocumento' => $this->tipodocumento,
         ]);
 
         session()->flash('message', $this->tipodedocumento_id ? 'Tipo de Documento Actualizado.' : 'Tipo de Documento Creado.');
@@ -60,8 +60,8 @@ class TiposDeDocumentosComponent extends Component
         $tipodedocumento = TiposDocumentos::findOrFail($id);
         $this->id = $id;
         $this->tipodedocumento_id=$id;
-        $this->tipodedocumento = $tipodedocumento->tipodedocumento;
-        dd($tipodedocumento->tipodedocumento);
+        $this->tipodocumento = $tipodedocumento->tipodocumento;
+        //dd($tipodedocumento->tipodocumento);
         
         $this->openModalPopover();
     }

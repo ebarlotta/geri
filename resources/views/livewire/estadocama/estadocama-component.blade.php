@@ -39,8 +39,16 @@
                 <tbody>
                     @foreach ($camas as $cama)
                     <tr>
-                        <td class="border  py-2">{{ $cama->NroHabitacion }}</td>
-                        <td class="border  py-2">{{ $cama->NroCama }}</td>
+                        <td class="border  py-2">
+                            <div class="flex justify-center">
+                                {{ $cama->NroHabitacion }}
+                            </div>
+                        </td>
+                        <td class="border  py-2">
+                            <div class="flex justify-center">
+                                {{ $cama->NroCama }}
+                            </div>
+                        </td>
                         <td class="border  py-2">
                             <div class="flex justify-center">
                                 @if($cama->EstadoCama)
@@ -68,7 +76,9 @@
                             </div>
                         </td>
                         <td class="border text-xs text-sm py-2  hidden sm:block">
-                            <div class="align-middle">{{ date('Y-m-d', strtotime($cama->updated_at)) }}</div>
+                            <div class="flex justify-center">
+                                {{ date('d-m-Y', strtotime($cama->updated_at)) }}
+                            </div>
                         </td>
                         <td class="border px-1 py-2">
                             <div class="flex justify-center">
