@@ -16,17 +16,7 @@
                                 <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Apellido y Nombre" wire:model="name">
                                 @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Alias</label>
-                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Alias" wire:model="alias">
-                                @error('alias') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
                             
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">DNI</label>
-                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese documento" wire:model="documento">
-                                @error('documento') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
                             <div class="mb-2 col-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de documento</label>
                                 <select name="tipodocumento_id" id="" wire:model="tipodocumento_id">
@@ -36,6 +26,19 @@
                                     @endforeach
                                 </select>
                                 @error('tipodocumento_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">DNI</label>
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese documento" wire:model="documento" maxlength="8">
+                                @error('documento') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-2 col-4">
+                            
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Alias</label>
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Alias" wire:model="alias">
+                                @error('alias') <span class="text-red-500">{{ $message }}</span>@enderror
+                            
                             </div>
                             <div class="mb-2 col-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Nacimiento</label>

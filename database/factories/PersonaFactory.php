@@ -27,7 +27,7 @@ class PersonaFactory extends Factory
             'email_verified_at' => now(),
             'nacimiento' => $this->faker->date(),
             'alias' => $this->faker->word,
-            'documento' => $this->faker->numberBetween(100000,4000000),
+            'documento' => $this->faker->numberBetween(1000000,4000000),
             'domicilio'=> $this->faker->streetName . $this->faker->buildingNumber,
             'sexo'=> $this->faker->randomElement([0,1]),
             'cama_id'=> $this->faker->randomElement([1,2,3]),
