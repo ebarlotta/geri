@@ -30,7 +30,7 @@ class PersonaFactory extends Factory
             'documento' => $this->faker->numberBetween(100000,4000000),
             'domicilio'=> $this->faker->streetName . $this->faker->buildingNumber,
             'sexo'=> $this->faker->randomElement([0,1]),
-            'cama_id'=> $this->faker->randomElement([0,1,2]),
+            'cama_id'=> $this->faker->randomElement([1,2,3]),
             'nacionalidad_id'=> 1,
             'localidad_id' => $this->faker->randomElement([1,2]),
             'estado_id' => $this->faker->randomElement([1,2]),
