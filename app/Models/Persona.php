@@ -44,26 +44,39 @@ class Actor extends Model {
     public $estadocivil_id;
     public $sexo_id;
     public $email;
+    public $imagenurl;
     //Tipo de persona
     public $nacionalidad_id;
     public $localidad_id;
     public $obrasocial_id;
     public $escolaridad_id;
     public $telefono;
+
     public $empresa_id;
     public $activo;
 }
 
-class Personas extends Actor {
+// class Personas extends Actor {
+//     public $modalidad;
+//     public $ultimaocupacion;
+//     public $viviendapropia;
+//     public $canthijosvarones;
+//     public $canthijasmujeres;
+//     public $persona_id;
+// }
+class DatosAdicionales {
     public $modalidad;
     public $ultimaocupacion;
     public $viviendapropia;
     public $canthijosvarones;
     public $canthijasmujeres;
-}
+}este es el nuevo cambio
+
 
 class Referente extends Actor {
+    public $datosadicionales_id;
     public $vinculo;
+    public $persona_id;
 }
 
 class Personal extends Actor {
@@ -74,6 +87,7 @@ class Personal extends Actor {
     public $nrotramite;
     public $patente;
     public $nrocta;
+    public $persona_id;
 }
 
 class Agente extends Actor {
@@ -89,39 +103,45 @@ class Agente extends Actor {
     public $dependencia_id;
     public $historiadevida_id;
     public $informes_id;
+    public $persona_id;
+    public $datosadicionales_id;
 }
 
 class Proveedor extends Actor {
     public $iva_id;
+    public $persona_id;
 }
 
 class Cliente extends Actor {
     public $iva_id;
+    public $persona_id;
 }
 
 class Vendedor extends Actor {
     public $iva_id;
+    public $persona_id;
 }
 
 class empresa extends Actor {
     public $iva_id;
+    public $logourl;
     public $actividad;
     public $caracterdeltitular;
-    public $titular_id;  //Hace referencia a Persona
+    public $persona_id;  //Hace referencia a Persona   $titular_id
 
-    public $nacimiento;
-    public $estadocivil_id;
-    public $sexo_id;
-    public $nacionalidad_id;
-    public $obrasocial_id;
-    public $escolaridad_id;
+    // public $nacimiento;
+    // public $estadocivil_id;
+    // public $sexo_id;
+    // public $nacionalidad_id;
+    // public $obrasocial_id;
+    // public $escolaridad_id;
 
-    function __construct() {
-        $this->nacimiento=date('Y-m-d');
-        $this->estadocivil_id=0; // 0 = sin especificar
-        $this->sexo_id=0;        // 0 = sin especificar
-        $this->nacionalidad_id=0;// 0 = sin especificar
-        $this->obrasocial_id=0;  // 0 = sin especificar
-        $this->escolaridad_id=0; // 0 = sin especificar
-    }
+    // function __construct() {
+    //     $this->nacimiento=date('Y-m-d');
+    //     $this->estadocivil_id=0; // 0 = sin especificar
+    //     $this->sexo_id=0;        // 0 = sin especificar
+    //     $this->nacionalidad_id=0;// 0 = sin especificar
+    //     $this->obrasocial_id=0;  // 0 = sin especificar
+    //     $this->escolaridad_id=0; // 0 = sin especificar
+    // }
 }
