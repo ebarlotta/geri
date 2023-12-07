@@ -15,6 +15,7 @@ use App\Models\Localidades;
 use App\Models\Nacionalidad;
 use Livewire\Component;
 use App\Models\Persona;
+use App\Models\PersonaActor as Actor;
 use App\Models\PersonActivo;
 use App\Models\TipoDePersona;
 use App\Models\TiposDocumentos;
@@ -47,6 +48,7 @@ class PersonaComponent extends Component
 
         $this->personas = Persona::all();
         return view('livewire.personas.persona-component')->with('isModalOpen', $this->isModalOpen)->with('personas', $this->personas);
+        $a = Actor::nueva();
     }
 
     public function create()
@@ -95,7 +97,7 @@ class PersonaComponent extends Component
             'nacimiento' => 'required|date',
             'estadocivil_id' => 'required|integer',
             'sexo' => 'required|integer', 
-            'email' => 'required|email', 
+            // 'email' => 'required|email', 
             'tipopersona_id' => 'required|integer', 
             'nacionalidad_id' => 'required|integer',
             'localidad_id' => 'required|integer',

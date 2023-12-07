@@ -25,8 +25,7 @@
             @include('livewire.estadocama.createcama')
             @endif
             <div>
-            <table class="w-full" style="display: block; overflow-x: auto;">  <!--  table-fixed  class="w-full "-->
-                <thead>
+            <table class="w-full table table-striped" style="overflow-x: auto; ">  <!--  table-fixed  class="w-full "-->
                     <tr class="bg-gray-100">
                         <th class=" py-2">Habitación</th>
                         <th class=" py-2">Cama</th>
@@ -35,9 +34,8 @@
                         <th class=" py-2 hidden sm:block">Fecha Movimiento</th>
                         <th class=" py-2">Opciones</th>
                     </tr>
-                </thead>
-                <tbody>
                     @foreach ($camas as $cama)
+                    @if($cama->NroHabitacion<>0)
                     <tr>
                         <td class="border  py-2">
                             <div class="flex justify-center">
@@ -89,8 +87,8 @@
                             </div>
                         </td>
                     </tr>
+                    @endif
                     @endforeach
-                </tbody>
             </table>
             </div>
         </div>

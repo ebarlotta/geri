@@ -148,7 +148,7 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2">Cama</label>
                             <select name="cama_id" id="" wire:model="cama_id">
                                     <option value="" selected>-</option>
-                                    <option value="0">Sin cama</option>
+                                    <option value="1">Sin cama</option>
                                     @foreach($camas as $cama)
                                         <option value="{{ $cama['cama_id'] }}">{{ $cama['cama_id'] }} </option>
                                     @endforeach

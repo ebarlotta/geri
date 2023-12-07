@@ -29,8 +29,13 @@ class Persona extends Model
         'estado_id',
         'beneficio_id',
         'tipopersona_id',
-        'gradodependencia_id', 
+        'gradodependencia_id',
+        // estadocivil_id no esta
+        // tipodocumento_id no esta
     ];
+    public function TipoDePersona() {
+        return $this->hasOne('\\App\Models\TipoDePersona','id','tipopersona_id');
+    }
 }
 
 class Actor extends Model {

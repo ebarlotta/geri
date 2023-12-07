@@ -28,6 +28,7 @@
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2">Apellido y Nombre</th>
+                        <th class="px-4 py-2">Tipo</th>
                         <th class="px-4 py-2">Opciones</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@
                     @foreach ($personas as $persona)
                     <tr>
                         <td class="border px-4 py-2">{{ $persona->name }}</td>
+                        <td class="border px-4 py-2">{{ $persona->TipoDePersona->tipodepersona }}</td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 <!-- Editar  -->

@@ -367,7 +367,15 @@ return [
                         [
                             'text' => 'Menúes',
                             'url'  => 'admin/menu',
-                        ],        
+                        ],   
+                        [
+                            'text' => 'Unidades',
+                            'url'  => 'admin/unidades',
+                        ],
+                        [
+                            'text' => 'Categorías Ingredientes',
+                            'url'  => 'admin/categorias',
+                        ],     
                     ],
                 ],
                 ['text' => 'Generales',
@@ -391,14 +399,6 @@ return [
                             'text' => 'Gestión de Interfaces',
                             'url'  => 'admin/interfaces',
                         ],
-                        [
-                            'text' => 'Unidades',
-                            'url'  => 'admin/unidades',
-                        ],
-                        [
-                            'text' => 'Categorías Ingredientes',
-                            'url'  => 'admin/categorias',
-                        ],    
                     ],
                 ],                
             ],

@@ -20,7 +20,7 @@ class CreatePersonasTable extends Migration
             $table->string('email')->nullable();
             $table->date('email_verified_at')->nullable();
             $table->date('nacimiento');
-            $table->string('alias');
+            $table->string('alias')->nullable();
             $table->integer('documento');
             $table->string('domicilio');
             $table->integer('sexo');
@@ -28,13 +28,13 @@ class CreatePersonasTable extends Migration
             $table->unsignedBigInteger('cama_id');
             $table->unsignedBigInteger('nacionalidad_id');
             $table->unsignedBigInteger('localidad_id');
+            $table->unsignedBigInteger('escolaridad_id');
             $table->unsignedBigInteger('estado_id');
             $table->unsignedBigInteger('beneficio_id');
-            $table->unsignedBigInteger('tipodocumento_id');
-            $table->unsignedBigInteger('estadocivil_id');
             $table->unsignedBigInteger('tipopersona_id');
             $table->unsignedBigInteger('gradodependencia_id');
-            $table->unsignedBigInteger('escolaridad_id');
+            $table->unsignedBigInteger('estadocivil_id');
+            $table->unsignedBigInteger('tipodocumento_id');
 
             $table->timestamps();
 

@@ -96,8 +96,8 @@ class DatabaseSeeder extends Seeder
 
         DB::table('empresas')->insert(['name' => 'Empresa de Pruebas','direccion' => 'Dirección','cuit' => '20123456789','ib' => '012345678','imagen' => 'BarBer.png','establecimiento' => '0','telefono' => '12345678','actividad' => 'Desarrollo','actividad1' => 'Software','email' => '','habilitada' => true,'nombretitular' => 'Juan de los Palotes','dnititular' => '1234',]);
 
-        \App\Models\Empresa::factory(4)->create();   //Crea una empresa de prueba para relacionar con los usuarios que se dan de alta
-        \App\Models\Unidad::factory(10)->create();
+        //\App\Models\Empresa::factory(4)->create();   //Crea una empresa de prueba para relacionar con los usuarios que se dan de alta
+        //\App\Models\Unidad::factory(10)->create();
         $this->call(ModuloSeeder::class);
     }
 }
