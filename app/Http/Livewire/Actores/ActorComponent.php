@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Personas;
+namespace App\Http\Livewire\Actores;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Actor;
@@ -8,7 +8,7 @@ use App\Models\Actores\ActorReferente;
 use App\Models\Beneficios;
 use App\Models\Camas;
 use App\Models\Cliente;
-use App\Models\empresa;
+use App\Models\Empresa;
 use App\Models\Escolaridades;
 use App\Models\EstadosCiviles;
 use App\Models\GradoDependencia;
@@ -17,7 +17,6 @@ use App\Models\Iva;
 use App\Models\Localidades;
 use App\Models\Nacionalidad;
 use Livewire\Component;
-use App\Models\Persona;
 use App\Models\PersonActivo;
 use App\Models\Personas;
 use App\Models\Referente;
@@ -25,12 +24,10 @@ use App\Models\Sexo;
 use App\Models\TipoDePersona;
 use App\Models\TiposDocumentos;
 
-
-
-class PersonaComponent extends Component
+class ActorComponent extends Component
 {
-    public $persona_descripcion, $persona_id, $iva_id, $fingreso, $fegreso, $peso, $referente_id;
-    public $personas, $ivas, $referentes;
+    public $persona_descripcion, $actor_id, $iva_id, $fingreso, $fegreso, $peso, $referente_id;
+    public $actores, $ivas, $referentes;
     
     public $tipos_documentos, $estados_civiles, $tipos_de_personas, $nacionalidades, $localidades, $beneficios, $grados_dependencias, $escolaridades, $camas, $person_activos, $sexos;
 
@@ -41,6 +38,7 @@ class PersonaComponent extends Component
     public $isModalOpen = false;
     public $isModalOpenAdicionales=false;
     public $vinculo, $modalidad,$ultimaocupacion,$viviendapropia,$canthijosvarones,$canthijasmujeres, $activo;
+
 
     public function render()
     {
@@ -55,27 +53,17 @@ class PersonaComponent extends Component
         $this->sexos = Sexo::all();
         $this->person_activos = PersonActivo::all();
         $this->ivas = Iva::all();
+        // $this->actores = Empresa::all();
+        $this->actores = Actor::all();
+
+        //dd($this->actores);
         $this->camas = json_decode(DB::table('cama_habitacions')
             ->join('habitacions', 'habitacions.id', '=', 'cama_habitacions.habitacion_id')
             ->where('habitacions.empresa_id',session('empresa_id'))
             ->orderBy('cama_id')
             ->get(),true);
 
-        $this->personas = Persona::all();
-        return view('livewire.personas.persona-component')->with('isModalOpen', $this->isModalOpen)->with('personas', $this->personas);
-
-        // $a = New Actor;
-        // $a->nueva();
-        // $a->agregar();
-        // $b = new Personas;
-        // $b->agregar();
-
-        // $c=new Referente;
-        // $c->vinculo;
-
-        // $b->viviendapropia;
-        // $b->telefono;
-
+        return view('livewire.actores.actor-component');
     }
 
     public function create()
@@ -97,7 +85,7 @@ class PersonaComponent extends Component
             ->where('habitacions.empresa_id',session('empresa_id'))
             ->orderBy('cama_id')
             ->get(),true);
-        return view('livewire.personas.persona-component')->with('isModalOpen', $this->isModalOpen);
+        return view('livewire.actores.actor-component')->with('isModalOpen', $this->isModalOpen);
     }
 
     // Se encarga de los modales 
@@ -105,55 +93,65 @@ class PersonaComponent extends Component
     public function openModalPopover() { $this->isModalOpen = true; }
     public function closeModalPopover() { $this->isModalOpen = false; }
     public function openModalPopoverAdicionales() { $this->isModalOpenAdicionales = true; }
-    public function closeModalPopoverAdicionales() { $this->isModalOpenAdicionales = false; }
+    public function closeModalPopoverAdicionales() { 
+        $this->isModalOpenAdicionales = false; 
+        $this->reset('vinculo','ultimaocupacion','viviendapropia','canthijosvarones','canthijasmujeres','activo');
+    }
     
 
     private function resetCreateForm(){
-        $this->persona_id = '';
-        $this->persona_descripcion = '';
+        $this->actor_id = '';
+        $this->actor_descripcion = '';
     }
     
     public function store()
     {
+        
         $this->validate([
             'name' => 'required', 
             'documento' => 'required|integer',
             'tipodocumento_id' => 'required|integer', 
-            'nacimiento' => 'required|date',
-            'estadocivil_id' => 'required|integer',
-            'sexo_id' => 'required|integer', 
+            // 'nacimiento' => 'required|date',
+            // 'estadocivil_id' => 'required|integer',
+            // 'sexo_id' => 'required|integer', 
             // 'email' => 'required|email', 
             'tipopersona_id' => 'required|integer', 
             'nacionalidad_id' => 'required|integer',
             'localidad_id' => 'required|integer',
             'beneficio_id' => 'required|integer',
-            'gradodependencia_id' => 'required|integer', 
-            'escolaridad_id' => 'required|integer', 
+            // 'gradodependencia_id' => 'required|integer', 
+            // 'escolaridad_id' => 'required|integer', 
             // 'cama_id' => 'integer', 
             'estado_id' => 'required|integer',
         ]);
-
-        Persona::updateOrCreate(['id' => $this->persona_id], [
-            'name' => $this->name, 
-            'alias' => $this->alias, 
+        // dd($this->tipopersona_id);
+        actor::updateOrCreate(['id' => $this->actor_id], [
+            'nombre' => $this->name, 
+            // 'alias' => $this->alias, 
             'domicilio' => $this->domicilio, 
             'documento' =>  $this->documento,
-            'tipodocumento_id' =>  $this->tipodocumento_id, 
-            'nacimiento' =>  $this->nacimiento,
-            'estadocivil_id' =>  $this->estadocivil_id,
-            'sexo_id' =>  $this->sexo_id, 
+            'tipos_documento' =>  1, //$this->tipodocumento_id, 
+            'nacimiento' =>  date(now()), //$this->nacimiento,
+            // 'estadocivil_id' =>  $this->estadocivil_id,
+            'sexo_id' =>  1, //$this->sexo_id, 
             'email' =>  $this->email, 
-            'tipopersona_id' =>  $this->tipopersona_id, 
+            'telefono' => 1111, // $this->telefono, 
+            // 'tipopersona_id' =>  $this->tipopersona_id, 
             'nacionalidad_id' =>  $this->nacionalidad_id,
             'localidad_id' =>  $this->localidad_id,
-            'beneficio_id' =>  $this->beneficio_id,
-            'gradodependencia_id' =>  $this->gradodependencia_id, 
-            'escolaridad_id' =>  $this->escolaridad_id, 
-            'cama_id' =>  $this->cama_id, 
-            'estado_id' =>  $this->estado_id,
-            'email_verified_at' => $this->nacimiento,
+            // 'beneficio_id' =>  $this->beneficio_id,
+            'obrasocial_id' =>  $this->beneficio_id,
+            // 'gradodependencia_id' =>  $this->gradodependencia_id, 
+            'escolaridad_id' =>  1, //$this->escolaridad_id, 
+            // 'cama_id' =>  $this->cama_id, 
+            // 'estado_id' =>  $this->estado_id,
+            // 'email_verified_at' => $this->nacimiento,
+            'tipopersona_id' => $this->tipopersona_id,
+            'empresa_id' => 1,
+            'urlfoto' => 'pepe',
+            'activo' => 1,
         ]);
-        session()->flash('message', $this->persona_id ? 'Persona Actualizada.' : 'Persona Creada.');
+        session()->flash('message', $this->actor_id ? 'Actor Actualizada.' : 'Actor Creada.');
 
         $this->closeModalPopover();
         $this->resetCreateForm();
@@ -161,71 +159,84 @@ class PersonaComponent extends Component
 
     public function edit($id)
     {
-        $persona = Persona::findOrFail($id);
+        $actor = Actor::findOrFail($id);
         $this->id = $id;
-        $this->persona_id=$id;
+        $this->actor_id=$id;
         //$cliente = new empresa;
         //dd($cliente->nombre);
-        $this->name = $persona->name;
-        $this->alias = $persona->alias;
-        $this->domicilio = $persona->domicilio;
-        $this->documento = $persona->documento;
-        $this->tipodocumento_id = $persona->tipodocumento_id;
-        //$this->tipodocumento_id = $persona->tipodocumento_id;
-        $this->nacimiento = $persona->nacimiento;
-        $this->estadocivil_id = $persona->estadocivil_id;
-        $this->sexo_id = $persona->sexo_id ;
-        $this->email = $persona->email;
-        $this->tipopersona_id = $persona->tipopersona_id;
-        $this->nacionalidad_id = $persona->nacionalidad_id;
-        $this->localidad_id = $persona->localidad_id;
-        $this->beneficio_id = $persona->beneficio_id;
-        $this->gradodependencia_id = $persona->gradodependencia_id ;
-        $this->escolaridad_id = $persona->escolaridad_id ;
-        $this->cama_id = $persona->cama_id ;
-        $this->estado_id = $persona->estado_id;
-        $this->email_verified_at = $persona->email_verified_at;
+        $this->name = $actor->nombre;
+        // $this->alias = $actor->alias;
+        $this->domicilio = $actor->domicilio;
+        $this->documento = $actor->documento;
+        $this->tipodocumento_id = $actor->tipos_documento;
+        //$this->tipodocumento_id = $actor->tipodocumento_id;
+        $this->nacimiento = $actor->nacimiento;
+        $this->estadocivil_id = $actor->estadocivil_id;
+        // $this->sexo_id = $actor->sexo_id ;
+        $this->email = $actor->email;
+        $this->tipopersona_id = $actor->tipopersona_id;
+        $this->nacionalidad_id = $actor->nacionalidad_id;
+        $this->localidad_id = $actor->localidad_id;
+        $this->beneficio_id = $actor->obrasocial_id;
+        // $this->gradodependencia_id = $actor->gradodependencia_id ;
+        $this->escolaridad_id = $actor->escolaridad_id ;
+        // $this->cama_id = $actor->cama_id ;
+        // $this->estado_id = $actor->estado_id;
+        // $this->email_verified_at = $actor->email_verified_at;
 
-        
-        //dd($persona->tipodocumento_id);
-        
         $this->openModalPopover();
     }
     
     public function delete($id)
     {
-        Persona::find($id)->delete();
-        session()->flash('message', 'Persona Eliminada.');
+        Actor::find($id)->delete();
+        session()->flash('message', 'Actor Eliminada.');
     }
 
     public function agregar($id)
     {
-        $persona = Persona::findOrFail($id);
+        $actor = Actor::findOrFail($id);
         $this->id = $id;
-        $this->persona_id=$id;
+        $this->actor_id=$id;
+        
         //$cliente = new empresa;
-        //dd($cliente->nombre);
-        $this->name = $persona->name;
-        $this->alias = $persona->alias;
-        $this->domicilio = $persona->domicilio;
-        $this->documento = $persona->documento;
-        $this->tipodocumento_id = $persona->tipodocumento_id;
-        //$this->tipodocumento_id = $persona->tipodocumento_id;
-        $this->nacimiento = $persona->nacimiento;
-        $this->estadocivil_id = $persona->estadocivil_id;
-        $this->sexo_id = $persona->sexo_id ;
-        $this->email = $persona->email;
-        $this->tipopersona_id = $persona->tipopersona_id;
-        $this->nacionalidad_id = $persona->nacionalidad_id;
-        $this->localidad_id = $persona->localidad_id;
-        $this->beneficio_id = $persona->beneficio_id;
-        $this->gradodependencia_id = $persona->gradodependencia_id ;
-        $this->escolaridad_id = $persona->escolaridad_id ;
-        $this->cama_id = $persona->cama_id ;
-        $this->estado_id = $persona->estado_id;
-        $this->email_verified_at = $persona->email_verified_at;
-        //dd($persona->tipodocumento_id);
-        $this->referentes = Persona::where('tipopersona_id','=',2)->get();
+        switch ($this->tipopersona_id) {
+            case 1: break; // Agente
+            case 2: // Referentes
+                    $referente = ActorReferente::where('actor_id','=',$this->actor_id)->get();
+                    if($referente->isNotEmpty()) {
+                        $this->vinculo = $referente[0]->vinculo;
+                        $this->ultimaocupacion = $referente[0]->ultimaocupacion;
+                        $this->viviendapropia = $referente[0]->viviendapropia;
+                        $this->canthijosvarones = $referente[0]->canthijosvarones;
+                        $this->canthijasmujeres = $referente[0]->canthijasmujeres;
+                        $this->actor_id = $referente[0]->actor_id;
+                        $this->activo = $referente[0]->activo;
+                        break;
+                    }
+        }
+
+        $this->name = $actor->name;
+        $this->alias = $actor->alias;
+        $this->domicilio = $actor->domicilio;
+        $this->documento = $actor->documento;
+        $this->tipodocumento_id = $actor->tipodocumento_id;
+        //$this->tipodocumento_id = $actor->tipodocumento_id;
+        $this->nacimiento = $actor->nacimiento;
+        $this->estadocivil_id = $actor->estadocivil_id;
+        $this->sexo_id = $actor->sexo_id;
+        $this->email = $actor->email;
+        $this->tipopersona_id = $actor->tipopersona_id;
+        $this->nacionalidad_id = $actor->nacionalidad_id;
+        $this->localidad_id = $actor->localidad_id;
+        $this->beneficio_id = $actor->beneficio_id;
+        $this->gradodependencia_id = $actor->gradodependencia_id ;
+        $this->escolaridad_id = $actor->escolaridad_id ;
+        $this->cama_id = $actor->cama_id ;
+        $this->estado_id = $actor->estado_id;
+        $this->email_verified_at = $actor->email_verified_at;
+        // dd($this->actor_id);
+        $this->referentes = Actor::where('tipopersona_id','=',2)->get();
 
         // $this->camas = json_decode(DB::table('cama_habitacions')
         // ->join('habitacions', 'habitacions.id', '=', 'cama_habitacions.habitacion_id')
@@ -251,17 +262,18 @@ class PersonaComponent extends Component
                 'canthijasmujeres' => 'required', 
                 'activo' => 'required', 
             ]);
-            // dd('valido');
-            $a = ActorReferente::updateOrCreate(['id' => $this->persona_id], [ //Tener en cuenta que está grabando en la tabla de personas, no de agentes
+            // dd($this->actor_id);
+            $a = ActorReferente::updateOrCreate(['id' => $this->actor_id], [ //Tener en cuenta que está grabando en la tabla de personas, no de agentes
                 'vinculo' => $this->vinculo, 
                 'modalidad' => 1, 
                 'ultimaocupacion' => $this->ultimaocupacion, 
                 'viviendapropia' => $this->viviendapropia, 
                 'canthijosvarones' => $this->canthijosvarones, 
                 'canthijasmujeres' => $this->canthijasmujeres, 
+                'actor_id' => $this->actor_id, 
                 'activo' => $this->activo, 
             ]);
-            // dd($a);
+            session()->flash('message', 'Se guardaron los datos');
             break;
             case 3: break; // Personal
             case 4: break; // Proveedor

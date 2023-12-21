@@ -1,5 +1,5 @@
 <div>
-    <x-titulo>Personas</x-titulo>
+    <x-titulo>Actores</x-titulo>
     <x-slot name="header">
         <div class="flex">
             <!-- //Comienza en submenu de encabezado -->
@@ -20,10 +20,10 @@
                 </div>
             </div>
             @endif
-            <x-crear>Alta de Persona</x-crear>
-            @if ($isModalOpen)
-                @include('livewire.personas.createpersonas')
-            @endif
+            <x-crear>Alta de Actores</x-crear>
+            @if ($isModalOpen) @include('livewire.actores.createactores') @endif
+            @if ($isModalOpenAdicionales) @include('livewire.actores.createactoresadicionales') @endif
+
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
@@ -33,17 +33,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if($personas)
-                    @foreach ($personas as $persona)
+                    @if($actores)
+                    @foreach ($actores as $actor)
                     <tr>
-                        <td class="border px-4 py-2">{{ $persona->name }}</td>
-                        <td class="border px-4 py-2">{{ $persona->TipoDePersona->tipodepersona }}</td>
+                        <td class="border px-4 py-2">{{ $actor->nombre }}</td>
+                        <td class="border px-4 py-2">{{ $actor->TipoDePersona->tipodepersona }}</td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 <!-- Editar  -->
-                                <x-editar id="{{$persona->id}}"></x-editar>
+                                <x-editar id="{{$actor->id}}"></x-editar>
                                 <!-- Eliminar -->
-                                <x-eliminar id="{{$persona->id}}"></x-eliminar>
+                                <x-eliminar id="{{$actor->id}}"></x-eliminar>
+                                <!-- Agregar -->
+                                <x-agregar id="{{$actor->id}}"></x-agregar>
                             </div>
                         </td>
                     </tr>

@@ -23,7 +23,7 @@ class CreatePersonasTable extends Migration
             $table->string('alias')->nullable();
             $table->integer('documento');
             $table->string('domicilio');
-            $table->integer('sexo');
+            $table->unsignedBigInteger('sexo_id');
             $table->text('url')->nullable();
             $table->unsignedBigInteger('cama_id');
             $table->unsignedBigInteger('nacionalidad_id');
@@ -39,13 +39,14 @@ class CreatePersonasTable extends Migration
             $table->timestamps();
 
             //$table->foreignIdFor(PersonActivo::class,'id');
-            $table->foreign('estado_id')->references('id')->on('person_activos')->onDelete('cascade');
+            $table->foreign('sexo_id')->references('id')->on('sexos');
+            $table->foreign('estado_id')->references('id')->on('person_activos');
             $table->foreign('beneficio_id')->references('id')->on('beneficios');
-            $table->foreign('tipodocumento_id')->references('id')->on('tipos_documentos')->onDelete('cascade');
-            $table->foreign('estadocivil_id')->references('id')->on('estados_civiles')->onDelete('cascade');
-            $table->foreign('tipopersona_id')->references('id')->on('tipo_de_personas')->onDelete('cascade');
-            $table->foreign('gradodependencia_id')->references('id')->on('grado_dependencias')->onDelete('cascade');
-            $table->foreign('escolaridad_id')->references('id')->on('escolaridades')->onDelete('cascade');
+            $table->foreign('tipodocumento_id')->references('id')->on('tipos_documentos');
+            $table->foreign('estadocivil_id')->references('id')->on('estados_civiles');
+            $table->foreign('tipopersona_id')->references('id')->on('tipo_de_personas');
+            $table->foreign('gradodependencia_id')->references('id')->on('grado_dependencias');
+            $table->foreign('escolaridad_id')->references('id')->on('escolaridades');
             $table->foreign('nacionalidad_id')->references('id')->on('nacionalidads');
             $table->foreign('localidad_id')->references('id')->on('localidades');
             $table->foreign('cama_id')->references('id')->on('camas')->default(0);

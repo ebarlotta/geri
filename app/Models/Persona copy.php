@@ -14,6 +14,7 @@ class Persona extends Model
         'name',
         'tipodocumento_id',
         'documento',
+        'alias',
         'nacimiento',
         'domicilio',
         'estadocivil_id',
@@ -42,15 +43,21 @@ class Actor extends Model {
     public $nombre='';
     public $documentotipo_id;
     public $documento;
-    public $tipo_de_persona;
+    //public $alias
+    public $nacimiento;
     public $domicilio;
+    public $estadocivil_id;
+    public $sexo_id;
     public $email;
+    //Tipo de persona
     public $nacionalidad_id;
     public $localidad_id;
+    public $obrasocial_id;
+    public $escolaridad_id;
     public $telefono;
     public $empresa_id;
     public $activo;
-    
+
     public function nueva() {
         return "entro";
     }
@@ -59,19 +66,16 @@ class Actor extends Model {
 }
 
 class Personas extends Actor { //Aplica para referentes y residentes
-    
-    public $alias;
-    public $nacimiento;
-    public $estadocivil_id;
-    public $sexo_id;
-    public $obrasocial_id;
-    public $escolaridad_id;
     public $modalidad;
     public $ultimaocupacion;
     public $viviendapropia;
     public $canthijosvarones;
     public $canthijasmujeres;
 
+    public function agregar() {
+    
+        $a = $this->domicilio;
+    }
 }
 
 class Referente extends Actor {
@@ -120,9 +124,14 @@ class empresa extends Actor {
     public $actividad;
     public $caracterdeltitular;
     public $titular_id;  //Hace referencia a Persona
-    public $fechainicio;
 
-    
+    public $nacimiento;
+    public $estadocivil_id;
+    public $sexo_id;
+    public $nacionalidad_id;
+    public $obrasocial_id;
+    public $escolaridad_id;
+
     function __construct() {
         $this->nacimiento=date('Y-m-d');
         $this->estadocivil_id=0; // 0 = sin especificar

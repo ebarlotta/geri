@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\ClsOtrasCosasController;
-
+use App\Http\Livewire\Actores\ActorComponent;
 use App\Http\Livewire\Beneficios\clsBeneficios;
 use App\Http\Livewire\Estadosciviles\EstadosCivilesComponent;
 use App\Http\Livewire\Tiposdepersonas\TiposDePersonasComponent;
@@ -78,7 +78,8 @@ Route::get('ingredientes',IngredientesComponent::class)->name('ingredientes');
 Route::get('habitaciones',Habitacion::class)->name('habitaciones');
 
 Route::get('menu',MenuComponent::class)->name('menu');
-Route::get('personas',PersonaComponent::class)->name('personas');
+// Route::get('personas',PersonaComponent::class)->name('personas');
+Route::get('actores',ActorComponent::class)->name('actores');
 
 //Route::get('menugestionar',[MenuComponent::class,'show'])->name('menugestionar');
 
