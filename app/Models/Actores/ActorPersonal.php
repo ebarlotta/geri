@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class ActorPersonal extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'modalidad',
+        'fingreso',
+        'iminimo',
+        'cbu',
+        'nrotramite',
+        'patente',
+        'nrocta',
+        'actor_id',
+        'activo',
+    ];
 }

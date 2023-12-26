@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Actores;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Actor;
+use App\Models\Actores\ActorAgente;
+use App\Models\Actores\ActorPersonal;
 use App\Models\Actores\ActorReferente;
 use App\Models\Beneficios;
 use App\Models\Camas;
@@ -33,7 +35,8 @@ class ActorComponent extends Component
 
     public $camas22;
 
-    public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $estado_id, $email_verified_at;
+    public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta;
+
 
     public $isModalOpen = false;
     public $isModalOpenAdicionales=false;
@@ -101,7 +104,15 @@ class ActorComponent extends Component
 
     private function resetCreateForm(){
         $this->actor_id = '';
-        $this->actor_descripcion = '';
+        $this->email = '';
+        $this->domicilio = '';
+        $this->documento = '';
+        $this->tipopersona_id = null ;
+        $this->nacionalidad_id = null;
+        $this->localidad_id = null ;
+        $this->beneficio_id = null ;
+        $this->personactivo_id = null ;
+
     }
     
     public function store()
@@ -122,9 +133,9 @@ class ActorComponent extends Component
             // 'gradodependencia_id' => 'required|integer', 
             // 'escolaridad_id' => 'required|integer', 
             // 'cama_id' => 'integer', 
-            'estado_id' => 'required|integer',
+            'personactivo_id' => 'required|integer',
         ]);
-        // dd($this->tipopersona_id);
+        //dd($this->personactivo_id);
         actor::updateOrCreate(['id' => $this->actor_id], [
             'nombre' => $this->name, 
             // 'alias' => $this->alias, 
@@ -144,7 +155,7 @@ class ActorComponent extends Component
             // 'gradodependencia_id' =>  $this->gradodependencia_id, 
             'escolaridad_id' =>  1, //$this->escolaridad_id, 
             // 'cama_id' =>  $this->cama_id, 
-            // 'estado_id' =>  $this->estado_id,
+            'personactivo_id' =>  $this->personactivo_id,
             // 'email_verified_at' => $this->nacimiento,
             'tipopersona_id' => $this->tipopersona_id,
             'empresa_id' => 1,
@@ -181,7 +192,6 @@ class ActorComponent extends Component
         // $this->gradodependencia_id = $actor->gradodependencia_id ;
         $this->escolaridad_id = $actor->escolaridad_id ;
         // $this->cama_id = $actor->cama_id ;
-        // $this->estado_id = $actor->estado_id;
         // $this->email_verified_at = $actor->email_verified_at;
 
         $this->openModalPopover();
@@ -200,9 +210,22 @@ class ActorComponent extends Component
         $this->actor_id=$id;
         
         //$cliente = new empresa;
-        switch ($this->tipopersona_id) {
-            case 1: break; // Agente
-            case 2: // Referentes
+        // dd($actor->tipopersona_id);
+        switch ($actor->tipopersona_id) {
+            case 1: {
+                $this->referentes = Actor::where('tipopersona_id','=',2)->get(); 
+                $agente = ActorAgente::where('id','=',$this->actor_id)->get(); 
+                // Datos del Agente
+                if($agente->isNotEmpty()) {
+                    $this->fingreso = $agente[0]->fingreso;
+                    $this->fegreso = $agente[0]->fegreso;
+                    $this->peso = $agente[0]->peso_id;
+                    $this->cama_id = $agente[0]->cama_id;
+                }
+                break; // Agente
+                    }
+            case 2: {
+                // Referentes
                     $referente = ActorReferente::where('actor_id','=',$this->actor_id)->get();
                     if($referente->isNotEmpty()) {
                         $this->vinculo = $referente[0]->vinculo;
@@ -212,10 +235,24 @@ class ActorComponent extends Component
                         $this->canthijasmujeres = $referente[0]->canthijasmujeres;
                         $this->actor_id = $referente[0]->actor_id;
                         $this->activo = $referente[0]->activo;
-                        break;
                     }
+                    break;
+                }
+            case 3: // Personal
+                $personal = ActorPersonal::where('actor_id','=',$this->actor_id)->get();
+                if($personal->isNotEmpty()) {
+                    $this->modalidad = $personal[0]->modalidad;
+                    $this->fingreso = $personal[0]->fingreso;
+                    $this->iminimo = $personal[0]->iminimo;
+                    $this->cbu = $personal[0]->cbu;
+                    $this->nrotramite = $personal[0]->nrotramite;
+                    $this->patente = $personal[0]->patente;
+                    $this->nrocta = $personal[0]->nrocta;
+                    $this->activo = $personal[0]->activo;
+                }
+                break;
         }
-
+        //Datos del Actor
         $this->name = $actor->name;
         $this->alias = $actor->alias;
         $this->domicilio = $actor->domicilio;
@@ -233,7 +270,7 @@ class ActorComponent extends Component
         $this->gradodependencia_id = $actor->gradodependencia_id ;
         $this->escolaridad_id = $actor->escolaridad_id ;
         $this->cama_id = $actor->cama_id ;
-        $this->estado_id = $actor->estado_id;
+        $this->personactivo_id = $actor->personactivo_id;
         $this->email_verified_at = $actor->email_verified_at;
         // dd($this->actor_id);
         $this->referentes = Actor::where('tipopersona_id','=',2)->get();
@@ -250,7 +287,29 @@ class ActorComponent extends Component
 
     public function storeAdicionalActor() {
         switch ($this->tipopersona_id) {
-            case 1: break; // Agente
+            case 1: // Agente
+                $this->validate([
+                    'fingreso' => 'required',
+                    'peso' => 'integer',
+                    'referente_id' => 'integer',
+                    'cama_id' => 'integer',
+                ]);
+                $a = ActorAgente::updateOrCreate(['id' => $this->actor_id], [
+                'fingreso' => $this->fingreso,
+                'fegreso' => $this->fegreso,
+                'alias' => $this->alias,
+                'peso_id' => $this->peso,
+                'actor_referente' => $this->referente_id,
+                'cama_id' => $this->cama_id,
+                'datossociales_id' => null,
+                'datosmedicos_id' => null,
+                'motivos_egreso_id' => null,
+                'grado_dependencia_id' => null,
+                'historiadevida_id' => null,
+                'informes_id' => null,
+                ]);
+                session()->flash('message', 'Se guardaron los datos');
+                break;
             case 2: // Referente
                 
             $this->validate([
@@ -263,7 +322,7 @@ class ActorComponent extends Component
                 'activo' => 'required', 
             ]);
             // dd($this->actor_id);
-            $a = ActorReferente::updateOrCreate(['id' => $this->actor_id], [ //Tener en cuenta que está grabando en la tabla de personas, no de agentes
+            $a = ActorReferente::updateOrCreate(['actor_id' => $this->actor_id], [ //Tener en cuenta que está grabando en la tabla de personas, no de agentes
                 'vinculo' => $this->vinculo, 
                 'modalidad' => 1, 
                 'ultimaocupacion' => $this->ultimaocupacion, 
@@ -275,7 +334,27 @@ class ActorComponent extends Component
             ]);
             session()->flash('message', 'Se guardaron los datos');
             break;
-            case 3: break; // Personal
+            case 3: // Personal
+                $this->validate([
+                    'modalidad' => 'required',
+                    'fingreso' => 'required|date', 
+                    'iminimo' => 'integer', 
+                    'activo' => 'required', 
+                ]);
+                // DD($this->actor_id);
+                $a = ActorPersonal::updateOrCreate(['actor_id' => $this->actor_id], [
+                    'modalidad' => $this->modalidad,  
+                    'fingreso' => $this->fingreso, 
+                    'iminimo' => $this->iminimo, 
+                    'cbu' => $this->cbu, 
+                    'nrotramite' => $this->nrotramite, 
+                    'patente' => $this->patente, 
+                    'nrocta' => $this->nrocta,
+                    'actor_id' => $this->actor_id, 
+                    'activo' => $this->activo, 
+                ]);
+                session()->flash('message', 'Se guardaron los datos');
+                break; 
             case 4: break; // Proveedor
             case 5: break; // Cliente
             case 6: break; // Vendedor

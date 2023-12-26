@@ -39,7 +39,7 @@
                                 <select name="referente_id" id="" wire:model="referente_id">
                                     <option value="">-</option>
                                     @foreach($referentes as $referente)
-                                        <option value="{{ $referente->id }}">{{ $referente->name}}</option>
+                                        <option value="{{ $referente->id }}">{{ $referente->nombre}}</option>
                                     @endforeach
                                 </select>
                                 @error('referente_id') <span class="text-red-500">{{ $message }}</span>@enderror
@@ -50,11 +50,24 @@
                                 <select name="cama_id" id="" wire:model="cama_id">
                                     <option value="">-</option>
                                     @foreach($camas22 as $cama)
-                                        <option value="{{ $cama->id }}">Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
+                                    {{$cama_id}}
+                                        @if($cama_id==$cama->id) <option value="{{ $cama->id }}" selected>Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
+                                        @else
+                                            <option value="{{ $cama->id }}">Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @error('cama_id') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
+                            @if (session()->has('message'))
+                                <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
+                                    <div class="flex">
+                                        <div>
+                                            <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             @endif
 
                             <!-- Referente -->
@@ -98,7 +111,74 @@
                                     </select>
                                     @error('vinculo') <span class="text-red-500">{{ $message }}</span>@enderror
                                 </div>
+                                @if (session()->has('message'))
+                                    <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
+                                        <div class="flex">
+                                            <div>
+                                                <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @endif
+
+                            <!-- Personal -->
+                            @if($tipopersona_id==3)
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">modalidad</label>
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="modalidad" wire:model="modalidad">
+                                @error('modalidad') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">fingreso</label>
+                                <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="fingreso" wire:model="fingreso">
+                                @error('fingreso') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>                            
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">iminimo</label>
+                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="iminimo" wire:model="iminimo">
+                                @error('iminimo') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">cbu</label>
+                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="cbu" wire:model="cbu">
+                                @error('cbu') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">nrotramite</label>
+                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="nrotramite" wire:model="nrotramite">
+                                @error('nrotramite') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">patente</label>
+                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="patente" wire:model="patente">
+                                @error('patente') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">nrocta</label>
+                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="nrocta" wire:model="nrocta">
+                                @error('nrocta') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-2 col-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Activo</label>
+                                <select name="activo" id="" wire:model="activo">
+                                    <option value="">-</option>
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                                @error('activo') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+
+                            @if (session()->has('message'))
+                                <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
+                                    <div class="flex">
+                                        <div>
+                                            <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
 
                             <!-- Proveedor -->
                             @if($tipopersona_id==4 or $tipopersona_id==5 or $tipopersona_id==6)

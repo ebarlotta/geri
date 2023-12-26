@@ -24,8 +24,11 @@ class CreateActorPersonalsTable extends Migration
             $table->string('patente')->nullable();
             $table->string('nrocta')->nullable();
             $table->boolean('activo')->default(true);
-
+            $table->unsignedBigInteger('actor_id');
+            
             $table->timestamps();
+        
+            $table->foreign('actor_id')->references('id')->on('actors');
         });
     }
 

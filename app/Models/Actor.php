@@ -26,6 +26,7 @@ class Actor extends Model {
 		'urlfoto',
 		'activo',
 		'tipopersona_id',
+      'personactivo_id',
       // 'estado_id',
       // 'email_verified_at',
 	];

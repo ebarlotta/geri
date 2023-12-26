@@ -151,13 +151,13 @@
                         </div> --}}
                         <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Estado de Persona</label>
-                            <select name="estado_id" id="" wire:model="estado_id">
+                            <select name="personactivo_id" id="" wire:model="personactivo_id">
                                 <option value="">-</option>
                                 @foreach($person_activos as $personactivo)
                                     <option value="{{ $personactivo->id }}">{{ $personactivo->estado}}</option>
                                 @endforeach
                             </select>
-                            @error('estado_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('personactivo_id') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
                 </div>
