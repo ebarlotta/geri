@@ -16,10 +16,12 @@ class CreateActorProveedorsTable extends Migration
         Schema::create('actor_proveedors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iva_id');
+            $table->unsignedBigInteger('actor_id');
 
             $table->timestamps();
 
             $table->foreign('iva_id')->references('id')->on('ivas');
+            $table->foreign('actor_id')->references('id')->on('actors');
         });
     }
 

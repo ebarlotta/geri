@@ -5,8 +5,12 @@ namespace App\Http\Livewire\Actores;
 use Illuminate\Support\Facades\DB;
 use App\Models\Actor;
 use App\Models\Actores\ActorAgente;
+use App\Models\Actores\ActorCliente;
+use App\Models\Actores\ActorEmpresa;
 use App\Models\Actores\ActorPersonal;
+use App\Models\Actores\ActorProveedor;
 use App\Models\Actores\ActorReferente;
+use App\Models\Actores\ActorVendedor;
 use App\Models\Beneficios;
 use App\Models\Camas;
 use App\Models\Cliente;
@@ -34,8 +38,10 @@ class ActorComponent extends Component
     public $tipos_documentos, $estados_civiles, $tipos_de_personas, $nacionalidades, $localidades, $beneficios, $grados_dependencias, $escolaridades, $camas, $person_activos, $sexos;
 
     public $camas22;
+    public $radios;
 
-    public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta;
+    public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta,
+    $actor_referente, $actividad, $caracterdeltitular;
 
 
     public $isModalOpen = false;
@@ -57,17 +63,40 @@ class ActorComponent extends Component
         $this->person_activos = PersonActivo::all();
         $this->ivas = Iva::all();
         // $this->actores = Empresa::all();
-        $this->actores = Actor::all();
-
+        // $this->actores = Actor::all();
+// $this->Filtrar();
         //dd($this->actores);
         $this->camas = json_decode(DB::table('cama_habitacions')
             ->join('habitacions', 'habitacions.id', '=', 'cama_habitacions.habitacion_id')
             ->where('habitacions.empresa_id',session('empresa_id'))
             ->orderBy('cama_id')
             ->get(),true);
-
-        return view('livewire.actores.actor-component');
+        // $this->radios = 'Todos';
+        if(is_null($this->radios)) { $this->radios='Todos'; $this->actores = Actor::orderby('nombre')->get(); }
+            // dd($this->radios);
+        return view('livewire.actores.actor-component')->with(['radios'=>$this->radios]);
     }
+
+    // public function mount() {
+    //     $this->radios = 'Todos';
+    //     dd('mount');
+    // }
+
+    public function Filtrar() {
+        
+        switch ($this->radios) {
+            case 'Todos': $this->actores = Actor::orderby('nombre')->get(); break;
+            case 'Agentes': $this->actores = Actor::where('tipopersona_id','=',1)->orderby('nombre')->get(); break;
+            case 'Referentes': $this->actores = Actor::where('tipopersona_id','=',2)->orderby('nombre')->get(); break;
+            case 'Personal': $this->actores = Actor::where('tipopersona_id','=',3)->orderby('nombre')->get(); break;
+            case 'Proveedores': $this->actores = Actor::where('tipopersona_id','=',4)->orderby('nombre')->get(); break;
+            case 'Clientes': $this->actores = Actor::where('tipopersona_id','=',5)->orderby('nombre')->get(); break;
+            case 'Vendedores': $this->actores = Actor::where('tipopersona_id','=',6)->orderby('nombre')->get(); break;
+            case 'Empresas': $this->actores = Actor::where('tipopersona_id','=',7)->orderby('nombre')->get(); break;
+        }
+    }
+    //     // $this->render();
+    // }
 
     public function create()
     {
@@ -100,7 +129,6 @@ class ActorComponent extends Component
         $this->isModalOpenAdicionales = false; 
         $this->reset('vinculo','ultimaocupacion','viviendapropia','canthijosvarones','canthijasmujeres','activo');
     }
-    
 
     private function resetCreateForm(){
         $this->actor_id = '';
@@ -215,12 +243,15 @@ class ActorComponent extends Component
             case 1: {
                 $this->referentes = Actor::where('tipopersona_id','=',2)->get(); 
                 $agente = ActorAgente::where('id','=',$this->actor_id)->get(); 
+                
                 // Datos del Agente
                 if($agente->isNotEmpty()) {
                     $this->fingreso = $agente[0]->fingreso;
                     $this->fegreso = $agente[0]->fegreso;
                     $this->peso = $agente[0]->peso_id;
                     $this->cama_id = $agente[0]->cama_id;
+                    $this->alias = $agente[0]->alias;
+                    $this->actor_referente = $agente[0]->actor_referente;
                 }
                 break; // Agente
                     }
@@ -251,10 +282,38 @@ class ActorComponent extends Component
                     $this->activo = $personal[0]->activo;
                 }
                 break;
-        }
+                case 4: //Proveedor
+                    // dd($this->actor_id);
+                $proveedor = ActorProveedor::where('actor_id','=',$this->actor_id)->get();
+                if($proveedor->isNotEmpty()) {
+                    $this->iva_id = $proveedor[0]->iva_id;
+                }
+                break;
+                case 5: //Cliente
+                    // dd($this->actor_id);
+                $cliente = ActorCliente::where('actor_id','=',$this->actor_id)->get();
+                if($cliente->isNotEmpty()) {
+                    $this->iva_id = $cliente[0]->iva_id;
+                }
+                break;
+                case 6: // Vendedor
+                    $vendedor = ActorVendedor::where('actor_id','=',$this->actor_id)->get();
+                if($vendedor->isNotEmpty()) {
+                    $this->iva_id = $vendedor[0]->iva_id;
+                }
+                    break;
+                case 7: // Empresa
+                    $empresa = ActorEmpresa::where('actor_id','=',$this->actor_id)->get();
+                if($empresa->isNotEmpty()) {
+                    $this->iva_id = $empresa[0]->iva_id;
+                    $this->caracterdeltitular = $empresa[0]->caracterdeltitular;
+                    $this->actividad = $empresa[0]->actividad;
+                }
+                    break;
+            }
         //Datos del Actor
         $this->name = $actor->name;
-        $this->alias = $actor->alias;
+        // $this->alias = $actor->alias;
         $this->domicilio = $actor->domicilio;
         $this->documento = $actor->documento;
         $this->tipodocumento_id = $actor->tipodocumento_id;
@@ -269,7 +328,7 @@ class ActorComponent extends Component
         $this->beneficio_id = $actor->beneficio_id;
         $this->gradodependencia_id = $actor->gradodependencia_id ;
         $this->escolaridad_id = $actor->escolaridad_id ;
-        $this->cama_id = $actor->cama_id ;
+        //$this->cama_id = $actor->cama_id;
         $this->personactivo_id = $actor->personactivo_id;
         $this->email_verified_at = $actor->email_verified_at;
         // dd($this->actor_id);
@@ -355,10 +414,44 @@ class ActorComponent extends Component
                 ]);
                 session()->flash('message', 'Se guardaron los datos');
                 break; 
-            case 4: break; // Proveedor
-            case 5: break; // Cliente
-            case 6: break; // Vendedor
-            case 7: break; // Empresa
+            case 4:  // Proveedor
+                $this->validate([
+                    'iva_id' => 'integer',
+                ]);
+                $a = ActorProveedor::updateOrCreate(['actor_id' => $this->actor_id], [
+                    'iva_id' => $this->iva_id,
+                ]);
+                session()->flash('message', 'Se guardaron los datos');
+                break;
+            case 5: // Cliente
+                $this->validate([
+                    'iva_id' => 'integer',
+                ]);
+                $a = ActorCliente::updateOrCreate(['actor_id' => $this->actor_id], [
+                    'iva_id' => $this->iva_id,
+                ]);
+                session()->flash('message', 'Se guardaron los datos');
+                break;
+            case 6: // Vendedor
+                $this->validate([
+                    'iva_id' => 'integer',
+                ]);
+                $a = ActorVendedor::updateOrCreate(['actor_id' => $this->actor_id], [
+                    'iva_id' => $this->iva_id,
+                ]);
+                session()->flash('message', 'Se guardaron los datos');
+                break;
+            case 7: // Empresa
+                $this->validate([
+                    'iva_id' => 'integer',
+                ]);
+                $a = ActorEmpresa::updateOrCreate(['actor_id' => $this->actor_id], [
+                    'iva_id' => $this->iva_id,
+                    'actividad' => $this->actividad,
+                    'caracterdeltitular' => $this->caracterdeltitular,
+                ]);
+                session()->flash('message', 'Se guardaron los datos');
+                break;
         }
 
     }

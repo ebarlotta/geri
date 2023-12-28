@@ -20,7 +20,59 @@
                 </div>
             </div>
             @endif
-            <x-crear>Alta de Actores</x-crear>
+            <div class="flex d-flex">
+                <x-crear>Alta de Actores</x-crear>
+                <div class="flex d-flex align-middle" style="margin-top: 23px">
+                    <div class="form-check mx-3">
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Todos">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Todos
+                        </label>
+                    </div>
+                    <div class="form-check mx-3"> 
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Agentes" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Agentes
+                        </label>
+                    </div>
+                    <div class="form-check mx-3"> 
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Referentes" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Referentes
+                        </label>
+                    </div>
+                    <div class="form-check mx-3"> 
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Personal" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Personal
+                        </label>
+                    </div>
+                    <div class="form-check mx-3"> 
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Proveedores" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Proveedores
+                        </label>
+                    </div>
+                    <div class="form-check mx-3"> 
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Clientes" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Clientes
+                        </label>
+                    </div>
+                    <div class="form-check mx-3"> 
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Vendedores" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Vendedores
+                        </label>
+                    </div>
+                    <div class="form-check mx-3"> 
+                        <input class="form-check-input" wire:model="radios" wire:click="Filtrar()" type="radio" value="Empresas" checked>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Empresas
+                        </label>
+                    </div>
+                </div>
+            </div>
             @if ($isModalOpen) @include('livewire.actores.createactores') @endif
             @if ($isModalOpenAdicionales) @include('livewire.actores.createactoresadicionales') @endif
 

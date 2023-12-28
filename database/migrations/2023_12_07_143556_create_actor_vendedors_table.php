@@ -16,8 +16,10 @@ class CreateActorVendedorsTable extends Migration
         Schema::create('actor_vendedors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('iva_id');
+            $table->unsignedBigInteger('actor_id');
 
             $table->foreign('iva_id')->references('id')->on('ivas');
+            $table->foreign('actor_id')->references('id')->on('actors');
 
             $table->timestamps();
         });

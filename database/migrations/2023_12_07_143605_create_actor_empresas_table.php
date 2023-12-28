@@ -19,11 +19,12 @@ class CreateActorEmpresasTable extends Migration
 
             $table->string('actividad');
             $table->string('caracterdeltitular');
-            $table->unsignedBigInteger('titular_id');  //Hace referencia a Person')
+            // $table->unsignedBigInteger('titular_id');  //Hace referencia a Person')
+            $table->unsignedBigInteger('actor_id');
 
+            $table->foreign('actor_id')->references('id')->on('actors');
             $table->foreign('iva_id')->references('id')->on('ivas');
-            $table->foreign('titular_id')->references('id')->on('actors');
-
+            // $table->foreign('titular_id')->references('id')->on('actors');
 
             $table->timestamps();
         });

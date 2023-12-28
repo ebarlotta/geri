@@ -154,7 +154,11 @@
                             <select name="personactivo_id" id="" wire:model="personactivo_id">
                                 <option value="">-</option>
                                 @foreach($person_activos as $personactivo)
-                                    <option value="{{ $personactivo->id }}">{{ $personactivo->estado}}</option>
+                                    @if($personactivo->id===$tipopersona_id)
+                                        <option value="{{ $personactivo->id }}" selected>{{ $personactivo->estado}}</option>
+                                    @else
+                                        <option value="{{ $personactivo->id }}">{{ $personactivo->estado}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @error('personactivo_id') <span class="text-red-500">{{ $message }}</span>@enderror

@@ -14,60 +14,62 @@
 
                             <!-- Agente -->
                             @if($tipopersona_id==1)
-                            <div class="mb-2 col-3">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Ingreso</label>
-                                <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Fecha de ingreso" wire:model="fingreso">
-                                @error('fingreso') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-3">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Egreso</label>
-                                <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Fecha de egreso" wire:model="fegreso">
-                                @error('fegreso') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-3">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Alias</label>
-                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Sobrenombre" wire:model="alias">
-                                @error('alias') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-3">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Peso</label>
-                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="peso del agente" wire:model="peso">
-                                @error('peso') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-3">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Referente</label>
-                                <select name="referente_id" id="" wire:model="referente_id">
-                                    <option value="">-</option>
-                                    @foreach($referentes as $referente)
-                                        <option value="{{ $referente->id }}">{{ $referente->nombre}}</option>
-                                    @endforeach
-                                </select>
-                                @error('referente_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-3">
-                                
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Cama</label>
-                                <select name="cama_id" id="" wire:model="cama_id">
-                                    <option value="">-</option>
-                                    @foreach($camas22 as $cama)
-                                    {{$cama_id}}
-                                        @if($cama_id==$cama->id) <option value="{{ $cama->id }}" selected>Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
-                                        @else
-                                            <option value="{{ $cama->id }}">Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                @error('cama_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            @if (session()->has('message'))
-                                <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
-                                    <div class="flex">
-                                        <div>
-                                            <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                <div class="mb-2 col-3">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Ingreso</label>
+                                    <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Fecha de ingreso" wire:model="fingreso">
+                                    @error('fingreso') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-3">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Egreso</label>
+                                    <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Fecha de egreso" wire:model="fegreso">
+                                    @error('fegreso') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-3">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Alias</label>
+                                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Sobrenombre" wire:model="alias">
+                                    @error('alias') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-3">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Peso</label>
+                                    <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="peso del agente" wire:model="peso">
+                                    @error('peso') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-3">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Referente</label>
+                                    <select class="col-12 form-control" name="referente_id" id="" wire:model="referente_id" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
+                                        <option value="">-</option>
+                                        @foreach($referentes as $referente)
+                                            @if($actor_referente===$referente->id)
+                                                <option value="{{ $referente->id }}" selected>{{ $referente->nombre}}</option>
+                                            @else
+                                                <option value="{{ $referente->id }}">{{ $referente->nombre}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('referente_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-3">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Cama</label>
+                                    <select class="col-12 form-control" name="cama_id" id="" wire:model="cama_id" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
+                                        <option value="">-</option>
+                                        @foreach($camas22 as $cama)
+                                            @if($cama_id===$cama->id) <option value="{{ $cama->id }}" selected>Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
+                                            @else
+                                                <option value="{{ $cama->id }}">Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('cama_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                @if (session()->has('message'))
+                                    <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
+                                        <div class="flex">
+                                            <div>
+                                                <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endif
+                                @endif
                             @endif
 
                             <!-- Referente -->
@@ -84,7 +86,7 @@
                                 </div>
                                 <div class="mb-2 col-4">
                                     <label class="block text-gray-700 text-sm font-bold mb-2">Vivienda Propia</label>
-                                    <select name="viviendapropia" id="" wire:model="viviendapropia">
+                                    <select class="col-12 form-control" name="viviendapropia" id="" wire:model="viviendapropia" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
                                         <option value="">-</option>
                                         <option value="1">Si</option>
                                         <option value="2">No</option>
@@ -104,7 +106,7 @@
                                 </div>
                                 <div class="mb-2 col-4">
                                     <label class="block text-gray-700 text-sm font-bold mb-2">Activo</label>
-                                    <select name="activo" id="" wire:model="activo">
+                                    <select class="col-12 form-control" name="activo" id="" wire:model="activo" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
                                         <option value="">-</option>
                                         <option value="1">Si</option>
                                         <option value="2">No</option>
@@ -124,74 +126,116 @@
 
                             <!-- Personal -->
                             @if($tipopersona_id==3)
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">modalidad</label>
-                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="modalidad" wire:model="modalidad">
-                                @error('modalidad') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">fingreso</label>
-                                <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="fingreso" wire:model="fingreso">
-                                @error('fingreso') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>                            
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">iminimo</label>
-                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="iminimo" wire:model="iminimo">
-                                @error('iminimo') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">cbu</label>
-                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="cbu" wire:model="cbu">
-                                @error('cbu') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">nrotramite</label>
-                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="nrotramite" wire:model="nrotramite">
-                                @error('nrotramite') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">patente</label>
-                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="patente" wire:model="patente">
-                                @error('patente') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">nrocta</label>
-                                <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="nrocta" wire:model="nrocta">
-                                @error('nrocta') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Activo</label>
-                                <select name="activo" id="" wire:model="activo">
-                                    <option value="">-</option>
-                                    <option value="1">Si</option>
-                                    <option value="2">No</option>
-                                </select>
-                                @error('activo') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">modalidad</label>
+                                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="modalidad" wire:model="modalidad">
+                                    @error('modalidad') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">fingreso</label>
+                                    <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="fingreso" wire:model="fingreso">
+                                    @error('fingreso') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>                            
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">iminimo</label>
+                                    <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="iminimo" wire:model="iminimo">
+                                    @error('iminimo') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">cbu</label>
+                                    <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="cbu" wire:model="cbu">
+                                    @error('cbu') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">nrotramite</label>
+                                    <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="nrotramite" wire:model="nrotramite">
+                                    @error('nrotramite') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">patente</label>
+                                    <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="patente" wire:model="patente">
+                                    @error('patente') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">nrocta</label>
+                                    <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="nrocta" wire:model="nrocta">
+                                    @error('nrocta') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Activo</label>
+                                    <select class="col-12 form-control" name="activo" id="" wire:model="activo" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
+                                        <option value="">-</option>
+                                        <option value="1">Si</option>
+                                        <option value="2">No</option>
+                                    </select>
+                                    @error('activo') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
 
-                            @if (session()->has('message'))
-                                <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
-                                    <div class="flex">
-                                        <div>
-                                            <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                @if (session()->has('message'))
+                                    <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
+                                        <div class="flex">
+                                            <div>
+                                                <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endif
-                        @endif
 
                             <!-- Proveedor -->
                             @if($tipopersona_id==4 or $tipopersona_id==5 or $tipopersona_id==6)
-                            <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de IVA</label>
-                                <select name="iva_id" id="" wire:model="iva_id">
-                                    <option value="">-</option>
-                                    @foreach($ivas as $iva)
-                                        <option value="{{ $iva->id }}">{{ $iva->descripcioniva}}</option>
-                                    @endforeach
-                                </select>
-                                @error('iva_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de IVA</label>
+                                    <select class="col-12 form-control" name="iva_id" id="" wire:model="iva_id" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
+                                        <option value="">-</option>
+                                        @foreach($ivas as $iva)
+                                            <option value="{{ $iva->id }}">{{ $iva->descripcioniva}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('iva_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                @if (session()->has('message'))
+                                    <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
+                                        <div class="flex">
+                                            <div>
+                                                <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+
+                            <!-- Empresas -->
+                            @if($tipopersona_id==7)
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de IVA</label>
+                                    <select class="col-12 form-control" name="iva_id" id="" wire:model="iva_id" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
+                                        <option value="">-</option>
+                                        @foreach($ivas as $iva)
+                                            <option value="{{ $iva->id }}">{{ $iva->descripcioniva}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('iva_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Caracter del Titular</label>
+                                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="caracterdeltitular" wire:model="caracterdeltitular">
+                                    @error('caracterdeltitular') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-2 col-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">Actividad</label>
+                                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="modalidad" wire:model="actividad">
+                                    @error('actividad') <span class="text-red-500">{{ $message }}</span>@enderror
+                                </div>
+                                @if (session()->has('message'))
+                                    <div class="bg-success px-4 py-3 shadow-md my-3" role="alert">
+                                        <div class="flex">
+                                            <div>
+                                                <p class="text-xm bg-lightgreen">{{ session('message') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @endif
                         </div>                        
                     </div>                    

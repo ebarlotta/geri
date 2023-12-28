@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ActorVendedor extends Model
 {
     use HasFactory;
+
+    protected $fillable=[
+        'iva_id',
+        'actor_id',
+    ];
 }
