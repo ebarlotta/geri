@@ -271,6 +271,18 @@ return [
             ],
         ],
         [
+            'text' => 'Medicamentos',
+            // 'url'  => 'medicamentos',
+            'icon' => 'fas fa-fw fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Gestión de Medicamentos',
+                    'url'  => 'admin/medicamentos',
+                    'icon' => 'fas fa-fw fa-usd',
+                ],
+            ],
+        ],
+        [
             'text' => 'Configuraciones',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-cogs',

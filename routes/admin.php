@@ -31,6 +31,7 @@ use App\Http\Livewire\Unidad\UnidadComponent;
 use App\Http\Livewire\Categorias\CategoriasComponent;
 use App\Http\Livewire\Ingredientes\IngredientesComponent;
 use App\Http\Livewire\Habitacion\Habitacion;
+use App\Http\Livewire\Medicamentos\MedicamentosComponent;
 use App\Http\Livewire\Menu\MenuComponent;
 use App\Http\Livewire\Personas\PersonaComponent;
 
@@ -52,6 +53,7 @@ Route::get('motivoegreso',MotivoegresoComponent::class)->name('motivoegreso');
 Route::get('estadocama',EstadocamaComponent::class)->name('estadocama');
 Route::get('personascampos',PersonasCamposComponent::class)->name('personascampos');
 Route::get('interfaces',InterfacesComponent::class)->name('interfaces');
+Route::get('medicamentos',MedicamentosComponent::class)->name('medicamentos');
 
 Route::get('settings',[Settings::class,'index'])->name('admin.settings.index');
 
