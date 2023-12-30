@@ -1,0 +1,91 @@
+<div>
+    <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0" style="background-color: beige; ">
+            <div class="fixed inset-0 transition-opacity">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+            <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle col-11 sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <form class="col-12">
+                <!-- Controles -->
+                @if($pepe) @include('livewire.actores.informessociales') @endif
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3 mt-5 flex border border-primary shadow-0">
+                            <img class="block rounded-md flex-none bg-cover mr-3 p-2" src="{{ asset('images/sin_imagen.jpg') }}" style="width: 100px; height: 100px;">
+                            <div class="mt-2">
+                                <b>Nombre: {{ $name }}</b><br>
+                                <label for="">Alias: {{ $alias }}</label>
+                            </div>
+                        </div>
+                        <div class="w-1 bg-gray-300 card shadow-0 mt-3"></div>
+                        <div class="col-8 mt-5 border border-primary shadow-0">
+                            <div class="flex d-flex flex-wrap">
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Informes Sociales</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Informes Médicos</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Informes Nutricionales</label>           
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">historiadevida_id</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Otro</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Pagos</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3" >
+                            <div class="row">
+                                <div class="col-12 card border border-primary shadow-0 mt-3">  
+                                    <div class="card-body mt-1">
+                                        <table class="col-11 table-striped" >
+                                            <tr><td>domicilio'</td><td>{{ $domicilio }}</td></tr>
+                                            <tr><td>documento</td><td>{{ $documento }}</td></tr>
+                                            <tr><td>tipos_documento</td><td>{{ $tipodocumento_id }}</td></tr>
+                                            <tr><td>nacimiento</td><td>{{ $nacimiento }}</td></tr>
+                                            <tr><td>sexo_id'</td><td>{{ $sexo_id }}</td> </tr>
+                                            <tr><td>email'</td><td>{{ $email }}</td> </tr>
+                                            <tr><td>nacionalidad_id</td><td>{{ $nacionalidad_id }}</td> </tr>
+                                            <tr><td>localidad_id</td><td>{{ $localidad_id }}</td> </tr>
+                                            <tr><td>obrasocial_id</td><td>{{ $beneficio_id }}</td> </tr>
+                                            <tr><td>escolaridad_id</td><td>{{ $escolaridad_id }}</td> </tr>
+                                            <tr><td>telefono</td><td>telefono</td> </tr>
+                                            <tr><td>empresa_id</td><td>{{ $personactivo_id }}</td> </tr>
+                                            <tr><td>activo</td> </tr>
+                                            <tr><td>fingreso</td><td>{{ $fingreso }}</td> </tr>
+                                            <tr><td>fegreso</td><td>{{ $fegreso }}</td> </tr>
+                                            <tr><td>peso_id</td><td>{{ $peso }}</td> </tr>
+                                            <tr><td>actor_referente</td><td>actor_referente</td> </tr>
+                                            <tr><td>cama_id</td><td>cama_id</td> </tr>
+                                            <tr><td>motivos_egreso_id</td><td>motivos_egreso_id</td> </tr>
+                                            <tr><td>grado_dependencia_id</td><td>{{ $gradodependencia_id }}</td> </tr>
+                                        </table>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-1 bg-gray-300 card shadow-0 mt-3">
+                        </div>
+                        <div class="col-8 bg-gray-300 card border border-primary shadow-0 mt-3">
+                            <textarea class="mt-1" style="height: 95%;" wire:model="historiadevida">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Botones -->
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <x-guardar></x-guardar>
+                    {{-- <x-cerrar></x-cerrar> --}}
+                    <span class="mt-3 flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                        <button wire:click="show(1)" type="button"
+                            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-yellow-300 text-base leading-6 font-bold text-gray-700 shadow-sm hover:bg-yellow-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                            Cerrar
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- </div> --}}

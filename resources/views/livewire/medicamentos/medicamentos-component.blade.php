@@ -36,7 +36,7 @@
                         </label>
                     </div>
                     <div class="form-check mx-3"> 
-                        <input class="form-check-input"  wire:click="Filtrar('No psiquiatricos')" type="radio">
+                        <input class="form-check-input" wire:click="Filtrar('No psiquiatricos')" type="radio">
                         <label class="form-check-label" for="flexRadioDefault2">
                             No Psiquiátricos
                         </label>
