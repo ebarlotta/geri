@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInformesTable extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateInformesTable extends Migration
      */
     public function up()
     {
-        Schema::create('informes', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->id();
+            $table->string('areasdescripcion')->nullable(false);
+            $table->boolean('areashabilitada')->default(true);
+            $table->unsignedBigInteger('empresa_id')->default(1);
             $table->timestamps();
+
+            $table->foreign('empresa_id')->references('id')->on('empresas');
         });
     }
 
@@ -26,6 +31,6 @@ class CreateInformesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('informes');
+        Schema::dropIfExists('areas');
     }
 }

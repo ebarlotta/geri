@@ -31,6 +31,7 @@ use App\Http\Livewire\Unidad\UnidadComponent;
 use App\Http\Livewire\Categorias\CategoriasComponent;
 use App\Http\Livewire\Ingredientes\IngredientesComponent;
 use App\Http\Livewire\Habitacion\Habitacion;
+use App\Http\Livewire\Informes\InformeComponent;
 use App\Http\Livewire\Medicamentos\MedicamentosComponent;
 use App\Http\Livewire\Menu\MenuComponent;
 use App\Http\Livewire\Personas\PersonaComponent;
@@ -82,6 +83,8 @@ Route::get('habitaciones',Habitacion::class)->name('habitaciones');
 Route::get('menu',MenuComponent::class)->name('menu');
 // Route::get('personas',PersonaComponent::class)->name('personas');
 Route::get('actores',ActorComponent::class)->name('actores');
+
+Route::get('informes',InformeComponent::class)->name('informes');
 // Route::get('agentegestionar',[ActorComponent::class,'show'])->name('agentegestionar');
 
 //Route::get('menugestionar',[MenuComponent::class,'show'])->name('menugestionar');

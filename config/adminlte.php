@@ -283,6 +283,18 @@ return [
             ],
         ],
         [
+            'text' => 'Informes',
+            // 'url'  => 'medicamentos',
+            'icon' => 'fas fa-fw fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Gestión de Informes',
+                    'url'  => 'admin/informes',
+                    'icon' => 'fas fa-fw fa-usd',
+                ],
+            ],
+        ],
+        [
             'text' => 'Configuraciones',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-cogs',

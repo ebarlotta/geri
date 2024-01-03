@@ -26,7 +26,7 @@ class CreateActorAgentesTable extends Migration
             $table->unsignedBigInteger('motivos_egreso_id')->nullable();
             $table->unsignedBigInteger('grado_dependencia_id')->nullable();
             $table->unsignedBigInteger('historiadevida_id')->nullable(); //hacer
-            $table->unsignedBigInteger('informes_id')->nullable();       //hacer
+            // $table->unsignedBigInteger('informes_id')->nullable();       //hacer
 
             $table->timestamps();
 
@@ -37,7 +37,7 @@ class CreateActorAgentesTable extends Migration
             $table->foreign('motivos_egreso_id')->references('id')->on('motivos_egresos');
             $table->foreign('grado_dependencia_id')->references('id')->on('grado_dependencias');
             $table->foreign('historiadevida_id')->references('id')->on('historia_vidas');
-            $table->foreign('informes_id')->references('id')->on('informes');
+            // $table->foreign('informes_id')->references('id')->on('informes');
         });
     }
 

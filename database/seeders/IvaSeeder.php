@@ -14,7 +14,7 @@ class IvaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('ivas')->truncate();
+        // DB::table('ivas')->truncate();
         DB::table('ivas')->insert(['descripcioniva'=>'Consumidor Final','porcentaje'=>0,'activo'=>true]);
         DB::table('ivas')->insert(['descripcioniva'=>'Responsable Inscripto','porcentaje'=>0,'activo'=>true]);
         DB::table('ivas')->insert(['descripcioniva'=>'Monotributista','porcentaje'=>0,'activo'=>true]);

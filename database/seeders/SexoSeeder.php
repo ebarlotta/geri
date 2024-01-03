@@ -15,7 +15,7 @@ class SexoSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sexos')->truncate();
+        // DB::table('sexos')->truncate();
         DB::table('sexos')->insert(['nombresexo'=>'Masculino',]);
         DB::table('sexos')->insert(['nombresexo'=>'Femenino',]);
         DB::table('sexos')->insert(['nombresexo'=>'Prefiero no decirlo',]);

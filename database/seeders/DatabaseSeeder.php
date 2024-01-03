@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
         $TipoDePersona->save();*/
         
 
-        $this->call(AreasSeeder::class);
+        
         $this->call(EscolaridadesSeeder::class);
         $this->call(TipoDePersonaSeeder::class);
         $this->call(EstadosCivilesSeeder::class);
@@ -93,6 +93,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CamasSeeder::class);
         $this->call(PersonasCamposSeeder::class);
 
+        $this->call(SexoSeeder::class);
+
         \App\Models\Persona::factory(10)->create();
         \App\Models\Camas::factory(20)->create();
 
@@ -100,9 +102,13 @@ class DatabaseSeeder extends Seeder
 
         //\App\Models\Empresa::factory(4)->create();   //Crea una empresa de prueba para relacionar con los usuarios que se dan de alta
         //\App\Models\Unidad::factory(10)->create();
+        $this->call(AreasSeeder::class);
+        
         $this->call(ModuloSeeder::class);
 
         $this->call(IvaSeeder::class);
+        $this->call(PeriodoSeeder::class);
+        $this->call(EscalaSeeder::class);
 
 
 
