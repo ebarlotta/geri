@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInformePreguntasTable extends Migration
+class CreateInformeRespuestasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateInformePreguntasTable extends Migration
      */
     public function up()
     {
-        Schema::create('informe_preguntas', function (Blueprint $table) {
+        Schema::create('informe_respuestas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('informes_id');
+            $table->unsignedBigInteger('agente_informes_id');
             $table->unsignedBigInteger('preguntas_id');
             $table->double('cantidad');
             $table->string('descripcion');
@@ -23,7 +23,7 @@ class CreateInformePreguntasTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('informes_id')->references('id')->on('informes');
+            $table->foreign('agente_informes_id')->references('id')->on('agente_informes');
             $table->foreign('preguntas_id')->references('id')->on('preguntas');
         });
     }
@@ -35,6 +35,6 @@ class CreateInformePreguntasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('informe_preguntas');
+        Schema::dropIfExists('informe_respuestas');
     }
 }

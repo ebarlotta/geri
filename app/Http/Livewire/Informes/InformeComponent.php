@@ -15,8 +15,10 @@ class InformeComponent extends Component
     public $pregunta_id=false;
     public $periodos, $escalas, $preguntas, $informes, $areas;
     public $informe_id, $escala_id, $area_id;
-    public $editInforme=false;
+    public $editpregunta=false, $editinforme=false;
     public $textopregunta;
+
+    public $nombreinforme, $periodo_id, $observaciones;
 
 
     public function render()
@@ -47,23 +49,47 @@ class InformeComponent extends Component
 
     public function agregar($id) {
         switch ($id) {
+            case 3: //informesview 
+                {   $this->editinforme = true; 
+                    $this->nombreinforme=''; $this->area_id='';$this->periodo_id='';$this->observaciones='';
+                    break; 
+            }
             case 4: //Preguntas 
-                {   $this->editInforme = true; 
+                {   $this->editpregunta = true; 
                     $this->informe_id=''; $this->area_id='';$this->escala_id='';$this->textopregunta='';
                     break; 
-                }
+            }
         }
     }
 
     public function ocultar($id) {
         switch ($id) {
+            case 3: //Informes
+                { $this->editinforme = false; $this->informe_id=''; break; }
             case 4: //Preguntas 
-                { $this->editInforme = false; $this->pregunta_id=''; break; }
+                { $this->editpregunta = false; $this->pregunta_id=''; break; }
         }
     }
 
     public function store($id) {
         switch ($id) {
+            case 3: //Informes
+                {   $this->validate([
+                    'nombreinforme' => 'required',
+                    'periodo_id' => 'required|integer',
+                    'area_id' => 'required|integer',
+                ]);
+                Informe::updateOrCreate(['id' => $this->informe_id], [
+                    'nombreinforme' => $this->nombreinforme,
+                    'periodo_id' => $this->periodo_id,
+                    'area_id' => $this->area_id,
+                    'observaciones' => $this->observaciones,
+                    'empresa_id' =>  1, //session(['empresa_id' => $id]),
+                ]);
+        
+                session()->flash('message', $this->informe_id ? 'Pregunta Actualizada.' : 'Pregunta Creada.');
+                $this->editinforme = false; break; }
+
             case 4: //Preguntas 
                 {   $this->validate([
                     'informe_id' => 'required|integer',
@@ -81,7 +107,7 @@ class InformeComponent extends Component
         
                 session()->flash('message', $this->pregunta_id ? 'Pregunta Actualizada.' : 'Pregunta Creada.');
         
-                $this->editInforme = false; break; }
+                $this->editpregunta = false; break; }
         }
     }
 
@@ -95,4 +121,16 @@ class InformeComponent extends Component
         $this->textopregunta = $pregunta->textopregunta;
         $this->pregunta_id = $id;
     }
+
+    public function editinforme($id) {
+        $informe = Informe::find($id);
+        // $pregunta = Pregunta::where('id','=',$id)->get();
+        $this->agregar(3);
+        $this->nombreinforme = $informe->nombreinforme;
+        $this->periodo_id = $informe->periodo_id;
+        $this->area_id = $informe->area_id;
+        $this->observaciones = $informe->observaciones;
+        $this->informe_id = $id;
+    }
+
 }

@@ -1,6 +1,8 @@
 <div>
     <div class="row justify-content-center">
-        @if($editInforme) @include('livewire.informes.editinforme') @endif
+        @if($editpregunta) @include('livewire.informes.editpregunta') @endif
+        @if($editinforme) @include('livewire.informes.editinforme') @endif
+
         <div class="card sm:col-11 col-md-5 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray;" wire:click="Mostrar('Periodos')">
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Periodos</h5>
@@ -88,25 +90,37 @@
                 @if($informesview)
                     <table class="table table-striped">
                         <tr>
-                            <td class="font-weight-bold">Nombre del Informe</td>
-                            <td class="font-weight-bold col-1">Período</td>
-                            <td class="font-weight-bold col-1">Area</td>
-                            <td class="font-weight-bold col-1">Observaciones</td>
+                            <td class="font-weight-bold col-4">Nombre del Informe</td>
+                            <td class="font-weight-bold col-2">Período</td>
+                            <td class="font-weight-bold col-2">Area</td>
+                            <td class="font-weight-bold col-3">Observaciones</td>
                             <td class="font-weight-bold col-1">
                                 <div style="display: inline-flex;">
                                     <div> Opciones </div>
-                                    <x-agregar2 id="1">Agregar</x-agregar2>
+                                    <button wire:click="agregar(3)" class="hidden sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold py-1 px-2 ml-2 rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-6 w-6 mr-1" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
+                                        </svg>
+                                        Agregar
+                                    </button>
                                     <div>
                                 </div>
                             </td>
                         </tr>
                         @foreach($informes as $informe)
                         <tr>
-                            <td>{{ $informe->nombreinforme }}</td>
-                            <td class="col-1">{{ $informe->periodo->nombreperiodo }}</td>
-                            <td class="col-1">{{ $informe->area->areasdescripcion }}</td>
-                            <td class="col-1">{{ $informe->observaciones }}</td>
-                            <td class="col-1"><x-editar id="{{$informe->id}}"></x-editar></td>
+                            <td class="col-4">{{ $informe->nombreinforme }}</td>
+                            <td class="col-2">{{ $informe->periodo->nombreperiodo }}</td>
+                            <td class="col-2">{{ $informe->area->areasdescripcion }}</td>
+                            <td class="col-3">{{ $informe->observaciones }}</td>
+                            <td class="col-1">
+                                <button wire:click="editinforme({{ $informe->id }})" class="hidden sm:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold px-4 mr-2 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                    </svg>
+                                    Editar
+                                </button>
+                            </td>
                         </tr>
                         @endforeach
                     </table>
@@ -115,11 +129,12 @@
                 @if($preguntasview)
                     <table class="table table-striped">
                         <tr>
-                            <td class="font-weight-bold">Texto de la Pregunta</td>
+                            <td class="font-weight-bold col-5">Texto de la Pregunta</td>
                             <td class="font-weight-bold col-1">Area</td>
                             <td class="font-weight-bold col-1">Escala Utilizada</td>
+                            <td class="font-weight-bold col-2">Informe</td>
                             <td class="font-weight-bold col-1">
-                            <div style="display: inline-flex;">
+                            <div class="col-2" style="display: inline-flex;">
                                 <div> Opciones </div>
                                 <button wire:click="agregar(4)" class="hidden sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold py-1 px-2 ml-2 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-6 w-6 mr-1" viewBox="0 0 24 24">
@@ -127,23 +142,15 @@
                                     </svg>
                                     Agregar
                                 </button>
-                                <!-- <button wire:click="agregar(4)">Agregar</button> -->
-                                    <!-- <button class="hidden sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold py-1 px-2 ml-2 rounded" data-toggle="modal" data-target="#exampleModalLong">
-                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-6 w-6 mr-1" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
-                                        </svg>
-                                        Agregar
-                                    </button> -->
-                                    <div>
-                                </div>
                             </td>
                         </tr>
                         @foreach($preguntas as $pregunta)
                         <tr>
-                            <td>{{ $pregunta->textopregunta }}</td>
+                            <td class=" col-5">{{ $pregunta->textopregunta }}</td>
                             <td class="col-1">{{ $pregunta->nombrearea->areasdescripcion }}</td>
                             <td class="col-1">{{ $pregunta->nombreescala->nombreescala }}</td>
-                            <td class="col-1">
+                            <td class="col-2">{{ $pregunta->informe->nombreinforme }}</td>
+                            <td class="col-2">
                                 <button wire:click="editpregunta({{ $pregunta->id }})" class="hidden sm:flex bg-blue-300 hover:bg-blue-400 text-black-900 font-bold px-4 mr-2 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>

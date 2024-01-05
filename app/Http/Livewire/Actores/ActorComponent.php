@@ -11,6 +11,8 @@ use App\Models\Actores\ActorPersonal;
 use App\Models\Actores\ActorProveedor;
 use App\Models\Actores\ActorReferente;
 use App\Models\Actores\ActorVendedor;
+use App\Models\AgenteInforme;
+use App\Models\Areas;
 use App\Models\Beneficios;
 use App\Models\Camas;
 use App\Models\Cliente;
@@ -19,12 +21,15 @@ use App\Models\Escolaridades;
 use App\Models\EstadosCiviles;
 use App\Models\GradoDependencia;
 use App\Models\Habitacion;
+use App\Models\Informes\Informe;
+use App\Models\Informes\InformeRespuestas;
 use App\Models\Iva;
 use App\Models\Localidades;
 use App\Models\Nacionalidad;
 use Livewire\Component;
 use App\Models\PersonActivo;
 use App\Models\Personas;
+use App\Models\Pregunta;
 use App\Models\Referente;
 use App\Models\Sexo;
 use App\Models\Sociales\DatosSocial;
@@ -44,11 +49,14 @@ class ActorComponent extends Component
     public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta,
     $actor_referente, $actividad, $caracterdeltitular;
 
+    public $listadoinformes,$listadoinformesGenerados,$respuestas,$nombredelinforme;
 
     public $isModalOpen = false;
     public $isModalOpenAdicionales=false;
     public $isModalOpenGestionar=false;
-    public $pepe=false;
+    public $mostrarInformesGenerados =false;
+    public $mostrarinformeespecifico=false, $informeespecifico;
+
     public $vinculo, $modalidad,$ultimaocupacion,$viviendapropia,$canthijosvarones,$canthijasmujeres, $activo;
 
 
@@ -89,9 +97,46 @@ class ActorComponent extends Component
         // return view('livewire.actores.createactores2');
     }
 
-    public function pepe() {
-        $this->pepe=!$this->pepe;
+    public function CargarInforme($informe) {
+        switch ($informe) {
+            case 'Sociales':{ 
+                // $this->listadoinformes = Informe::join('areas','areas.id','informes.area_id')
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Social')
+                ->get();  break;
+            }
+        }
+    }
 
+    public function MostrarInformes($informe_id) {
+        $this->mostrarInformesGenerados = true;
+        // $this->listadoinformesGenerados = AgenteInforme::all();
+        // dd($this->listadoinformesGenerados);
+        $this->listadoinformesGenerados = AgenteInforme::where('informe_id','=',$informe_id)->orderby('anio')->orderby('nroperiodo')->get();
+    }
+
+    public function BuscarDatosDelInforme($informe_id) {
+
+        // $this->respuestas = InformeRespuestas::find($informe_id);
+        // $this->respuestas = InformeRespuestas::where('agente_informes_id','=',$informe_id)->get();
+        $this->informeespecifico = InformeRespuestas::join('preguntas','preguntas.id','preguntas_id')
+        // ->join('escalas','escalas.id','escalas_id')
+        ->where('agente_informes_id','=',$informe_id)->get();
+        // $cont = 0;
+        // dd($this->informeespecifico[0]->informe_id);
+
+        $this->nombredelinforme = Informe::find($this->informeespecifico[0]->informe_id)->nombreinforme;
+        // dd($this->nombredelinforme);
+
+        // foreach($this->respuestas as $respuesta) {
+            // $a[$cont]['cantidad'] = $respuesta->cantidad;
+            // $this->informeespecifico = Pregunta::find($respuesta->preguntas_id)->get();
+            // dd($a[$cont]);
+            // $cont++;
+        // }
+        $this->mostrarinformeespecifico = true;
+        // dd($a);
+        // dd($this->respuestas->respuesta);
     }
 
     public function Filtrar() {
@@ -135,6 +180,7 @@ class ActorComponent extends Component
     //==========================
     public function openModalPopover() { $this->isModalOpen = true; }
     public function closeModalPopover() { $this->isModalOpen = false; }
+    public function closeModalInformeEspecifico() { $this->mostrarinformeespecifico = false; }
     public function openModalPopoverAdicionales() { $this->isModalOpenAdicionales = true; }
     public function closeModalPopoverAdicionales() { 
         $this->isModalOpenAdicionales = false; 

@@ -15,7 +15,7 @@ class Informe extends Model
         'nombreinforme',
         'periodo_id',
         'area_id',
-        'Observaciones',
+        'observaciones',
         'empresa_id',
     ];
 

@@ -16,6 +16,7 @@ class CreateAgenteInformesTable extends Migration
         Schema::create('agente_informes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('agente_id');
+            $table->unsignedBigInteger('informe_id');
             $table->integer('nroperiodo')->default(1);
             $table->string('anio');
             $table->unsignedBigInteger('profesional_id');
@@ -23,8 +24,11 @@ class CreateAgenteInformesTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('agente_id')->references('id')->on('actor_agentes');
-            $table->foreign('profesional_id')->references('id')->on('actor_personals');
+            $table->foreign('agente_id')->references('id')->on('actors');
+            $table->foreign('informe_id')->references('id')->on('informes');
+            // $table->foreign('agente_id')->references('id')->on('actors_agentes');
+            $table->foreign('profesional_id')->references('id')->on('actors');
+            // $table->foreign('profesional_id')->references('id')->on('actor_personals');
             $table->foreign('empresa_id')->references('id')->on('empresas');
         });
     }

@@ -5,73 +5,46 @@
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-            <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle col-11 sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle col-8 sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <form class="col-12">
                 <!-- Controles -->
                 
                 
                 <div class="container">
-                    funciona
-                    {{-- <div class="row">
-                        <div class="col-3 mt-5 flex border border-primary shadow-0">
-                            <img class="block rounded-md flex-none bg-cover mr-3 p-2" src="{{ asset('images/sin_imagen.jpg') }}" style="width: 100px; height: 100px;">
-                            <div class="mt-2">
-                                <b>Nombre: {{ $name }}</b><br>
-                                <label for="">Alias: {{ $alias }}</label>
-                            </div>
-                        </div>
-                        <div class="w-1 bg-gray-300 card shadow-0 mt-3"></div>
-                        <div class="col-8 mt-5 border border-primary shadow-0">
-                            <div class="flex d-flex flex-wrap">
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Informes Sociales</label>
-                                <button class="btn btn-info mr-2 rounded-md mt-2">Informes Médicos</button>
-                                <button class="btn btn-info mr-2 rounded-md mt-2">Informes Nutricionales</button>           
-                                <button class="btn btn-info mr-2 rounded-md mt-2">historiadevida_id</button>
-                                <button class="btn btn-info mr-2 rounded-md mt-2">Otro</button>
-                                <button class="btn btn-info mr-2 rounded-md mt-2">Pagos</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3" >
-                            <div class="row">
-                                <div class="col-12 card border border-primary shadow-0 mt-3">  
-                                    <div class="card-body mt-1">
-                                        <table class="col-11 table-striped" >
-                                            <tr><td>domicilio'</td><td>{{ $domicilio }}</td></tr>
-                                            <tr><td>documento</td><td>{{ $documento }}</td></tr>
-                                            <tr><td>tipos_documento</td><td>{{ $tipodocumento_id }}</td></tr>
-                                            <tr><td>nacimiento</td><td>{{ $nacimiento }}</td></tr>
-                                            <tr><td>sexo_id'</td><td>{{ $sexo_id }}</td> </tr>
-                                            <tr><td>email'</td><td>{{ $email }}</td> </tr>
-                                            <tr><td>nacionalidad_id</td><td>{{ $nacionalidad_id }}</td> </tr>
-                                            <tr><td>localidad_id</td><td>{{ $localidad_id }}</td> </tr>
-                                            <tr><td>obrasocial_id</td><td>{{ $beneficio_id }}</td> </tr>
-                                            <tr><td>escolaridad_id</td><td>{{ $escolaridad_id }}</td> </tr>
-                                            <tr><td>telefono</td><td>telefono</td> </tr>
-                                            <tr><td>empresa_id</td><td>{{ $personactivo_id }}</td> </tr>
-                                            <tr><td>activo</td> </tr>
-                                            <tr><td>fingreso</td><td>{{ $fingreso }}</td> </tr>
-                                            <tr><td>fegreso</td><td>{{ $fegreso }}</td> </tr>
-                                            <tr><td>peso_id</td><td>{{ $peso }}</td> </tr>
-                                            <tr><td>actor_referente</td><td>actor_referente</td> </tr>
-                                            <tr><td>cama_id</td><td>cama_id</td> </tr>
-                                            <tr><td>motivos_egreso_id</td><td>motivos_egreso_id</td> </tr>
-                                            <tr><td>grado_dependencia_id</td><td>{{ $gradodependencia_id }}</td> </tr>
-                                        </table>
-                                    </div>  
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-1 bg-gray-300 card shadow-0 mt-3">
-                        </div>
-                        <div class="col-8 bg-gray-300 card border border-primary shadow-0 mt-3">
-                            <textarea class="mt-1" style="height: 95%;">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!
+                    <b>{{ $nombredelinforme }}</b>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Pregunta</td>
+                            <td style="text-align: center">Respuesta</td>
+                        </tr>
+                        @foreach($informeespecifico as $informe)
+                        <tr>
+                            <td>
+                                {{ $informe->textopregunta }} 
+                            </td>
+                            <td class="col-3" style="text-align: center">
+                                @if($informe->escala_id==1) 
+                                    @if($informe->cantidad==1)
+                                        <input class="mr-1" type="checkbox" checked>SI<input class="ml-3 mr-1" type="checkbox">NO
+                                    @else
+                                        <input class="mr-1" type="checkbox">SI<input class="ml-3 mr-1" type="checkbox" checked>NO
+                                    @endif
+                                @endif
+                                @if($informe->escala_id==2)
+                                    <div>
+                                        <div>
+                                            0 <progress id="file" max="100" value="70" style="height: 10px;vertical-align: inherit;background-color: darkgray; margin-left: 3px; margin-right: 3px; border-radius: 5px"></progress> 100
+                                        </div>
+                                        <p style="position: relative; top:-9px;font-size: 12px;">70</p>
+                                    </div>
+                                @endif
 
-                            </textarea>
-                        </div>
-                    </div> --}}
+                            </td>
+                        </tr>
+                            
+                            <!-- <p> Cantidad: {{ $informe->cantidad }} </p> -->
+                        @endforeach
+                    </table>
                 </div>
 
 
@@ -80,7 +53,7 @@
                     <x-guardar></x-guardar>
                     {{-- <x-cerrar></x-cerrar> --}}
                     <span class="mt-3 flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                        <button wire:click="show(1)" type="button"
+                        <button wire:click="closeModalInformeEspecifico()" type="button"
                             class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-yellow-300 text-base leading-6 font-bold text-gray-700 shadow-sm hover:bg-yellow-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             Cerrar
                         </button>

@@ -8,7 +8,7 @@
             <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle col-11 sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <form class="col-12">
                 <!-- Controles -->
-                @if($pepe) @include('livewire.actores.informessociales') @endif
+                @if($mostrarinformeespecifico) @include('livewire.actores.informessociales') @endif
                 
                 <div class="container">
                     <div class="row">
@@ -22,12 +22,12 @@
                         <div class="w-1 bg-gray-300 card shadow-0 mt-3"></div>
                         <div class="col-8 mt-5 border border-primary shadow-0">
                             <div class="flex d-flex flex-wrap">
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Informes Sociales</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Informes Médicos</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Informes Nutricionales</label>           
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">historiadevida_id</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Otro</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="pepe">Pagos</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Sociales')">Informes Sociales</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Medicos')">Informes Médicos</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Nutricionales')">Informes Nutricionales</label>           
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('HistoriaDeVida')">historiadevida_id</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Otro')">Otro</label>
+                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Pagos')">Pagos</label>
                             </div>
                         </div>
                     </div>
@@ -64,10 +64,55 @@
                         </div>
                         <div class="w-1 bg-gray-300 card shadow-0 mt-3">
                         </div>
-                        <div class="col-8 bg-gray-300 card border border-primary shadow-0 mt-3">
-                            <textarea class="mt-1" style="height: 95%;" wire:model="historiadevida">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!
-                            </textarea>
+                        <div class="col-8 bg-gray-300 card border border-primary shadow-0 mt-3" style="display: block;">
+                            <div class="col-12" style="display: flex; overflow: auto;">
+                                @if($listadoinformes)
+                                    @foreach($listadoinformes as $informe)
+                                        <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content;" wire:click="MostrarInformes({{ $informe->id }})">
+                                            <div class="card-body" style=" max-height: 200px; height: 100%; padding: 0.25rem;">
+                                                <p class="card-text flex">
+                                                    <button wire:click="agregar()" class=" sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold ml-2 rounded" style="max-height: 31px;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-6 w-6 m-1" viewBox="0 0 24 24">
+                                                            <path fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <b>{{ $informe->nombreinforme }}</b>
+                                                </p>
+                                                <p>{{ $informe->areasdescripcion }}</p>
+                                                <p>{{ $informe->observaciones }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    No hay informes por el momento
+                                @endif 
+                                <!-- <textarea class="mt-1" style="height: 95%;" wire:model="historiadevida">
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!
+                                </textarea> -->
+                            </div>
+                            <div>
+                                @if($listadoinformesGenerados)
+                                    @foreach($listadoinformesGenerados as $informe3)
+                                        <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content;" wire:click="BuscarDatosDelInforme({{ $informe3->id }})">
+                                            <div class="card-body" style=" max-height: 200px; height: 100%; padding: 0.25rem;">
+                                                <p class="card-text flex">
+                                                    <!-- <button wire:click="agregar()" class=" sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold ml-2 rounded" style="max-height: 31px;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-6 w-6 m-1" viewBox="0 0 24 24">
+                                                            <path fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
+                                                        </svg>
+                                                    </button> -->
+                                                    <b>{{ $informe3->datosinforme->nombreinforme}}</b><br>  
+                                                </p>
+                                                <p>Año:{{ $informe3->anio }}</p>
+                                                <p>Periodo: {{ $informe3->nroperiodo }}</p>
+                                                <p>Profesional: {{ $informe3->datosprofesional->nombre }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    No se han generado informes 
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
