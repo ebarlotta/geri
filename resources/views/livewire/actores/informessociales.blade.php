@@ -13,37 +13,43 @@
                 <div class="container">
                     <b>{{ $nombredelinforme }}</b>
                     <table class="table table-striped">
-                        <tr>
-                            <td>Pregunta</td>
-                            <td style="text-align: center">Respuesta</td>
-                        </tr>
-                        @foreach($informeespecifico as $informe)
-                        <tr>
-                            <td>
-                                {{ $informe->textopregunta }} 
-                            </td>
-                            <td class="col-3" style="text-align: center">
-                                @if($informe->escala_id==1) 
-                                    @if($informe->cantidad==1)
-                                        <input class="mr-1" type="checkbox" checked>SI<input class="ml-3 mr-1" type="checkbox">NO
-                                    @else
-                                        <input class="mr-1" type="checkbox">SI<input class="ml-3 mr-1" type="checkbox" checked>NO
+                        @if(count($informeespecifico))
+                            @foreach($informeespecifico as $informe)
+                            <tr>
+                                <td>
+                                    {{ $informe->textopregunta }} 
+                                </td>
+                                <td class="col-3" style="text-align: center">
+                                    @if($informe->escala_id==1) 
+                                        @if($informe->cantidad==1)
+                                            <input class="mr-1" type="checkbox" checked>SI<input class="ml-3 mr-1" type="checkbox">NO
+                                        @else
+                                            <input class="mr-1" type="checkbox">SI<input class="ml-3 mr-1" type="checkbox" checked>NO
+                                        @endif
                                     @endif
-                                @endif
-                                @if($informe->escala_id==2)
-                                    <div>
+                                    @if($informe->escala_id==2)
                                         <div>
-                                            0 <progress id="file" max="100" value="70" style="height: 10px;vertical-align: inherit;background-color: darkgray; margin-left: 3px; margin-right: 3px; border-radius: 5px"></progress> 100
+                                            <div>
+                                                0 <progress id="file" max="100" value="70" style="height: 10px;vertical-align: inherit;background-color: darkgray; margin-left: 3px; margin-right: 3px; border-radius: 5px"></progress> 100
+                                            </div>
+                                            <p style="position: relative; top:-9px;font-size: 12px;">70</p>
                                         </div>
-                                        <p style="position: relative; top:-9px;font-size: 12px;">70</p>
-                                    </div>
-                                @endif
+                                    @endif
 
-                            </td>
-                        </tr>
-                            
-                            <!-- <p> Cantidad: {{ $informe->cantidad }} </p> -->
-                        @endforeach
+                                </td>
+                            </tr>
+                                <!-- <p> Cantidad: {{ $informe->cantidad }} </p> -->
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="2">
+                                    <div>Todavía no se ha respondido el informe</div>
+                                    <button wire:click.prevent="ResponderInforme({{ $agente_informes_id }})" type="button" class="inline-flex justify-center w-full mt-2 rounded-md border border-gray-300 px-4 py-2 bg-green-300 text-base leading-6 font-bold text-gray-700 shadow-sm hover:bg-yellow-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                        Responder
+                                    </button>
+                                </td>
+                            </tr>
+                        @endif
                     </table>
                 </div>
 

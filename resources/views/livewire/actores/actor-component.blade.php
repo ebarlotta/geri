@@ -76,6 +76,7 @@
             @if ($isModalOpen) @include('livewire.actores.createactores') @endif
             @if ($isModalOpenAdicionales) @include('livewire.actores.createactoresadicionales') @endif
             @if ($isModalOpenGestionar) @include('livewire.actores.createactores2') @endif
+            @if ($modalpreguntas) @include('livewire.actores.modalpreguntas') @endif
 
             <table class="table-fixed w-full">
                 <thead>

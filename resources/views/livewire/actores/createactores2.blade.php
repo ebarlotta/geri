@@ -86,9 +86,6 @@
                                 @else
                                     No hay informes por el momento
                                 @endif 
-                                <!-- <textarea class="mt-1" style="height: 95%;" wire:model="historiadevida">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore amet nostrum cum dignissimos inventore aperiam illum ea minus voluptates accusantium doloremque deserunt, aspernatur quidem. Tempore mollitia ipsum eius nostrum error!
-                                </textarea> -->
                             </div>
                             <div>
                                 @if($listadoinformesGenerados)
@@ -96,11 +93,6 @@
                                         <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content;" wire:click="BuscarDatosDelInforme({{ $informe3->id }})">
                                             <div class="card-body" style=" max-height: 200px; height: 100%; padding: 0.25rem;">
                                                 <p class="card-text flex">
-                                                    <!-- <button wire:click="agregar()" class=" sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold ml-2 rounded" style="max-height: 31px;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-6 w-6 m-1" viewBox="0 0 24 24">
-                                                            <path fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
-                                                        </svg>
-                                                    </button> -->
                                                     <b>{{ $informe3->datosinforme->nombreinforme}}</b><br>  
                                                 </p>
                                                 <p>Año:{{ $informe3->anio }}</p>

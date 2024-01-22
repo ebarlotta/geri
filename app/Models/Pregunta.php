@@ -27,6 +27,13 @@ class Pregunta extends Model
         return $this->hasOne(Escala::class,'id','escala_id');
     }
 
+    // public function nombreescala1()
+    // {
+    //     $a = $this->hasOne(Escala::class,'id','escala_id')->get();
+    //     return $a[0]->nombreescala;
+    //     // return $a->nombreescala;
+    // }
+
     public function informe()
     {
         return $this->hasOne(Informe::class,'id','informe_id');

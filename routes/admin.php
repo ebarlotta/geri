@@ -83,6 +83,7 @@ Route::get('habitaciones',Habitacion::class)->name('habitaciones');
 Route::get('menu',MenuComponent::class)->name('menu');
 // Route::get('personas',PersonaComponent::class)->name('personas');
 Route::get('actores',ActorComponent::class)->name('actores');
+Route::get('modalpreguntas',[ActorComponent::class,'ResponderInforme1'])->name('modalpreguntas');
 
 Route::get('informes',InformeComponent::class)->name('informes');
 // Route::get('agentegestionar',[ActorComponent::class,'show'])->name('agentegestionar');

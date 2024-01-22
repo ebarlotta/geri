@@ -44,18 +44,21 @@ class ActorComponent extends Component
     public $tipos_documentos, $estados_civiles, $tipos_de_personas, $nacionalidades, $localidades, $beneficios, $grados_dependencias, $escolaridades, $camas, $person_activos, $sexos, $datossociales_id, $historiadevida;
 
     public $camas22;
-    public $radios;
+    public $radios, $temporal;
 
     public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta,
-    $actor_referente, $actividad, $caracterdeltitular;
+    $actor_referente, $actividad, $caracterdeltitular, $agente_informes_id;
 
     public $listadoinformes,$listadoinformesGenerados,$respuestas,$nombredelinforme;
+    public $bancorespuestas =array();
+    public $bancopreguntas;
 
     public $isModalOpen = false;
     public $isModalOpenAdicionales=false;
     public $isModalOpenGestionar=false;
     public $mostrarInformesGenerados =false;
     public $mostrarinformeespecifico=false, $informeespecifico;
+    public $modalpreguntas=false;
 
     public $vinculo, $modalidad,$ultimaocupacion,$viviendapropia,$canthijosvarones,$canthijasmujeres, $activo;
 
@@ -122,10 +125,12 @@ class ActorComponent extends Component
         $this->informeespecifico = InformeRespuestas::join('preguntas','preguntas.id','preguntas_id')
         // ->join('escalas','escalas.id','escalas_id')
         ->where('agente_informes_id','=',$informe_id)->get();
+
+        $this->agente_informes_id=$informe_id;
         // $cont = 0;
         // dd($this->informeespecifico[0]->informe_id);
+        if(count($this->informeespecifico)) { $this->nombredelinforme = Informe::find($this->informeespecifico[0]->informe_id)->nombreinforme; }
 
-        $this->nombredelinforme = Informe::find($this->informeespecifico[0]->informe_id)->nombreinforme;
         // dd($this->nombredelinforme);
 
         // foreach($this->respuestas as $respuesta) {
@@ -137,6 +142,103 @@ class ActorComponent extends Component
         $this->mostrarinformeespecifico = true;
         // dd($a);
         // dd($this->respuestas->respuesta);
+    }
+
+    public function ResponderInforme($informe_id) {
+        // Buscar las preguntas que tendrá el informe
+        $informe = Informe::find($informe_id);
+        $this->bancopreguntas = Pregunta::where('informe_id','=',$informe_id)
+        ->join('escalas','escala_id','escalas.id')
+        ->get();
+        // Iterar las preguntas y según su tipo mostrarla por pantalla
+        // dd($this->bancopreguntas);
+        // dd($bancopreguntas);
+        
+        // foreach($this->bancopreguntas as $pregunta) {
+        //     // $otra = $pregunta;
+        //     // $escala = $otra->nombreescala1;
+        //     switch ($pregunta->nombreescala) {
+        //         case 'Lógica':{ 
+        //             $html = $html . '
+        //                 <tr>
+        //                     <td>
+        //                         ' . $pregunta->textopregunta . '
+        //                     </td>
+        //                     <td class="col-3" style="text-align: center" colspan=2>
+        //                         <input class="mr-1" type="checkbox">SI<input class="ml-3 mr-1" type="checkbox">NO
+        //                     </td>
+        //                 </tr>';
+        //                 break;
+        //         }
+        //         case 'Numérica':{ 
+        //             $html = $html . '
+        //                 <tr>
+        //                     <td>
+        //                         ' . $pregunta->textopregunta . '
+        //                     </td>
+        //                     <td>Cantidad: <input class="mr-1" type="textbox"></td>
+        //                 </tr>';
+        //                 break;
+        //         }
+        //         case 'Porcentaje':{ 
+        //             $html = $html . '
+        //                 <tr>
+        //                     <td>
+        //                         ' . $pregunta->textopregunta . '
+        //                     </td>
+        //                     <td>Cantidad porcentaje: <input class="mr-1" type="textbox"></td>
+        //                 </tr>';
+        //         }
+        //     }
+        // }
+        //     $html = $html . '</table>';
+                
+            //         $matrizpreguntas[$cont][];
+            //     }
+            // $cont++;
+        // dd($html);
+            //     @if($informe->escala_id==2)
+            //     <div>
+            //         <div>
+            //             0 <progress id="file" max="100" value="70" style="height: 10px;vertical-align: inherit;background-color: darkgray; margin-left: 3px; margin-right: 3px; border-radius: 5px"></progress> 100
+            //         </div>
+            //         <p style="position: relative; top:-9px;font-size: 12px;">70</p>
+            //     </div>
+            // @endif
+        // foreach($bancopreguntas as $pregunta) {
+        //     switch ($pregunta->nombreescala) {
+        //         case 'Lógica':{ 
+        //             $matrizrespuestas[$cont]['informes_id']=$pregunta->informes_id;
+        //             $matrizrespuestas[$cont]['preguntas_id']=$pregunta->preguntas_id;
+        //             $matrizrespuestas[$cont]['cantidad']=$pregunta->cantidad;
+        //             $matrizrespuestas[$cont]['descripcion']=$pregunta->descripcion;
+        //         }
+        //     }
+        // }
+        // dd($informe_id);
+        //return redirect()->route('modalpreguntas', ['informe_id' => $informe_id]);
+        // return redirect('livewire-actores-modalpreguntas');
+        $this->modalpreguntas = true;
+    }
+
+    public function ResponderInforme1() {
+        // Buscar las preguntas que tendrá el informe
+        $informe = Informe::find(2);
+        $this->bancopreguntas = Pregunta::where('informe_id','=',2)
+        ->join('escalas','escala_id','escalas.id')
+        ->get();
+        $this->modalpreguntas = true;
+        return view('livewire.actores.modalpreguntas')->with(['nombredelinforme'=>'INFORME','bancopreguntas'=>$this->bancopreguntas,'temporal'=>1]);
+    }
+
+    public function TomarRespuesta($pregunta_id, $respuesta,$descripcion){
+        $temp = array();
+        $temp = array('pregunta'=>$pregunta_id, 'respuesta'=>$respuesta, 'descripcion'=>$descripcion);
+        // dd($temp);
+        
+        array_push($this->bancorespuestas,$temp);
+        dd($this->bancorespuestas);
+        // $this->bancorespuestas[] = $temp;
     }
 
     public function Filtrar() {
@@ -182,6 +284,7 @@ class ActorComponent extends Component
     public function closeModalPopover() { $this->isModalOpen = false; }
     public function closeModalInformeEspecifico() { $this->mostrarinformeespecifico = false; }
     public function openModalPopoverAdicionales() { $this->isModalOpenAdicionales = true; }
+    public function closeModalPreguntas() { $this->modalpreguntas = false; }
     public function closeModalPopoverAdicionales() { 
         $this->isModalOpenAdicionales = false; 
         $this->reset('vinculo','ultimaocupacion','viviendapropia','canthijosvarones','canthijasmujeres','activo');
