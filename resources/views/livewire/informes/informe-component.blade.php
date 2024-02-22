@@ -164,5 +164,8 @@
                 @endif
             </div>
         </div>
+        <a href="{{ route('actores')}}">
+            <input type="button" class="btn btn-info" value="Volver a Gestión de Entidades">
+        </a>
     </div>
 </div>

@@ -9,6 +9,7 @@
             <form class="col-12">
                 <!-- Controles -->
                 @if($mostrarinformeespecifico) @include('livewire.actores.informessociales') @endif
+                @if($ModalNuevoInforme) @include('livewire.actores.nuevoInforme') @endif
                 
                 <div class="container">
                     <div class="row">
@@ -71,14 +72,10 @@
                                         <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content;" wire:click="MostrarInformes({{ $informe->id }})">
                                             <div class="card-body" style=" max-height: 200px; height: 100%; padding: 0.25rem;">
                                                 <p class="card-text flex">
-                                                    <button wire:click="agregar()" class=" sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold ml-2 rounded" style="max-height: 31px;">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-6 w-6 m-1" viewBox="0 0 24 24">
-                                                            <path fill-rule="evenodd" d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <b>{{ $informe->nombreinforme }}</b>
+                                                    <input type="button" wire:click="abrirModalNuevoInforme({{ $informe->id }})" class="btn btn-info sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold ml-2 rounded" style="max-height: 31px;" value="+">
+                                                    <b class="ml-2">{{ $informe->nombreinforme }}</b>
                                                 </p>
-                                                <p>{{ $informe->areasdescripcion }}</p>
+                                                <p>Area:{{ $informe->areasdescripcion }}</p>
                                                 <p>{{ $informe->observaciones }}</p>
                                             </div>
                                         </div>
@@ -87,7 +84,7 @@
                                     No hay informes por el momento
                                 @endif 
                             </div>
-                            <div>
+                            <div class="d-flex">
                                 @if($listadoinformesGenerados)
                                     @foreach($listadoinformesGenerados as $informe3)
                                         <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content;" wire:click="BuscarDatosDelInforme({{ $informe3->id }})">
@@ -103,6 +100,9 @@
                                     @endforeach
                                 @else
                                     No se han generado informes 
+                                    {{-- <a href="{{ route('informes')}}"> --}}
+                                        <input wire:click="agregar()" type="button" class="btn btn-info" value="Crear nuevos informes">
+                                    {{-- </a> --}}
                                 @endif
                             </div>
                         </div>

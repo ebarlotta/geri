@@ -22,9 +22,13 @@
                                 <td class="col-3" style="text-align: center">
                                     @if($informe->escala_id==1) 
                                         @if($informe->cantidad==1)
-                                            <input class="mr-1" type="checkbox" checked>SI<input class="ml-3 mr-1" type="checkbox">NO
+                                            <input class="mr-1" type="radio" name="drone{{ $informe->id }}" checked wire:click="TomarRespuesta({{ $informe->id }},{{ $informeespecifico[0]->informe_id }},'')">SI<input class="ml-3 mr-1" type="radio" name="drone{{ $informe->id }}" wire:click="TomarRespuesta({{ $informe->id }},{{ $informeespecifico[0]->informe_id }},'')">NO
                                         @else
-                                            <input class="mr-1" type="checkbox">SI<input class="ml-3 mr-1" type="checkbox" checked>NO
+                                            @if($informe->cantidad==0)
+                                                <input class="mr-1" type="radio" name="drone{{ $informe->id }}" wire:click="TomarRespuesta({{ $informe->id }},{{ $informeespecifico[0]->informe_id }},'')">SI<input class="ml-3 mr-1" type="radio" checked name="drone{{ $informe->id }}" wire:click="TomarRespuesta({{ $informe->id }},{{ $informeespecifico[0]->informe_id }},'')">NO
+                                            @else
+                                                <input class="mr-1" type="radio" name="drone{{ $informe->id }}" wire:click="TomarRespuesta({{ $informe->id }},{{ $informeespecifico[0]->informe_id }},'')">SI<input class="ml-3 mr-1" type="radio" name="drone{{ $informe->id }}" wire:click="TomarRespuesta({{ $informe->id }},{{ $informeespecifico[0]->informe_id }},'')">NO
+                                            @endif
                                         @endif
                                     @endif
                                     @if($informe->escala_id==2)

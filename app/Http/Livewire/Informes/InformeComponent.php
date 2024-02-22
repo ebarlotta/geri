@@ -109,6 +109,8 @@ class InformeComponent extends Component
         
                 $this->editpregunta = false; break; }
         }
+
+        $this->pregunta_id = null;
     }
 
     public function editpregunta($id) {

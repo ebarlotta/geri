@@ -52,12 +52,14 @@
                                     <label class="block text-gray-700 text-sm font-bold mb-2">Cama</label>
                                     <select class="col-12 form-control" name="cama_id" id="" wire:model="cama_id" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;">
                                         <option value="">-</option>
-                                        @foreach($camas22 as $cama)
-                                            @if($cama_id===$cama->id) <option value="{{ $cama->id }}" selected>Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
-                                            @else
-                                                <option value="{{ $cama->id }}">Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
-                                            @endif
-                                        @endforeach
+                                        @if($camas22)
+                                            @foreach($camas22 as $cama)
+                                                @if($cama_id===$cama->id) <option value="{{ $cama->id }}" selected>Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
+                                                @else
+                                                    <option value="{{ $cama->id }}">Hab. {{ $cama->NroHabitacion }} - Cama: {{ $cama->NroCama }}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </select>
                                     @error('cama_id') <span class="text-red-500">{{ $message }}</span>@enderror
                                 </div>

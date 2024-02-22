@@ -48,6 +48,7 @@ class ActorComponent extends Component
 
     public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta,
     $actor_referente, $actividad, $caracterdeltitular, $agente_informes_id;
+    public $informe_id; // Es el id del area seleccionada que tiene ligados todos los informes del area
 
     public $listadoinformes,$listadoinformesGenerados,$respuestas,$nombredelinforme;
     public $bancorespuestas =array();
@@ -56,7 +57,12 @@ class ActorComponent extends Component
     public $isModalOpen = false;
     public $isModalOpenAdicionales=false;
     public $isModalOpenGestionar=false;
-    public $mostrarInformesGenerados =false;
+
+    //Variables de Nuevo informe
+    public $ModalNuevoInforme=false;
+    public $personalmedico;
+    public $anioNuevo, $periodoNuevo, $profesional_id_Nuevo, $nuevo_informe_id;
+    // public $mostrarInformesGenerados =false;
     public $mostrarinformeespecifico=false, $informeespecifico;
     public $modalpreguntas=false;
 
@@ -65,6 +71,7 @@ class ActorComponent extends Component
 
     public function render()
     {
+        $this->anioNuevo=date("Y");
         $this->tipos_documentos = TiposDocumentos::all();
         $this->estados_civiles = EstadosCiviles::all();
         $this->tipos_de_personas = TipoDePersona::all();
@@ -89,6 +96,28 @@ class ActorComponent extends Component
         return view('livewire.actores.actor-component')->with(['radios'=>$this->radios]);
     }
 
+    public function nuevoInforme() {
+        $a= new AgenteInforme;
+        $a->agente_id = $this->actor_id;
+        $a->informe_id=$this->nuevo_informe_id;
+        $a->nroperiodo=$this->periodoNuevo;
+        $a->anio=$this->anioNuevo;
+        $a->profesional_id=$this->profesional_id_Nuevo;
+        $a->empresa_id=1;
+        $a->save();
+        $preguntas = Pregunta::where('informe_id','=',$this->informe_id)->get();
+        foreach($preguntas as $pregunta) {
+            $b = new InformeRespuestas;
+            $b->agente_informes_id = $a->id;
+            $b->preguntas_id = $pregunta->id;
+            $b->cantidad = -1;
+            $b->descripcion = '';
+            $b->fotourl = '';
+            $b->save();
+        }
+        $this->cerrarModalNuevoInforme();
+    }
+
     public function show($id) {
         $actor = Actor::find($id);
         $this->CargaDatosdelActor($actor);
@@ -106,16 +135,40 @@ class ActorComponent extends Component
                 // $this->listadoinformes = Informe::join('areas','areas.id','informes.area_id')
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Social')
-                ->get();  break;
+                ->get();
+                if($this->listadoinformes) {
+                    $this->informe_id=$this->listadoinformes[0]->id;
+                }
+                //dd($this->informe_id);
+                // $this->informe_id=$informe_id;
+                break;
+            }
+            case 'Medicos':{ 
+                // $this->listadoinformes = Informe::join('areas','areas.id','informes.area_id')
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Médica')
+                ->get();
+                if($this->listadoinformes) {
+                    $this->informe_id=$this->listadoinformes[0]->id;
+                    // dd($this->informe_id);
+                }
+                //dd($this->informe_id);
+                // $this->informe_id=$informe_id;
+                break;
             }
         }
+        $this->listadoinformesGenerados=null;
     }
 
     public function MostrarInformes($informe_id) {
-        $this->mostrarInformesGenerados = true;
         // $this->listadoinformesGenerados = AgenteInforme::all();
+        // $this->informe_id=$informe_id;
+        $this->listadoinformesGenerados = AgenteInforme::where('informe_id','=',$informe_id)
+        ->where('agente_id','=',$this->actor_id)
+        ->orderby('anio')->orderby('nroperiodo')->get();
         // dd($this->listadoinformesGenerados);
-        $this->listadoinformesGenerados = AgenteInforme::where('informe_id','=',$informe_id)->orderby('anio')->orderby('nroperiodo')->get();
+
+        // $this->mostrarInformesGenerados = true;
     }
 
     public function BuscarDatosDelInforme($informe_id) {
@@ -235,9 +288,15 @@ class ActorComponent extends Component
         $temp = array();
         $temp = array('pregunta'=>$pregunta_id, 'respuesta'=>$respuesta, 'descripcion'=>$descripcion);
         // dd($temp);
-        
-        array_push($this->bancorespuestas,$temp);
-        dd($this->bancorespuestas);
+        $a = new InformeRespuestas();
+        $a->agente_informes_id = $this->informe_id;
+        $a->preguntas_id = $pregunta_id;
+        $a->cantidad = $respuesta;
+        $a->descripcion = $descripcion;
+        dd($a);
+        $a->save();
+        // array_push($this->bancorespuestas,$temp);
+        // dd($this->bancorespuestas);
         // $this->bancorespuestas[] = $temp;
     }
 
@@ -289,6 +348,14 @@ class ActorComponent extends Component
         $this->isModalOpenAdicionales = false; 
         $this->reset('vinculo','ultimaocupacion','viviendapropia','canthijosvarones','canthijasmujeres','activo');
     }
+
+    public function abrirModalNuevoInforme($id) { 
+        $this->ModalNuevoInforme=true; 
+        $this->personalmedico = Actor::where('tipopersona_id','=',3)->get(); 
+        $this->nuevo_informe_id= $id; 
+    }
+    public function cerrarModalNuevoInforme() { $this->ModalNuevoInforme=false; }
+
 
     private function resetCreateForm(){
         $this->actor_id = '';
@@ -388,23 +455,24 @@ class ActorComponent extends Component
     public function delete($id)
     {
         Actor::find($id)->delete();
-        session()->flash('message', 'Actor Eliminada.');
+        session()->flash('message', 'Actor Eliminado.');
     }
 
-    public function agregar($id)
+    public function agregar()
     {
-        $actor = Actor::findOrFail($id);
-        $this->id = $id;
-        $this->actor_id=$id;
+        //dd($this->actor_id);
+        $actor = Actor::findOrFail($this->actor_id);
+        $this->id = $this->actor_id;
+        //$this->actor_id=$this->actor_id;
         
         //$cliente = new empresa;
-        // dd($actor->tipopersona_id);
+        //dd($actor->tipopersona_id);
         switch ($actor->tipopersona_id) {
-            case 1: {
+            case 1: { // Agente
                 $this->referentes = Actor::where('tipopersona_id','=',2)->get(); 
                 $agente = ActorAgente::where('id','=',$this->actor_id)->get(); 
-                $this->CargaDatosdelAgente($agente);                
-                break; // Agente
+                $this->CargaDatosdelAgente($agente);     
+                break; 
             }
             case 2: {
                 // Referentes
@@ -464,6 +532,7 @@ class ActorComponent extends Component
             }
 
         // Carga Datos del Actor
+        
         $this->CargaDatosdelActor($actor);
         $this->openModalPopoverAdicionales();
     }
