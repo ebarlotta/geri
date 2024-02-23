@@ -31,6 +31,7 @@ class EmpresaComponent extends Component
     }
 
     public function cargamodulos($id) {
+        dd("Este es el id de la empresa $id");
         session(['empresa_id' => $id]);
         //sleep(2);
         $this->empresa_id=$id;

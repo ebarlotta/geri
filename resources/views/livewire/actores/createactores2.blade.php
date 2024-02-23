@@ -38,26 +38,26 @@
                                 <div class="col-12 card border border-primary shadow-0 mt-3">  
                                     <div class="card-body mt-1">
                                         <table class="col-11 table-striped" >
-                                            <tr><td>domicilio'</td><td>{{ $domicilio }}</td></tr>
-                                            <tr><td>documento</td><td>{{ $documento }}</td></tr>
-                                            <tr><td>tipos_documento</td><td>{{ $tipodocumento_id }}</td></tr>
-                                            <tr><td>nacimiento</td><td>{{ $nacimiento }}</td></tr>
-                                            <tr><td>sexo_id'</td><td>{{ $sexo_id }}</td> </tr>
-                                            <tr><td>email'</td><td>{{ $email }}</td> </tr>
-                                            <tr><td>nacionalidad_id</td><td>{{ $nacionalidad_id }}</td> </tr>
-                                            <tr><td>localidad_id</td><td>{{ $localidad_id }}</td> </tr>
-                                            <tr><td>obrasocial_id</td><td>{{ $beneficio_id }}</td> </tr>
-                                            <tr><td>escolaridad_id</td><td>{{ $escolaridad_id }}</td> </tr>
-                                            <tr><td>telefono</td><td>telefono</td> </tr>
-                                            <tr><td>empresa_id</td><td>{{ $personactivo_id }}</td> </tr>
-                                            <tr><td>activo</td> </tr>
-                                            <tr><td>fingreso</td><td>{{ $fingreso }}</td> </tr>
-                                            <tr><td>fegreso</td><td>{{ $fegreso }}</td> </tr>
-                                            <tr><td>peso_id</td><td>{{ $peso }}</td> </tr>
-                                            <tr><td>actor_referente</td><td>actor_referente</td> </tr>
-                                            <tr><td>cama_id</td><td>cama_id</td> </tr>
-                                            <tr><td>motivos_egreso_id</td><td>motivos_egreso_id</td> </tr>
-                                            <tr><td>grado_dependencia_id</td><td>{{ $gradodependencia_id }}</td> </tr>
+                                            <tr><td>Domicilio</td><td>{{ $domicilio }}</td></tr>
+                                            <tr><td>Documento</td><td>{{ $documento }}</td></tr>
+                                            <tr><td>Tipo documento</td><td>{{ $tipodocumento_id }}</td></tr>
+                                            <tr><td>Nacimiento</td><td>{{ $nacimiento }}</td></tr>
+                                            <tr><td>Sexo</td><td>{{ $sexo_id }}</td> </tr>
+                                            <tr><td>EMail</td><td>{{ $email }}</td> </tr>
+                                            <tr><td>Nacionalidad</td><td>{{ $nacionalidad_id }}</td> </tr>
+                                            <tr><td>Localidad</td><td>{{ $localidad_id }}</td> </tr>
+                                            <tr><td>Obra Social</td><td>{{ $beneficio_id }}</td> </tr>
+                                            <tr><td>Escolaridad</td><td>{{ $escolaridad_id }}</td> </tr>
+                                            <tr><td>Teléfono</td><td>{{ $telefono}}</td> </tr>
+                                            <tr><td>Empresa_id</td><td>{{ $nombreempresa }}</td> </tr>
+                                            <tr><td>Activo</td><td>@if($activo) SI @else NO @endif </td></tr>
+                                            <tr><td>FIngreso</td><td>{{ $fingreso }}</td> </tr>
+                                            <tr><td>FEgreso</td><td>{{ $fegreso }}</td> </tr>
+                                            <tr><td>Peso</td><td>{{ $peso }}</td> </tr>
+                                            <tr><td>Actor_Referente</td><td>{{ $actor_referente[0]['nombre']}}</td> </tr>
+                                            <tr><td>Cama</td><td>{{ $cama_id }}</td> </tr>
+                                            <tr><td>Motivo_Egreso_id</td><td>motivos_egreso_id</td> </tr>
+                                            <tr><td>Grado_Depend.</td><td>{{ $gradodependencia_id }}</td> </tr>
                                         </table>
                                     </div>  
                                 </div>

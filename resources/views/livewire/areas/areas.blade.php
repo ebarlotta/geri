@@ -35,7 +35,7 @@
                 <tbody>
                     @foreach ($areas as $area)
                     <tr>
-                        <td class="border px-4 py-2">{{ $area->AreasDescripcion }}</td>
+                        <td class="border px-4 py-2">{{ $area->areasdescripcion }}</td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 @if($area->AreasHabilitada)

@@ -19,7 +19,8 @@ class CreateActorAgentesTable extends Migration
             $table->date('fegreso')->nullable();
             $table->string('alias')->nullable();
             $table->double('peso_id');
-            $table->unsignedBigInteger('actor_referente');
+            $table->unsignedBigInteger('actor_id');
+            $table->unsignedBigInteger('actor_referente')->nullable();
             $table->unsignedBigInteger('cama_id');
             $table->unsignedBigInteger('datossociales_id')->nullable();  //hacer
             $table->unsignedBigInteger('datosmedicos_id')->nullable();   //hacer
@@ -30,7 +31,8 @@ class CreateActorAgentesTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('actor_referente')->references('id')->on('actor_referentes');
+            $table->foreign('actor_id')->references('id')->on('actors');
+            $table->foreign('actor_referente')->references('id')->on('actors');
             $table->foreign('cama_id')->references('id')->on('camas')->default(0);
             $table->foreign('datossociales_id')->references('id')->on('datos_socials');
             $table->foreign('datosmedicos_id')->references('id')->on('datos_medicos');

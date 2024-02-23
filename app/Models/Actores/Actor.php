@@ -2,8 +2,10 @@
 
 namespace App\Models\Actores;
 
+use App\Models\Sexo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TiposDocumentos;
 
 class Actor extends Model
 {
@@ -34,5 +36,11 @@ class Actor extends Model
     public function TipoDePersona() {
         return $this->hasOne('\\App\Models\TipoDePersona','id','tipopersona_id');
     }
+
+    public function tipodocumento_texto() {
+        return $this->hasOne(TiposDocumentos::class,'id','tipodocumento_id');
+        // return $this->hasMany('App\Models\Unidad');
+     }
+
     
 }

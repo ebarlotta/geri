@@ -35,6 +35,33 @@ class Actor extends Model {
 		return $this->hasOne('\\App\Models\TipoDePersona','id','tipopersona_id');
 	}
 
+   public function TipoDocumento() {
+		return $this->hasOne('\\App\Models\TiposDocumentos','id','tipos_documento')->get();
+	}
+
+   public function Sexo() {
+      return $this->hasOne('\\App\Models\Sexo','id','sexo_id')->get();
+   }
+
+   public function Nacionalidad() {
+      return $this->hasOne('\\App\Models\Nacionalidad','id','nacionalidad_id')->get();
+   }
+
+   public function Localidad() {
+      return $this->hasOne('\\App\Models\Localidades','id','localidad_id')->get();
+   }
+
+   public function Beneficio() {
+      return $this->hasOne('\\App\Models\Beneficios','id','obrasocial_id')->get();
+   }
+
+   public function Escolaridad() {
+      return $this->hasOne('\\App\Models\Escolaridades','id','escolaridad_id')->get();
+   }
+
+   public function Empresa() {
+      return $this->hasOne('\\App\Models\Empresa','id','empresa_id')->get();
+   }
 //    public $id;
 //    public $nombre='';
 //    public $documentotipo_id;
@@ -151,4 +178,6 @@ class Actor extends Model {
 // }
 
 }
+
+
 

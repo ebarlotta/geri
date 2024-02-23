@@ -15,12 +15,12 @@ class ActorAgente extends Model
         'alias',
         'peso_id',
         'actor_referente',
+        'actor_id',
         'cama_id',
         'datossociales_id',
         'datosmedicos_id',
         'motivos_egreso_id',
         'grado_dependencia_id',
         'historiadevida_id',
-        'informes_id',
     ];
 }

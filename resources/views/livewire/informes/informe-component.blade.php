@@ -40,24 +40,24 @@
                     <table class="table table-striped">
                         <tr>
                             <td class="font-weight-bold">Nombre</td>
-                            <td class="font-weight-bold col-1">
+                            {{-- <td class="font-weight-bold col-1">
                                 <div style="display: inline-flex;">
                                     <div> Opciones </div>
-                                    <x-agregar2 id="1">Agregar</x-agregar2>
+                                        <x-agregar2 id="1">Agregar</x-agregar2>
                                     <div>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
                         @foreach($periodos as $periodo)
                         <tr>
                             <td>{{ $periodo->nombreperiodo }}</td>
-                            <td class="col-1"><x-editar id="{{$periodo->id}}"></x-editar></td>
+                            {{-- <td class="col-1"><x-editar id="{{$periodo->id}}"></x-editar></td> --}}
                         </tr>
                         @endforeach
                     </table>
-                    <button wire:click="create()" class="bg-green-300 hover:bg-green-400 text-white-900 font-bold px-4 rounded mx-2">
+                    {{-- <button wire:click="create()" class="bg-green-300 hover:bg-green-400 text-white-900 font-bold px-4 rounded mx-2">
                         Agregar
-                    </button>
+                    </button> --}}
                 @endif
                 <!-- Escalas -->
                 @if($escalasview)
