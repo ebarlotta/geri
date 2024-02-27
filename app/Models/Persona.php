@@ -45,11 +45,6 @@ class Actor extends Model {
     public $tipo_de_persona;
     public $domicilio;
     public $email;
-<<<<<<< HEAD
-    public $imagenurl;
-    //Tipo de persona
-=======
->>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
     public $nacionalidad_id;
     public $localidad_id;
     public $telefono;
@@ -64,17 +59,6 @@ class Actor extends Model {
     
 }
 
-<<<<<<< HEAD
-// class Personas extends Actor {
-//     public $modalidad;
-//     public $ultimaocupacion;
-//     public $viviendapropia;
-//     public $canthijosvarones;
-//     public $canthijasmujeres;
-//     public $persona_id;
-// }
-class DatosAdicionales {
-=======
 class Personas extends Actor { //Aplica para referentes y residentes
     
     public $alias;
@@ -83,19 +67,13 @@ class Personas extends Actor { //Aplica para referentes y residentes
     public $sexo_id;
     public $obrasocial_id;
     public $escolaridad_id;
->>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
     public $modalidad;
     public $ultimaocupacion;
     public $viviendapropia;
     public $canthijosvarones;
     public $canthijasmujeres;
-<<<<<<< HEAD
-}este es el nuevo cambio
-
-=======
 
 }
->>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
 
 class Referente extends Actor {
     public $datosadicionales_id;
@@ -151,25 +129,6 @@ class empresa extends Actor {
     public $logourl;
     public $actividad;
     public $caracterdeltitular;
-<<<<<<< HEAD
-    public $persona_id;  //Hace referencia a Persona   $titular_id
-
-    // public $nacimiento;
-    // public $estadocivil_id;
-    // public $sexo_id;
-    // public $nacionalidad_id;
-    // public $obrasocial_id;
-    // public $escolaridad_id;
-
-    // function __construct() {
-    //     $this->nacimiento=date('Y-m-d');
-    //     $this->estadocivil_id=0; // 0 = sin especificar
-    //     $this->sexo_id=0;        // 0 = sin especificar
-    //     $this->nacionalidad_id=0;// 0 = sin especificar
-    //     $this->obrasocial_id=0;  // 0 = sin especificar
-    //     $this->escolaridad_id=0; // 0 = sin especificar
-    // }
-=======
     public $titular_id;  //Hace referencia a Persona
     public $fechainicio;
 
@@ -182,5 +141,4 @@ class empresa extends Actor {
         $this->obrasocial_id=0;  // 0 = sin especificar
         $this->escolaridad_id=0; // 0 = sin especificar
     }
->>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
 }

@@ -12,7 +12,7 @@
                 @if($ModalNuevoInforme) @include('livewire.actores.nuevoInforme') @endif
                 
                 <div class="container">
-                    <div class="row">
+                    <div class="row" style="margin-left: 15%">
                         <div class="col-3 mt-5 flex border border-primary shadow-0">
                             <img class="block rounded-md flex-none bg-cover mr-3 p-2" src="{{ asset('images/sin_imagen.jpg') }}" style="width: 100px; height: 100px;">
                             <div class="mt-2">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-left: 15%">
                         <div class="col-3" >
                             <div class="row">
                                 <div class="col-12 card border border-primary shadow-0 mt-3">  

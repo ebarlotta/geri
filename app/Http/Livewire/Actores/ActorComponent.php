@@ -147,9 +147,10 @@ class ActorComponent extends Component
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Social')
                 ->get();
-                if($this->listadoinformes) {
-                    $this->informe_id=$this->listadoinformes[0]->id;
-                    // dd($this->listadoinformes);
+                if(count($this->listadoinformes)) {
+                    if($this->listadoinformes) {
+                        $this->informe_id=$this->listadoinformes[0]->id;
+                    }
                 }
                 // $this->informe_id=$informe_id;
                 break;
@@ -159,9 +160,11 @@ class ActorComponent extends Component
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Médica')
                 ->get();
-                if($this->listadoinformes) {
-                    $this->informe_id=$this->listadoinformes[0]->id;
-                    // dd($this->informe_id);
+                if(count($this->listadoinformes)) {
+                    if($this->listadoinformes) {
+                        $this->informe_id=$this->listadoinformes[0]->id;
+                        // dd($this->informe_id);
+                    }
                 }
                 //dd($this->informe_id);
                 // $this->informe_id=$informe_id;
@@ -455,8 +458,8 @@ class ActorComponent extends Component
             $b->vinculo = '';
             $b->modalidad = '';
             $b->save();
+            $this->actor_id = $b->id;
         }
-        $this->actor_id = $b->id;
 
         session()->flash('message', $this->actor_id ? 'Actor Actualizado/a.' : 'Actor Creada.');
 
@@ -497,6 +500,7 @@ class ActorComponent extends Component
     {
         Actor::find($id)->delete();
         session()->flash('message', 'Actor Eliminado.');
+        $this->Filtrar();
     }
 
     public function agregar($id)
