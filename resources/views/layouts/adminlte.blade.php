@@ -1,48 +1,23 @@
-
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
-
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-    @livewireStyles
-
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="js/jquery.mask.js"></script>
-
-</head>
 @extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+{{-- @section('content_header')
+    <h1>Dashboard</h1>
+@stop --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @section('content')
-    
-    
-        <div class="bg-gray-100 h-full">
+    <p>Welcome to this beautiful admin panel.</p>
+@stop
 
-            <!-- Page Content -->
-            <main>
-                {{-- @yield('content')  Desactivado --}}
-            </main>
-        </div>
-        @stop
-        @stack('modals')
+{{-- @section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop --}}
+@stack('modals')
 
-        @livewireScripts
-    </body>
-    </html>
+    @livewireScripts
+
+@section('js')
+    <script> console.log('Hia!'); </script>
+@stop

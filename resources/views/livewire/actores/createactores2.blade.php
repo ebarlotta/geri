@@ -54,10 +54,10 @@
                                             <tr><td>FIngreso</td><td>{{ $fingreso }}</td> </tr>
                                             <tr><td>FEgreso</td><td>{{ $fegreso }}</td> </tr>
                                             <tr><td>Peso</td><td>{{ $peso }}</td> </tr>
-                                            <tr><td>Actor_Referente</td><td>{{ $actor_referente[0]['nombre']}}</td> </tr>
-                                            <tr><td>Cama</td><td>{{ $cama_id }}</td> </tr>
-                                            <tr><td>Motivo_Egreso_id</td><td>motivos_egreso_id</td> </tr>
-                                            <tr><td>Grado_Depend.</td><td>{{ $gradodependencia_id }}</td> </tr>
+                                            <tr><td>Referente</td><td>{{ $actor_referente }}</td> </tr>
+                                            <tr><td>Cama Nª</td><td>{{ $cama_id }}</td> </tr>
+                                            <tr><td>Motivo Egreso</td><td>{{ $motivosegresos}}</td> </tr>
+                                            <tr><td>Grado Depend.</td><td>{{ $gradodependencia }}</td> </tr>
                                         </table>
                                     </div>  
                                 </div>
@@ -66,10 +66,11 @@
                         <div class="w-1 bg-gray-300 card shadow-0 mt-3">
                         </div>
                         <div class="col-8 bg-gray-300 card border border-primary shadow-0 mt-3" style="display: block;">
-                            <div class="col-12" style="display: flex; overflow: auto;">
-                                @if($listadoinformes)
+                            <div>INFORMES DISPONIBLES</div>
+                            <div class="col-12" style="display: flex; overflow: auto; background-color: lemonchiffon">
+                                @if($listadoinformes)                                   
                                     @foreach($listadoinformes as $informe)
-                                        <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content;" wire:click="MostrarInformes({{ $informe->id }})">
+                                        <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content; border: lightgray; border-style: ridge; border-width: thin;" wire:click="MostrarInformes({{ $informe->id }})">
                                             <div class="card-body" style=" max-height: 200px; height: 100%; padding: 0.25rem;">
                                                 <p class="card-text flex">
                                                     <input type="button" wire:click="abrirModalNuevoInforme({{ $informe->id }})" class="btn btn-info sm:flex bg-green-300 hover:bg-green-400 text-black-900 font-bold ml-2 rounded" style="max-height: 31px;" value="+">
@@ -81,13 +82,13 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    No hay informes por el momento
+                                    No hay informes configurados por el momento
                                 @endif 
                             </div>
-                            <div class="d-flex">
+                            <div class="col-12 " style="display: flex; flex-wrap: wrap; background-color: beige; margin-top:10px">
                                 @if($listadoinformesGenerados)
                                     @foreach($listadoinformesGenerados as $informe3)
-                                        <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content;" wire:click="BuscarDatosDelInforme({{ $informe3->id }})">
+                                        <div class="card sm:col-11 col-md-3 shadow-md rounded-l-md transform transition duration-500 hover:scale-105" style="margin: 1%;box-shadow: 10px 5px 5px gray; height: max-content; border: lightgray; border-style: ridge; border-width: thin;" wire:click="BuscarDatosDelInforme({{ $informe3->id }})">
                                             <div class="card-body" style=" max-height: 200px; height: 100%; padding: 0.25rem;">
                                                 <p class="card-text flex">
                                                     <b>{{ $informe3->datosinforme->nombreinforme}}</b><br>  
@@ -99,9 +100,9 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    No se han generado informes 
+                                    No se ha seleccionado un informe
                                     {{-- <a href="{{ route('informes')}}"> --}}
-                                        <input wire:click="agregar()" type="button" class="btn btn-info" value="Crear nuevos informes">
+                                        {{-- <input wire:click="agregar()" type="button" class="btn btn-info" value="Crear nuevos informes"> --}}
                                     {{-- </a> --}}
                                 @endif
                             </div>

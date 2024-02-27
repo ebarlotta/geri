@@ -62,6 +62,11 @@ class Actor extends Model {
    public function Empresa() {
       return $this->hasOne('\\App\Models\Empresa','id','empresa_id')->get();
    }
+
+   public function MotivosEgreso() {
+      dd($this->hasManyThrough('\\App\Models\MotivosEgresos','\\App\Models\Actores\ActorAgentess')->get());
+      // return
+   }
 //    public $id;
 //    public $nombre='';
 //    public $documentotipo_id;

@@ -23,4 +23,8 @@ class ActorAgente extends Model
         'grado_dependencia_id',
         'historiadevida_id',
     ];
+
+    public function MotivosEgreso() {
+        return $this->hasManyThrough('\\App\Models\MotivosEgresos','\\App\Models\Actores\ActorAgente','motivos_egreso_id','id')->get();
+    }
 }

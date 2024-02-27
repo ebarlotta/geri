@@ -81,8 +81,8 @@
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
-                        <th class="px-4 py-2">Apellido y Nombre</th>
-                        <th class="px-4 py-2">Tipo</th>
+                        <th class="px-4 py-2 col-3">Apellido y Nombre</th>
+                        <th class="px-4 py-2 col-2">Tipo</th>
                         <th class="px-4 py-2">Opciones</th>
                     </tr>
                 </thead>
@@ -90,8 +90,8 @@
                     @if($actores)
                     @foreach ($actores as $actor)
                     <tr>
-                        <td class="border px-4 py-2" style="width: 10%">{{ $actor->nombre }}</td>
-                        <td class="border px-4 py-2">{{ $actor->TipoDePersona->tipodepersona }}</td>
+                        <td class="border px-4 py-2 col-3" style="width: 10%">{{ $actor->nombre }}</td>
+                        <td class="border px-4 py-2 col-2">{{ $actor->TipoDePersona->tipodepersona }}</td>
                         <td class="border px-4 py-2">
                             <div class="flex justify-center">
                                 <!-- Gestionar -->

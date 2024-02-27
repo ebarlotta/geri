@@ -24,7 +24,8 @@
                                 {{ $pregunta->textopregunta }}
                             </td>
                             <td class="col-3" style="text-align: center" colspan=2>
-                                <input class="mr-1" type="checkbox" wire:click="TomarRespuesta({{ $pregunta->id }},1,'')">SI<input class="ml-3 mr-1" type="checkbox" wire:click="TomarRespuesta({{ $pregunta->id }},0,'')">NO
+                                <input class="mr-1" type="radio" name="vuelo{{ $pregunta->id}}" wire:click="TomarRespuesta({{ $informe_id }},{{ $pregunta->id }},1,'')">SI
+                                <input class="ml-3 mr-1" type="radio" name="vuelo{{ $pregunta->id}}" wire:click="TomarRespuesta({{ $informe_id }},{{ $pregunta->id }},2,'')">NO
                             </td>
                         </tr>
                     @endif

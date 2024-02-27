@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ActorComponent extends Component
 {
-    public $persona_descripcion, $actor_id, $iva_id, $fingreso, $fegreso, $peso, $telefono, $nombreempresa, $referente_id;
+    public $persona_descripcion, $actor_id, $iva_id, $fingreso, $fegreso, $peso, $telefono, $nombreempresa, $motivosegresos, $gradodependencia, $referente_id;
     public $actores, $ivas, $referentes;
     
     public $tipos_documentos, $estados_civiles, $tipos_de_personas, $nacionalidades, $localidades, $beneficios, $grados_dependencias, $escolaridades, $camas, $person_activos, $sexos, $datossociales_id, $historiadevida;
@@ -125,6 +125,7 @@ class ActorComponent extends Component
             $b->save();
         }
         $this->cerrarModalNuevoInforme();
+        $this->MostrarInformes($this->nuevo_informe_id);
     }
 
     public function show($id) {
@@ -139,6 +140,7 @@ class ActorComponent extends Component
     }
 
     public function CargarInforme($informe) {
+        $this->listadoinformes = null;
         switch ($informe) {
             case 'Sociales':{ 
                 // $this->listadoinformes = Informe::join('areas','areas.id','informes.area_id')
@@ -147,8 +149,8 @@ class ActorComponent extends Component
                 ->get();
                 if($this->listadoinformes) {
                     $this->informe_id=$this->listadoinformes[0]->id;
+                    // dd($this->listadoinformes);
                 }
-                //dd($this->informe_id);
                 // $this->informe_id=$informe_id;
                 break;
             }
@@ -175,7 +177,7 @@ class ActorComponent extends Component
         $this->listadoinformesGenerados = AgenteInforme::where('informe_id','=',$informe_id)
         ->where('agente_id','=',$this->actor_id)
         ->orderby('anio')->orderby('nroperiodo')->get();
-        // dd($this->listadoinformesGenerados);
+        //  dd($this->listadoinformesGenerados);
 
         // $this->mostrarInformesGenerados = true;
     }
@@ -184,14 +186,18 @@ class ActorComponent extends Component
 
         // $this->respuestas = InformeRespuestas::find($informe_id);
         // $this->respuestas = InformeRespuestas::where('agente_informes_id','=',$informe_id)->get();
-        $this->informeespecifico = InformeRespuestas::join('preguntas','preguntas.id','preguntas_id')
-        // ->join('escalas','escalas.id','escalas_id')
-        ->where('agente_informes_id','=',$informe_id)->get();
+        // $this->informeespecifico = InformeRespuestas::join('preguntas','preguntas.id','preguntas_id')
+        // ->where('agente_informes_id','=',$informe_id)->get();
+        $this->informeespecifico = InformeRespuestas::where('agente_informes_id','=',$informe_id)
+        ->join('preguntas','preguntas.id','preguntas_id')
+        ->get(['preguntas_id','cantidad','descripcion','agente_informes_id','fotourl','informe_respuestas.id','textopregunta','escala_id']);
+        // ->get();
 
+        
+        // dd($this->informeespecifico);
         $this->agente_informes_id=$informe_id;
         // $cont = 0;
-        // dd($this->informeespecifico[0]->informe_id);
-        if(count($this->informeespecifico)) { $this->nombredelinforme = Informe::find($this->informeespecifico[0]->informe_id)->nombreinforme; }
+        // if(count($this->informeespecifico)) { $this->nombredelinforme = Informe::find($this->informeespecifico[0]->informe_id)->nombreinforme; }
 
         // dd($this->nombredelinforme);
 
@@ -210,13 +216,12 @@ class ActorComponent extends Component
         // dd($this->informe_id);
         // Buscar las preguntas que tendrá el informe
         $informe = Informe::find($this->informe_id);
-        $this->bancopreguntas = Pregunta::where('informe_id','=',$this->informe_id)
+        $this->bancopreguntas = Pregunta::select('preguntas.id','textopregunta','area_id','escala_id','informe_id','nombreescala','tipodatos','minimo','maximo', 'empresa_id')
+        ->where('informe_id','=',$this->informe_id)
         ->join('escalas','escala_id','escalas.id')
         ->get();
         // Iterar las preguntas y según su tipo mostrarla por pantalla
         // dd($this->bancopreguntas);
-        // dd($bancopreguntas);
-        
         // foreach($this->bancopreguntas as $pregunta) {
         //     // $otra = $pregunta;
         //     // $escala = $otra->nombreescala1;
@@ -294,20 +299,36 @@ class ActorComponent extends Component
         return view('livewire.actores.modalpreguntas')->with(['nombredelinforme'=>'INFORME','bancopreguntas'=>$this->bancopreguntas,'temporal'=>1]);
     }
 
-    public function TomarRespuesta($pregunta_id, $respuesta,$descripcion){
-        $temp = array();
-        $temp = array('pregunta'=>$pregunta_id, 'respuesta'=>$respuesta, 'descripcion'=>$descripcion);
+    public function TomarRespuesta($id, $pregunta_id, $respuesta, $descripcion){
+        // $temp = array();
+        // $temp = array('pregunta'=>$pregunta_id, 'respuesta'=>$respuesta, 'descripcion'=>$descripcion);
         // dd($this->agente_informes_id);
-        $a = new InformeRespuestas();
-        $a->agente_informes_id = $this->agente_informes_id;
-        $a->preguntas_id = $pregunta_id;
-        $a->cantidad = $respuesta;
-        $a->descripcion = $descripcion;
+        $a = InformeRespuestas::find($id);
+        
+        if(!is_null($a)) {
+            $a->cantidad = $respuesta;
+            $a->save();
+        } else
+        {   $a = new InformeRespuestas();
+            $a->agente_informes_id = $this->agente_informes_id;
+            $a->preguntas_id = $pregunta_id;
+            if($respuesta==1) { $a->cantidad = $respuesta; } else { $a->cantidad = 0;}
+            $a->descripcion = $descripcion;
+            $a->save();
+        }
+        // InformeRespuestas::updateOrCreate(['id' => $id], [
+        // $a = new InformeRespuestas();
+        // 'agente_informes_id' => $this->agente_informes_id,
+        // 'preguntas_id' => $pregunta_id,
+        // 'cantidad' => $respuesta,
+        // 'descripcion' => $descripcion,
+        // ]);
         //dd($a);
-        $a->save();
+        // $a->save();
         // array_push($this->bancorespuestas,$temp);
         // dd($this->bancorespuestas);
         // $this->bancorespuestas[] = $temp;
+        $this->BuscarDatosDelInforme($this->agente_informes_id);
     }
 
     public function Filtrar() {
@@ -592,10 +613,11 @@ class ActorComponent extends Component
             $this->peso = $agente[0]->peso_id;
             $this->cama_id = $agente[0]->cama_id;
             $this->alias = $agente[0]->alias;
-            $this->gradodependencia_id = $agente[0]->gradodependencia_id;
-            $this->actor_referente = Actor::where('id','=',$agente[0]->actor_referente)->get('nombre');
-            
+            if(is_null($agente[0]['grado_dependencia_id'])) $this->gradodependencia='-'; else $this->gradodependencia = GradoDependencia::where('id','=',$agente[0]['grado_dependencia_id'])->get()[0]['gradodependenciaDescripcion'];
+            if(is_null($agente[0]->actor_referente)) $this->actor_referente = '-'; else $this->actor_referente = Actor::where('id','=',$agente[0]->actor_referente)->get()[0]['nombre'];
             $this->referentes = Actor::where('tipopersona_id','=',2)->get();
+
+            if(is_null($agente[0]->motivos_egreso_id))  $this->motivosegresos='-'; else $this->motivosegresos = $agente[0]->MotivosEgreso()[0]['motivoegresoDescripcion'];
             // $this->camas = json_decode(DB::table('cama_habitacions')
             // ->join('habitacions', 'habitacions.id', '=', 'cama_habitacions.habitacion_id')
             // ->where('habitacions.empresa_id',session('empresa_id'))
