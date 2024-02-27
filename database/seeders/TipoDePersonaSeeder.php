@@ -17,9 +17,12 @@ class TipoDePersonaSeeder extends Seeder
         //DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Residente',]);
         //DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Referente',]);
         //DB::table('tipo_de_personas')->truncate();
-        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Residente',]);
+        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Agente',]);
         DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Referente',]);
-        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Empleados Temporales',]);
-        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Empleados Mensuales',]);
+        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Personal',]);
+        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Proveedor',]);
+        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Cliente',]);
+        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Vendedor',]);
+        DB::table('tipo_de_personas')->insert(['tipodepersona'=>'Empresa',]);
     }
 }

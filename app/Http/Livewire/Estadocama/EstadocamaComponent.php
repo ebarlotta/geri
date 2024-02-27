@@ -102,7 +102,8 @@ class EstadocamaComponent extends Component
     public function cambiar($id,$sexo)
     {
         $cama = Camas::find($id);
-        if($sexo) { $cama->SexoCama = 0; } else { $cama->SexoCama = 1; }
+        // if($sexo==2) { $cama->SexoCama = 1; } else { $cama->SexoCama = 2; }
+        if($cama->SexoCama<3) $cama->SexoCama++; else $cama->SexoCama = 1;
         $cama->save();
     }
 }

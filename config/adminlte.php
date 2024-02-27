@@ -271,6 +271,30 @@ return [
             ],
         ],
         [
+            'text' => 'Medicamentos',
+            // 'url'  => 'medicamentos',
+            'icon' => 'fas fa-fw fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Gestión de Medicamentos',
+                    'url'  => 'admin/medicamentos',
+                    'icon' => 'fas fa-fw fa-usd',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Informes',
+            // 'url'  => 'medicamentos',
+            'icon' => 'fas fa-fw fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Gestión de Informes',
+                    'url'  => 'admin/informes',
+                    'icon' => 'fas fa-fw fa-usd',
+                ],
+            ],
+        ],
+        [
             'text' => 'Configuraciones',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-cogs',
@@ -291,12 +315,12 @@ return [
                     'icon' => 'fas fa-fw fa-bed',
                 ],
                 [
-                    'text' => 'Personas',
+                    'text' => 'Entidades',
                     'icon' => 'fas fa-fw fa-cogs',
                     'submenu' => [
                         [
-                            'text' => 'Gestión de Personas',
-                            'url'  => 'admin/personas',
+                            'text' => 'Gestión de Entidades',       //Hace referencia a las personas y entidades
+                            'url'  => 'admin/actores',
                             'icon' => 'fas fa-fw fa-card',
                         ],
                         [
@@ -305,7 +329,7 @@ return [
                             'icon' => 'fas fa-fw fa-card',
                         ],
                         [
-                            'text' => 'Tipo de Persona',
+                            'text' => 'Tipo de Entidades',          //Hace referencia a las personas y entidades
                             'url'  => 'admin/tiposdepersonas',
                             'icon' => 'fas fa-fw fa-object-group',
                         ],
@@ -367,7 +391,15 @@ return [
                         [
                             'text' => 'Menúes',
                             'url'  => 'admin/menu',
-                        ],        
+                        ],   
+                        [
+                            'text' => 'Unidades',
+                            'url'  => 'admin/unidades',
+                        ],
+                        [
+                            'text' => 'Categorías Ingredientes',
+                            'url'  => 'admin/categorias',
+                        ],     
                     ],
                 ],
                 ['text' => 'Generales',
@@ -391,14 +423,6 @@ return [
                             'text' => 'Gestión de Interfaces',
                             'url'  => 'admin/interfaces',
                         ],
-                        [
-                            'text' => 'Unidades',
-                            'url'  => 'admin/unidades',
-                        ],
-                        [
-                            'text' => 'Categorías Ingredientes',
-                            'url'  => 'admin/categorias',
-                        ],    
                     ],
                 ],                
             ],

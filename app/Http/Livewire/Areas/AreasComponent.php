@@ -65,8 +65,8 @@ class AreasComponent extends Component
         $area = Areas::findOrFail($id);
         $this->id = $id;
         $this->area_id=$id;
-        $this->AreasDescripcion = $area->AreasDescripcion;
-        $this->AreasHabilitada = $area->AreasHabilitada;
+        $this->AreasDescripcion = $area->areasdescripcion;
+        $this->AreasHabilitada = $area->areashabilitada;
         $this->openModalPopover();
     }
     

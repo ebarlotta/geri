@@ -21,31 +21,35 @@
             </div>
             @endif
             <x-crear>Alta de Persona</x-crear>
-            @if ($isModalOpen)
-                @include('livewire.personas.createpersonas')
-            @endif
+            @if ($isModalOpen) @include('livewire.actores.createactores') @endif
+            @if ($isModalOpenAdicionales) @include('livewire.actores.createactoresadicionales') @endif
+
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2">Apellido y Nombre</th>
+                        <th class="px-4 py-2">Tipo</th>
                         <th class="px-4 py-2">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if($personas)
-                    @foreach ($personas as $persona)
-                    <tr>
-                        <td class="border px-4 py-2">{{ $persona->name }}</td>
-                        <td class="border px-4 py-2">
-                            <div class="flex justify-center">
-                                <!-- Editar  -->
-                                <x-editar id="{{$persona->id}}"></x-editar>
-                                <!-- Eliminar -->
-                                <x-eliminar id="{{$persona->id}}"></x-eliminar>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
+                    @if($actores)
+                        @foreach ($actores as $actor)
+                            <tr>
+                                <td class="border px-4 py-2">{{ $actor->nombre }}</td>
+                                <td class="border px-4 py-2">{{ $actor->TipoDePersona->tipodepersona }}</td>
+                                <td class="border px-4 py-2">
+                                    <div class="flex justify-center">
+                                        <!-- Editar  -->
+                                        <x-editar id="{{$actor->id}}"></x-editar>
+                                        <!-- Eliminar -->
+                                        <x-eliminar id="{{$actor->id}}"></x-eliminar>
+                                        <!-- Agragar -->
+                                        <x-agregar id="{{$actor->id}}"></x-agregar>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     @endif
                 </tbody>
             </table>

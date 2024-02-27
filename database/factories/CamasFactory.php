@@ -22,7 +22,10 @@ class CamasFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nrohabitacion' => $this->faker->numberBetween(1,10),
+            'nrocama' => $this->faker->unique()->numberBetween(1,100),
+            'estadocama' => $this->faker->randomElement([0,1]),
+            'sexocama' => $this->faker->randomElement([1,2,3]),
         ];
     }
 }

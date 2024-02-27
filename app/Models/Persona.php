@@ -14,11 +14,10 @@ class Persona extends Model
         'name',
         'tipodocumento_id',
         'documento',
-        'alias',
         'nacimiento',
         'domicilio',
         'estadocivil_id',
-        'sexo',
+        'sexo_id',
         'email',
         'cama_id', //no esta
         'nacionalidad_id',
@@ -29,33 +28,43 @@ class Persona extends Model
         'estado_id',
         'beneficio_id',
         'tipopersona_id',
-        'gradodependencia_id', 
+        'gradodependencia_id',
+        // estadocivil_id no esta
+        // tipodocumento_id no esta
     ];
+    public function TipoDePersona() {
+        return $this->hasOne('\\App\Models\TipoDePersona','id','tipopersona_id');
+    }
 }
 
 class Actor extends Model {
     public $id;
     public $nombre='';
     public $documentotipo_id;
-    public $documentonro;
-    //public $alias
-    public $nacimiento;
-    public $direccion;
-    public $estadocivil_id;
-    public $sexo_id;
+    public $documento;
+    public $tipo_de_persona;
+    public $domicilio;
     public $email;
+<<<<<<< HEAD
     public $imagenurl;
     //Tipo de persona
+=======
+>>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
     public $nacionalidad_id;
     public $localidad_id;
-    public $obrasocial_id;
-    public $escolaridad_id;
     public $telefono;
 
     public $empresa_id;
     public $activo;
+    
+    public function nueva() {
+        return "entro";
+    }
+
+    
 }
 
+<<<<<<< HEAD
 // class Personas extends Actor {
 //     public $modalidad;
 //     public $ultimaocupacion;
@@ -65,13 +74,28 @@ class Actor extends Model {
 //     public $persona_id;
 // }
 class DatosAdicionales {
+=======
+class Personas extends Actor { //Aplica para referentes y residentes
+    
+    public $alias;
+    public $nacimiento;
+    public $estadocivil_id;
+    public $sexo_id;
+    public $obrasocial_id;
+    public $escolaridad_id;
+>>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
     public $modalidad;
     public $ultimaocupacion;
     public $viviendapropia;
     public $canthijosvarones;
     public $canthijasmujeres;
+<<<<<<< HEAD
 }este es el nuevo cambio
 
+=======
+
+}
+>>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
 
 class Referente extends Actor {
     public $datosadicionales_id;
@@ -94,9 +118,9 @@ class Agente extends Actor {
     public $fingreso;
     public $fegreso;
     public $alias;
-    public $peso_id;
+    public $peso;
     public $referente_id;
-    public $cama;
+    public $cama_id;
     public $datossociales_id;
     public $datosmedicos_id;
     public $motivoegreso_id;
@@ -127,6 +151,7 @@ class empresa extends Actor {
     public $logourl;
     public $actividad;
     public $caracterdeltitular;
+<<<<<<< HEAD
     public $persona_id;  //Hace referencia a Persona   $titular_id
 
     // public $nacimiento;
@@ -144,4 +169,18 @@ class empresa extends Actor {
     //     $this->obrasocial_id=0;  // 0 = sin especificar
     //     $this->escolaridad_id=0; // 0 = sin especificar
     // }
+=======
+    public $titular_id;  //Hace referencia a Persona
+    public $fechainicio;
+
+    
+    function __construct() {
+        $this->nacimiento=date('Y-m-d');
+        $this->estadocivil_id=0; // 0 = sin especificar
+        $this->sexo_id=0;        // 0 = sin especificar
+        $this->nacionalidad_id=0;// 0 = sin especificar
+        $this->obrasocial_id=0;  // 0 = sin especificar
+        $this->escolaridad_id=0; // 0 = sin especificar
+    }
+>>>>>>> 86840e65a81a6f13184b41b0ecff7ec5433b682b
 }

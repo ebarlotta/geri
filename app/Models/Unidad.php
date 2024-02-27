@@ -19,4 +19,5 @@ class Unidad extends Model
         return $this->hasOne(Empresa::class,'id','empresa_id');
         // return $this->hasMany('App\Models\Unidad');
     }
+
 }

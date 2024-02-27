@@ -29,7 +29,7 @@ class PersonaFactory extends Factory
             'alias' => $this->faker->word,
             'documento' => $this->faker->numberBetween(1000000,4000000),
             'domicilio'=> $this->faker->streetName . $this->faker->buildingNumber,
-            'sexo'=> $this->faker->randomElement([0,1]),
+            'sexo_id'=> $this->faker->randomElement([1,2,3]),
             'cama_id'=> $this->faker->randomElement([1,2,3]),
             'nacionalidad_id'=> 1,
             'localidad_id' => $this->faker->randomElement([1,2]),

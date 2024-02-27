@@ -29,22 +29,15 @@
                             </div>
                             
                             <div class="mb-2 col-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">DNI</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Número de Documento</label>
                                 <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese documento" wire:model="documento" maxlength="8">
                                 @error('documento') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
-                            <div class="mb-2 col-4">
-                            
-                                <label class="block text-gray-700 text-sm font-bold mb-2">Alias</label>
-                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Alias" wire:model="alias">
-                                @error('alias') <span class="text-red-500">{{ $message }}</span>@enderror
-                            
-                            </div>
-                            <div class="mb-2 col-4">
+                            {{-- <div class="mb-2 col-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Fecha de Nacimiento</label>
                                 <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese fecha de nacimiento" wire:model="nacimiento">
                                 @error('nacimiento') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
+                            </div> --}}
                             <div class="mb-2 col-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Domicilio</label>
                                 <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese domicilio" wire:model="domicilio">
@@ -58,7 +51,7 @@
                         </div>
                     </div>                    
                     <div style="display:flex; flex-wrap:wrap;">                                               
-                         <div class="mb-2 col-3">
+                         {{-- <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Estado Civil</label>
                             <select name="estadocivil_id" id="" wire:model="estadocivil_id">
                                 <option value="">-</option>
@@ -67,16 +60,17 @@
                                 @endforeach
                             </select>
                             @error('estadocivil_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </div>                        
-                        <div class="mb-2 col-3">
+                        </div>                         --}}
+                        {{-- <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Sexo</label>
-                            <select name="sexo" id="" wire:model="sexo">
+                            <select name="sexo_id" wire:model="sexo_id">
                                 <option value=""></option>
-                                <option value="1">Masculino</option>
-                                <option value="0">Femenina</option>
+                                @foreach($sexos as $sexo)
+                                    <option value="{{ $sexo->id }}">{{ $sexo->nombresexo}}</option>
+                                @endforeach
                             </select>
-                            @error('sexo') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </div>
+                            @error('sexo_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div> --}}
                         <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">E-mail</label>
                             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Ingrese Email" wire:model="email">
@@ -114,7 +108,7 @@
                             @error('localidad_id') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                         <div class="mb-2 col-3">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de Beneficio</label>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de Beneficio Social</label>
                             <select name="beneficio_id" id="" wire:model="beneficio_id">
                                 <option value="">-</option>
                                 @foreach($beneficios as $beneficio)
@@ -123,7 +117,7 @@
                             </select>
                             @error('beneficio_id') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
-                        <div class="mb-2 col-3">
+                        {{-- <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Grado de Dependencia</label>
                             <select name="gradodependencia_id" id="" wire:model="gradodependencia_id">
                                 <option value="">-</option>
@@ -132,9 +126,9 @@
                                 @endforeach
                             </select>
                             @error('gradodependencia_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </div>
+                        </div> --}}
 
-                        <div class="mb-2 col-3">
+                        {{-- <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Escolaridad</label>
                             <select name="escolaridad_id" id="" wire:model="escolaridad_id">
                                 <option value="">-</option>
@@ -148,22 +142,26 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2">Cama</label>
                             <select name="cama_id" id="" wire:model="cama_id">
                                     <option value="" selected>-</option>
-                                    <option value="0">Sin cama</option>
+                                    <option value="1">Sin cama</option>
                                     @foreach($camas as $cama)
                                         <option value="{{ $cama['cama_id'] }}">{{ $cama['cama_id'] }} </option>
                                     @endforeach
                                 </select>
                             @error('cama_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </div>
+                        </div> --}}
                         <div class="mb-2 col-3">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Estado de Persona</label>
-                            <select name="estado_id" id="" wire:model="estado_id">
+                            <select name="personactivo_id" id="" wire:model="personactivo_id">
                                 <option value="">-</option>
                                 @foreach($person_activos as $personactivo)
-                                    <option value="{{ $personactivo->id }}">{{ $personactivo->estado}}</option>
+                                    @if($personactivo->id===$tipopersona_id)
+                                        <option value="{{ $personactivo->id }}" selected>{{ $personactivo->estado}}</option>
+                                    @else
+                                        <option value="{{ $personactivo->id }}">{{ $personactivo->estado}}</option>
+                                    @endif
                                 @endforeach
                             </select>
-                            @error('estado_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                            @error('personactivo_id') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
                 </div>

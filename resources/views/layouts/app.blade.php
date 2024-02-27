@@ -15,22 +15,22 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <!-- <link rel="stylesheet" href="{{asset('css/app.css')}}"> -->
-        
+        @extends('adminlte::page')
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     
-    @extends('adminlte::page')
     <body class="font-sans antialiased">
+        
             {{-- <x-jet-banner /> --}}
             {{-- @livewire('navigation-menu') --}}
-            @section('content')
             <!-- Page Content -->
             <main>
+                @section('content')
+                
                 {{ $slot }}
             </main>
-
         {{-- </div> --}}
         @stop
         @stack('modals')
