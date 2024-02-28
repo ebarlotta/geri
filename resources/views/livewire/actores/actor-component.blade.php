@@ -20,7 +20,7 @@
                 </div>
             </div>
             @endif
-            <div class="flex d-flex">
+            <div class="flex d-flex" style="flex-wrap: wrap;">
                 <x-crear>Alta de Actores</x-crear>
                 <div class="flex d-flex align-middle" style="margin-top: 23px">
                     <div class="form-check mx-3">
@@ -70,6 +70,11 @@
                         <label class="form-check-label" for="flexRadioDefault2">
                             Empresas
                         </label>
+                    </div>
+                </div>
+                <div class="flex d-flex align-middle" style="margin-top: 23px">
+                    <div class="form-check mx-3"> 
+                        <input class="form-input" wire:model="searchActor" wire:keyup="Filtrar()" type="textbox" value="" placeholder="Buscar Nombre/Apellido" style="background-color: darkgray; padding:5px; border-radius:4px;">
                     </div>
                 </div>
             </div>

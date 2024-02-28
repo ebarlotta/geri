@@ -46,7 +46,7 @@ class ActorComponent extends Component
     public $tipos_documentos, $estados_civiles, $tipos_de_personas, $nacionalidades, $localidades, $beneficios, $grados_dependencias, $escolaridades, $camas, $person_activos, $sexos, $datossociales_id, $historiadevida;
 
     public $camas22;
-    public $radios, $temporal;
+    public $radios, $temporal, $searchActor;
 
     public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta,
     $actor_referente, $actividad, $caracterdeltitular, $agente_informes_id;
@@ -129,94 +129,74 @@ class ActorComponent extends Component
     }
 
     public function show($id) {
+        $this->cama_id = '';
         $actor = Actor::find($id);
         $this->CargaDatosdelActor($actor);
         $agente = ActorAgente::where('id','=',$this->actor_id)->get(); 
         $this->CargaDatosdelAgente($agente); 
-
         $this->isModalOpenGestionar=!$this->isModalOpenGestionar;
-        // dd('mount');
-        // return view('livewire.actores.createactores2');
     }
 
     public function CargarInforme($informe) {
         $this->listadoinformes = null;
         switch ($informe) {
             case 'Sociales':{ 
-                // $this->listadoinformes = Informe::join('areas','areas.id','informes.area_id')
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Social')
                 ->get();
-                if(count($this->listadoinformes)) {
-                    if($this->listadoinformes) {
-                        $this->informe_id=$this->listadoinformes[0]->id;
-                    }
-                }
-                // $this->informe_id=$informe_id;
                 break;
             }
             case 'Medicos':{ 
-                // $this->listadoinformes = Informe::join('areas','areas.id','informes.area_id')
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Médica')
                 ->get();
-                if(count($this->listadoinformes)) {
-                    if($this->listadoinformes) {
-                        $this->informe_id=$this->listadoinformes[0]->id;
-                        // dd($this->informe_id);
-                    }
-                }
-                //dd($this->informe_id);
-                // $this->informe_id=$informe_id;
                 break;
+            }
+            case 'Nutricional':{ 
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Nutricional')
+                ->get();
+                break;
+            }
+            case 'HistoriaDeVida':{ 
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Historia De Vida')
+                ->get();
+                break;
+            }
+            case 'Pagos':{ 
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Administración')
+                ->get();
+                break;
+            }
+            // Busca los datos necesarios para llenar el front
+            if(count($this->listadoinformes)) {
+                if($this->listadoinformes) {
+                    $this->informe_id=$this->listadoinformes[0]->id;
+                }
             }
         }
         $this->listadoinformesGenerados=null;
     }
 
     public function MostrarInformes($informe_id) {
-        // $this->listadoinformesGenerados = AgenteInforme::all();
-        // $this->informe_id=$informe_id;
+        // Carga el listado de informes que han sido generados para el area y actor seleccionado
         $this->listadoinformesGenerados = AgenteInforme::where('informe_id','=',$informe_id)
         ->where('agente_id','=',$this->actor_id)
         ->orderby('anio')->orderby('nroperiodo')->get();
-        //  dd($this->listadoinformesGenerados);
-
-        // $this->mostrarInformesGenerados = true;
     }
 
     public function BuscarDatosDelInforme($informe_id) {
-
-        // $this->respuestas = InformeRespuestas::find($informe_id);
-        // $this->respuestas = InformeRespuestas::where('agente_informes_id','=',$informe_id)->get();
-        // $this->informeespecifico = InformeRespuestas::join('preguntas','preguntas.id','preguntas_id')
-        // ->where('agente_informes_id','=',$informe_id)->get();
+        // en base a un id de informe, busca el mismo en la base de datos y carga los datos en informeespecifico
         $this->informeespecifico = InformeRespuestas::where('agente_informes_id','=',$informe_id)
         ->join('preguntas','preguntas.id','preguntas_id')
         ->get(['preguntas_id','cantidad','descripcion','agente_informes_id','fotourl','informe_respuestas.id','textopregunta','escala_id']);
-        // ->get();
-
-        
-        // dd($this->informeespecifico);
         $this->agente_informes_id=$informe_id;
-        // $cont = 0;
-        // if(count($this->informeespecifico)) { $this->nombredelinforme = Informe::find($this->informeespecifico[0]->informe_id)->nombreinforme; }
-
-        // dd($this->nombredelinforme);
-
-        // foreach($this->respuestas as $respuesta) {
-            // $a[$cont]['cantidad'] = $respuesta->cantidad;
-            // $this->informeespecifico = Pregunta::find($respuesta->preguntas_id)->get();
-            // dd($a[$cont]);
-            // $cont++;
-        // }
         $this->mostrarinformeespecifico = true;
-        // dd($a);
-        // dd($this->respuestas->respuesta);
     }
 
     public function ResponderInforme($informe_id) {
-        // dd($this->informe_id);
         // Buscar las preguntas que tendrá el informe
         $informe = Informe::find($this->informe_id);
         $this->bancopreguntas = Pregunta::select('preguntas.id','textopregunta','area_id','escala_id','informe_id','nombreescala','tipodatos','minimo','maximo', 'empresa_id')
@@ -262,52 +242,14 @@ class ActorComponent extends Component
         //         }
         //     }
         // }
-        //     $html = $html . '</table>';
-                
-            //         $matrizpreguntas[$cont][];
-            //     }
-            // $cont++;
-        // dd($html);
-            //     @if($informe->escala_id==2)
-            //     <div>
-            //         <div>
-            //             0 <progress id="file" max="100" value="70" style="height: 10px;vertical-align: inherit;background-color: darkgray; margin-left: 3px; margin-right: 3px; border-radius: 5px"></progress> 100
-            //         </div>
-            //         <p style="position: relative; top:-9px;font-size: 12px;">70</p>
-            //     </div>
-            // @endif
-        // foreach($bancopreguntas as $pregunta) {
-        //     switch ($pregunta->nombreescala) {
-        //         case 'Lógica':{ 
-        //             $matrizrespuestas[$cont]['informes_id']=$pregunta->informes_id;
-        //             $matrizrespuestas[$cont]['preguntas_id']=$pregunta->preguntas_id;
-        //             $matrizrespuestas[$cont]['cantidad']=$pregunta->cantidad;
-        //             $matrizrespuestas[$cont]['descripcion']=$pregunta->descripcion;
-        //         }
-        //     }
-        // }
-        // dd($informe_id);
-        //return redirect()->route('modalpreguntas', ['informe_id' => $informe_id]);
-        // return redirect('livewire-actores-modalpreguntas');
+      
         $this->modalpreguntas = true;
-    }
-
-    public function ResponderInforme1() {
-        // Buscar las preguntas que tendrá el informe
-        $informe = Informe::find(2);
-        $this->bancopreguntas = Pregunta::where('informe_id','=',2)
-        ->join('escalas','escala_id','escalas.id')
-        ->get();
-        $this->modalpreguntas = true;
-        return view('livewire.actores.modalpreguntas')->with(['nombredelinforme'=>'INFORME','bancopreguntas'=>$this->bancopreguntas,'temporal'=>1]);
     }
 
     public function TomarRespuesta($id, $pregunta_id, $respuesta, $descripcion){
-        // $temp = array();
-        // $temp = array('pregunta'=>$pregunta_id, 'respuesta'=>$respuesta, 'descripcion'=>$descripcion);
-        // dd($this->agente_informes_id);
+        // Recibe los id de: id del banco de respuestas e id de la pregunta, la respuesta proporcionada y un campo con texto
         $a = InformeRespuestas::find($id);
-        
+        // si hay una respuesta, la guarda en la tabla de informe_respuestas, sino crea un nuevo registro con la respuesta 
         if(!is_null($a)) {
             $a->cantidad = $respuesta;
             $a->save();
@@ -319,35 +261,22 @@ class ActorComponent extends Component
             $a->descripcion = $descripcion;
             $a->save();
         }
-        // InformeRespuestas::updateOrCreate(['id' => $id], [
-        // $a = new InformeRespuestas();
-        // 'agente_informes_id' => $this->agente_informes_id,
-        // 'preguntas_id' => $pregunta_id,
-        // 'cantidad' => $respuesta,
-        // 'descripcion' => $descripcion,
-        // ]);
-        //dd($a);
-        // $a->save();
-        // array_push($this->bancorespuestas,$temp);
-        // dd($this->bancorespuestas);
-        // $this->bancorespuestas[] = $temp;
+        //Carga nuevamente las respuestas ya grabadas
         $this->BuscarDatosDelInforme($this->agente_informes_id);
     }
 
     public function Filtrar() {
         switch ($this->radios) {
-            case 'Todos': $this->actores = Actor::orderby('nombre')->get(); break;
-            case 'Agentes': $this->actores = Actor::where('tipopersona_id','=',1)->orderby('nombre')->get(); break;
-            case 'Referentes': $this->actores = Actor::where('tipopersona_id','=',2)->orderby('nombre')->get(); break;
-            case 'Personal': $this->actores = Actor::where('tipopersona_id','=',3)->orderby('nombre')->get(); break;
-            case 'Proveedores': $this->actores = Actor::where('tipopersona_id','=',4)->orderby('nombre')->get(); break;
-            case 'Clientes': $this->actores = Actor::where('tipopersona_id','=',5)->orderby('nombre')->get(); break;
-            case 'Vendedores': $this->actores = Actor::where('tipopersona_id','=',6)->orderby('nombre')->get(); break;
-            case 'Empresas': $this->actores = Actor::where('tipopersona_id','=',7)->orderby('nombre')->get(); break;
+            case 'Todos': $this->actores = Actor::orderby('nombre')->where('nombre','like','%'.$this->searchActor.'%')->get(); break;
+            case 'Agentes': $this->actores = Actor::where('tipopersona_id','=',1)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Referentes': $this->actores = Actor::where('tipopersona_id','=',2)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Personal': $this->actores = Actor::where('tipopersona_id','=',3)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Proveedores': $this->actores = Actor::where('tipopersona_id','=',4)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Clientes': $this->actores = Actor::where('tipopersona_id','=',5)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Vendedores': $this->actores = Actor::where('tipopersona_id','=',6)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Empresas': $this->actores = Actor::where('tipopersona_id','=',7)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
         }
     }
-    //     // $this->render();
-    // }
 
     public function create()
     {
@@ -506,12 +435,7 @@ class ActorComponent extends Component
     public function agregar($id)
     {
         $actor = Actor::findOrFail($id);
-        // dd($actor);
-        $this->id = $id; // this->actor_id;
-        //$this->actor_id=$this->actor_id;
-        
-        //$cliente = new empresa;
-        // dd($actor->tipopersona_id);
+        $this->id = $id;
         switch ($actor->tipopersona_id) {
             case 1: { // Agente
                 $this->referentes = Actor::where('tipopersona_id','=',2)->get(); 

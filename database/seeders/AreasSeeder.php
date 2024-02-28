@@ -19,5 +19,8 @@ class AreasSeeder extends Seeder
         DB::table('areas')->insert(['areasdescripcion'=>'Administración','areashabilitada'=>1]);
         DB::table('areas')->insert(['areasdescripcion'=>'Médica','areashabilitada'=>1]);
         DB::table('areas')->insert(['areasdescripcion'=>'Social','areashabilitada'=>1]);
+        DB::table('areas')->insert(['areasdescripcion'=>'Historia De Vida','areashabilitada'=>1]);
+        DB::table('areas')->insert(['areasdescripcion'=>'Pagos','areashabilitada'=>1]);
+        DB::table('areas')->insert(['areasdescripcion'=>'Nutricional','areashabilitada'=>1]);
     }
 }
