@@ -47,7 +47,7 @@ class ActorComponent extends Component
     public $tipos_documentos, $estados_civiles, $tipos_de_personas, $nacionalidades, $localidades, $beneficios, $grados_dependencias, $escolaridades, $camas, $person_activos, $sexos, $datossociales_id, $historiadevida;
 
     public $camas22;
-    public $radios, $temporal;
+    public $radios, $temporal, $searchActor;
 
     public $name, $alias, $documento, $nacimiento, $email, $domicilio, $tipodocumento_id, $estadocivil_id, $nacionalidad_id, $localidad_id, $beneficio_id, $gradodependencia_id, $cama_id, $escolaridad_id, $sexo_id, $tipopersona_id, $personactivo_id, $email_verified_at, $iminimo, $cbu, $nrotramite, $patente, $nrocta,
     $actor_referente, $actividad, $caracterdeltitular, $agente_informes_id;
@@ -130,6 +130,7 @@ class ActorComponent extends Component
     }
 
     public function show($id) {
+        $this->cama_id = '';
         $actor = Actor::find($id);
         $this->CargaDatosdelActor($actor);
         $agente = ActorAgente::where('id','=',$this->actor_id)->get(); 
@@ -144,35 +145,73 @@ class ActorComponent extends Component
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Social')
                 ->get();
+<<<<<<< HEAD
                 if(count($this->listadoinformes)) {
                     if($this->listadoinformes) {
                         $this->informe_id=$this->listadoinformes[0]->id;
                     }
                 }
+=======
+>>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
                 break;
             }
             case 'Medicos':{ 
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Médica')
                 ->get();
+<<<<<<< HEAD
                 if(count($this->listadoinformes)) {
                     if($this->listadoinformes) {
                         $this->informe_id=$this->listadoinformes[0]->id;
                     }
                 }
+=======
+>>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
                 break;
+            }
+            case 'Nutricional':{ 
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Nutricional')
+                ->get();
+                break;
+            }
+            case 'HistoriaDeVida':{ 
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Historia De Vida')
+                ->get();
+                break;
+            }
+            case 'Pagos':{ 
+                $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
+                ->where('areasdescripcion','=','Administración')
+                ->get();
+                break;
+            }
+            // Busca los datos necesarios para llenar el front
+            if(count($this->listadoinformes)) {
+                if($this->listadoinformes) {
+                    $this->informe_id=$this->listadoinformes[0]->id;
+                }
             }
         }
         $this->listadoinformesGenerados=null;
     }
 
     public function MostrarInformes($informe_id) {
+<<<<<<< HEAD
+=======
+        // Carga el listado de informes que han sido generados para el area y actor seleccionado
+>>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         $this->listadoinformesGenerados = AgenteInforme::where('informe_id','=',$informe_id)
         ->where('agente_id','=',$this->actor_id)
         ->orderby('anio')->orderby('nroperiodo')->get();
     }
 
     public function BuscarDatosDelInforme($informe_id) {
+<<<<<<< HEAD
+=======
+        // en base a un id de informe, busca el mismo en la base de datos y carga los datos en informeespecifico
+>>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         $this->informeespecifico = InformeRespuestas::where('agente_informes_id','=',$informe_id)
         ->join('preguntas','preguntas.id','preguntas_id')
         ->get(['preguntas_id','cantidad','descripcion','agente_informes_id','fotourl','informe_respuestas.id','textopregunta','escala_id']);
@@ -187,6 +226,7 @@ class ActorComponent extends Component
         ->where('informe_id','=',$this->informe_id)
         ->join('escalas','escala_id','escalas.id')
         ->get();
+<<<<<<< HEAD
         $this->modalpreguntas = true;
     }
 
@@ -201,6 +241,55 @@ class ActorComponent extends Component
 
     public function TomarRespuesta($id, $pregunta_id, $respuesta, $descripcion){
         $a = InformeRespuestas::find($id);
+=======
+        // Iterar las preguntas y según su tipo mostrarla por pantalla
+        // dd($this->bancopreguntas);
+        // foreach($this->bancopreguntas as $pregunta) {
+        //     // $otra = $pregunta;
+        //     // $escala = $otra->nombreescala1;
+        //     switch ($pregunta->nombreescala) {
+        //         case 'Lógica':{ 
+        //             $html = $html . '
+        //                 <tr>
+        //                     <td>
+        //                         ' . $pregunta->textopregunta . '
+        //                     </td>
+        //                     <td class="col-3" style="text-align: center" colspan=2>
+        //                         <input class="mr-1" type="checkbox">SI<input class="ml-3 mr-1" type="checkbox">NO
+        //                     </td>
+        //                 </tr>';
+        //                 break;
+        //         }
+        //         case 'Numérica':{ 
+        //             $html = $html . '
+        //                 <tr>
+        //                     <td>
+        //                         ' . $pregunta->textopregunta . '
+        //                     </td>
+        //                     <td>Cantidad: <input class="mr-1" type="textbox"></td>
+        //                 </tr>';
+        //                 break;
+        //         }
+        //         case 'Porcentaje':{ 
+        //             $html = $html . '
+        //                 <tr>
+        //                     <td>
+        //                         ' . $pregunta->textopregunta . '
+        //                     </td>
+        //                     <td>Cantidad porcentaje: <input class="mr-1" type="textbox"></td>
+        //                 </tr>';
+        //         }
+        //     }
+        // }
+      
+        $this->modalpreguntas = true;
+    }
+
+    public function TomarRespuesta($id, $pregunta_id, $respuesta, $descripcion){
+        // Recibe los id de: id del banco de respuestas e id de la pregunta, la respuesta proporcionada y un campo con texto
+        $a = InformeRespuestas::find($id);
+        // si hay una respuesta, la guarda en la tabla de informe_respuestas, sino crea un nuevo registro con la respuesta 
+>>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         if(!is_null($a)) {
             $a->cantidad = $respuesta;
             $a->save();
@@ -212,19 +301,23 @@ class ActorComponent extends Component
             $a->descripcion = $descripcion;
             $a->save();
         }
+<<<<<<< HEAD
+=======
+        //Carga nuevamente las respuestas ya grabadas
+>>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         $this->BuscarDatosDelInforme($this->agente_informes_id);
     }
 
     public function Filtrar() {
         switch ($this->radios) {
-            case 'Todos': $this->actores = Actor::orderby('nombre')->get(); break;
-            case 'Agentes': $this->actores = Actor::where('tipopersona_id','=',1)->orderby('nombre')->get(); break;
-            case 'Referentes': $this->actores = Actor::where('tipopersona_id','=',2)->orderby('nombre')->get(); break;
-            case 'Personal': $this->actores = Actor::where('tipopersona_id','=',3)->orderby('nombre')->get(); break;
-            case 'Proveedores': $this->actores = Actor::where('tipopersona_id','=',4)->orderby('nombre')->get(); break;
-            case 'Clientes': $this->actores = Actor::where('tipopersona_id','=',5)->orderby('nombre')->get(); break;
-            case 'Vendedores': $this->actores = Actor::where('tipopersona_id','=',6)->orderby('nombre')->get(); break;
-            case 'Empresas': $this->actores = Actor::where('tipopersona_id','=',7)->orderby('nombre')->get(); break;
+            case 'Todos': $this->actores = Actor::orderby('nombre')->where('nombre','like','%'.$this->searchActor.'%')->get(); break;
+            case 'Agentes': $this->actores = Actor::where('tipopersona_id','=',1)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Referentes': $this->actores = Actor::where('tipopersona_id','=',2)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Personal': $this->actores = Actor::where('tipopersona_id','=',3)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Proveedores': $this->actores = Actor::where('tipopersona_id','=',4)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Clientes': $this->actores = Actor::where('tipopersona_id','=',5)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Vendedores': $this->actores = Actor::where('tipopersona_id','=',6)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
+            case 'Empresas': $this->actores = Actor::where('tipopersona_id','=',7)->where('nombre','like','%'.$this->searchActor.'%')->orderby('nombre')->get(); break;
         }
     }
 
@@ -359,8 +452,12 @@ class ActorComponent extends Component
     public function agregar($id)
     {
         $actor = Actor::findOrFail($id);
+<<<<<<< HEAD
         // dd($actor);
         $this->id = $id; 
+=======
+        $this->id = $id;
+>>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         switch ($actor->tipopersona_id) {
             case 1: { // Agente
                 $this->referentes = Actor::where('tipopersona_id','=',2)->get(); 

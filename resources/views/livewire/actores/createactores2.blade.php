@@ -23,12 +23,17 @@
                         <div class="w-1 bg-gray-300 card shadow-0 mt-3"></div>
                         <div class="col-8 mt-5 border border-primary shadow-0">
                             <div class="flex d-flex flex-wrap">
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Sociales')">Informes Sociales</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Medicos')">Informes Médicos</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Nutricionales')">Informes Nutricionales</label>           
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('HistoriaDeVida')">historiadevida_id</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Otro')">Otro</label>
-                                <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Pagos')">Pagos</label>
+                                {{-- si es Agente --}}
+                                @if($tipopersona_id==1)  
+                                    <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Sociales')">Informes Sociales</label>
+                                    <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Medicos')">Informes Médicos</label>
+                                    <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Nutricional')">Informes Nutricionales</label>           
+                                    <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('HistoriaDeVida')">Historia de Vida</label>
+                                    <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Otro')">Otro</label>
+                                    <label class="btn btn-info mr-2 rounded-md mt-2" wire:click="CargarInforme('Pagos')">Pagos</label>
+                                @else
+                                    Falta Hacer
+                                @endif
                             </div>
                         </div>
                     </div>
