@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-class AgenteInformeSeeder extends Seeder
+use Illuminate\Support\Facades\DB;
+
+class ActorReferente extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +14,6 @@ class AgenteInformeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('actor_referentes')->insert(['vinculo'=>'Ninguno','modalidad'=>'','actor_id'=>1]);
     }
 }
