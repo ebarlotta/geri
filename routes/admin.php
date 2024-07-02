@@ -35,7 +35,7 @@ use App\Http\Livewire\Informes\InformeComponent;
 use App\Http\Livewire\Medicamentos\MedicamentosComponent;
 use App\Http\Livewire\Menu\MenuComponent;
 use App\Http\Livewire\Personas\PersonaComponent;
-
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 //Route::get('',[HomeController::class,'index'])->name('admin.index');
 
@@ -82,12 +82,19 @@ Route::get('habitaciones',Habitacion::class)->name('habitaciones');
 
 Route::get('menu',MenuComponent::class)->name('menu');
 // Route::get('personas',PersonaComponent::class)->name('personas');
+Route::get('pdf/informes', ActorComponent::class, 'showPDF');
 Route::get('actores',ActorComponent::class)->name('actores');
 // Route::get('modalpreguntas',[ActorComponent::class,'ResponderInforme1'])->name('modalpreguntas');
 
 Route::get('informes',InformeComponent::class)->name('informes');
+
 // Route::get('agentegestionar',[ActorComponent::class,'show'])->name('agentegestionar');
 
 //Route::get('menugestionar',[MenuComponent::class,'show'])->name('menugestionar');
 
 session(['empresa_id' => 1]);  // HACER -> Hay que cargar la empresa cuando el usuario se loguee
+
+Route::get('/test/', function () {
+   $pdf = PDF::loadView('pruebaparapdf');
+   return $pdf->download('pruebapdf.pdf');
+ });

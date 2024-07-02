@@ -11,6 +11,7 @@ use App\Models\Actores\ActorPersonal;
 use App\Models\Actores\ActorProveedor;
 use App\Models\Actores\ActorReferente;
 use App\Models\Actores\ActorVendedor;
+use App\Models\Agente;
 use App\Models\AgenteInforme;
 use App\Models\Areas;
 use App\Models\Beneficios;
@@ -38,6 +39,7 @@ use App\Models\TiposDocumentos;
 use App\Models\EmpresaUsuario;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TraitUseAdaptation\Alias;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ActorComponent extends Component
 {
@@ -106,6 +108,11 @@ class ActorComponent extends Component
     ];
 
     public function nuevoInforme() {
+        $this->validate([
+            'anioNuevo' => 'required|integer',
+            'periodoNuevo' => 'required',
+            'profesional_id_Nuevo' => 'required',
+        ]);
         $a= new AgenteInforme;
         $a->agente_id = $this->actor_id;
         $a->informe_id=$this->nuevo_informe_id;
@@ -145,28 +152,22 @@ class ActorComponent extends Component
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Social')
                 ->get();
-<<<<<<< HEAD
                 if(count($this->listadoinformes)) {
                     if($this->listadoinformes) {
                         $this->informe_id=$this->listadoinformes[0]->id;
                     }
                 }
-=======
->>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
                 break;
             }
             case 'Medicos':{ 
                 $this->listadoinformes = Areas::join('informes','areas.id','informes.area_id')
                 ->where('areasdescripcion','=','Médica')
                 ->get();
-<<<<<<< HEAD
                 if(count($this->listadoinformes)) {
                     if($this->listadoinformes) {
                         $this->informe_id=$this->listadoinformes[0]->id;
                     }
                 }
-=======
->>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
                 break;
             }
             case 'Nutricional':{ 
@@ -198,20 +199,12 @@ class ActorComponent extends Component
     }
 
     public function MostrarInformes($informe_id) {
-<<<<<<< HEAD
-=======
-        // Carga el listado de informes que han sido generados para el area y actor seleccionado
->>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         $this->listadoinformesGenerados = AgenteInforme::where('informe_id','=',$informe_id)
         ->where('agente_id','=',$this->actor_id)
         ->orderby('anio')->orderby('nroperiodo')->get();
     }
 
     public function BuscarDatosDelInforme($informe_id) {
-<<<<<<< HEAD
-=======
-        // en base a un id de informe, busca el mismo en la base de datos y carga los datos en informeespecifico
->>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         $this->informeespecifico = InformeRespuestas::where('agente_informes_id','=',$informe_id)
         ->join('preguntas','preguntas.id','preguntas_id')
         ->get(['preguntas_id','cantidad','descripcion','agente_informes_id','fotourl','informe_respuestas.id','textopregunta','escala_id']);
@@ -226,7 +219,6 @@ class ActorComponent extends Component
         ->where('informe_id','=',$this->informe_id)
         ->join('escalas','escala_id','escalas.id')
         ->get();
-<<<<<<< HEAD
         $this->modalpreguntas = true;
     }
 
@@ -241,55 +233,6 @@ class ActorComponent extends Component
 
     public function TomarRespuesta($id, $pregunta_id, $respuesta, $descripcion){
         $a = InformeRespuestas::find($id);
-=======
-        // Iterar las preguntas y según su tipo mostrarla por pantalla
-        // dd($this->bancopreguntas);
-        // foreach($this->bancopreguntas as $pregunta) {
-        //     // $otra = $pregunta;
-        //     // $escala = $otra->nombreescala1;
-        //     switch ($pregunta->nombreescala) {
-        //         case 'Lógica':{ 
-        //             $html = $html . '
-        //                 <tr>
-        //                     <td>
-        //                         ' . $pregunta->textopregunta . '
-        //                     </td>
-        //                     <td class="col-3" style="text-align: center" colspan=2>
-        //                         <input class="mr-1" type="checkbox">SI<input class="ml-3 mr-1" type="checkbox">NO
-        //                     </td>
-        //                 </tr>';
-        //                 break;
-        //         }
-        //         case 'Numérica':{ 
-        //             $html = $html . '
-        //                 <tr>
-        //                     <td>
-        //                         ' . $pregunta->textopregunta . '
-        //                     </td>
-        //                     <td>Cantidad: <input class="mr-1" type="textbox"></td>
-        //                 </tr>';
-        //                 break;
-        //         }
-        //         case 'Porcentaje':{ 
-        //             $html = $html . '
-        //                 <tr>
-        //                     <td>
-        //                         ' . $pregunta->textopregunta . '
-        //                     </td>
-        //                     <td>Cantidad porcentaje: <input class="mr-1" type="textbox"></td>
-        //                 </tr>';
-        //         }
-        //     }
-        // }
-      
-        $this->modalpreguntas = true;
-    }
-
-    public function TomarRespuesta($id, $pregunta_id, $respuesta, $descripcion){
-        // Recibe los id de: id del banco de respuestas e id de la pregunta, la respuesta proporcionada y un campo con texto
-        $a = InformeRespuestas::find($id);
-        // si hay una respuesta, la guarda en la tabla de informe_respuestas, sino crea un nuevo registro con la respuesta 
->>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         if(!is_null($a)) {
             $a->cantidad = $respuesta;
             $a->save();
@@ -301,10 +244,6 @@ class ActorComponent extends Component
             $a->descripcion = $descripcion;
             $a->save();
         }
-<<<<<<< HEAD
-=======
-        //Carga nuevamente las respuestas ya grabadas
->>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         $this->BuscarDatosDelInforme($this->agente_informes_id);
     }
 
@@ -452,12 +391,8 @@ class ActorComponent extends Component
     public function agregar($id)
     {
         $actor = Actor::findOrFail($id);
-<<<<<<< HEAD
         // dd($actor);
         $this->id = $id; 
-=======
-        $this->id = $id;
->>>>>>> 4b11a8b9366b3a5b6ab3fb9308ff3bda3666d512
         switch ($actor->tipopersona_id) {
             case 1: { // Agente
                 $this->referentes = Actor::where('tipopersona_id','=',2)->get(); 
@@ -524,6 +459,7 @@ class ActorComponent extends Component
         // Carga Datos del Actor
         $this->CargaDatosdelActor($actor);
         $this->openModalPopoverAdicionales();
+        if(is_null($this->radios)) { $this->radios='Todos'; $this->actores = Actor::orderby('nombre')->get(); } // Carga inicial de los actores y categoria Todos en la variable radios
     }
 
     public function CargaDatosdelActor($actor) {
@@ -694,5 +630,23 @@ class ActorComponent extends Component
                 break;
         }
 
+    }
+
+    public function showPDF() {
+// dd('entro');
+        // $this->agente_informes_id = 6;
+        // $a = AgenteInforme::find($this->agente_informes_id);
+        // $agente = Actor::find($a->agente_id);
+        // $tituloInforme = Informe::find($a->informe_id);
+        // $periodo = $a->nroperiodo;
+        // $anio = $a->anio;
+        // $profesional = Actor::find($a->profesional_id);
+        // $informeespecifico = $this->informeespecifico;
+        // dd($a);
+        $pdf = PDF::loadView('livewire.actores.showPDF');
+        // $pdf = PDF::loadView('livewire.actores.showPDF',compact('agente','tituloInforme','periodo','anio','profesional','informeespecifico'));
+        return $pdf->stream('archivo.pdf');
+        dd($pdf->stream('archivo.pdf'));
+        return $pdf->download('pruebapdf.pdf');
     }
 }

@@ -6,11 +6,11 @@
             </div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
             <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle col-8 sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-            <form class="col-12">
+            {{-- <form class="col-12"> --}}
                 <!-- Controles -->
                 
                 
-                <div class="container">
+                {{-- <div class="container">
                     <b>{{ $nombredelinforme }}</b>
                     <table class="table table-striped">
                         @if(count($informeespecifico))
@@ -55,7 +55,7 @@
                             </tr>
                         @endif
                     </table>
-                </div>
+                </div> --}}
 
 
                 <!-- Botones -->
@@ -63,13 +63,33 @@
                     {{-- <x-guardar></x-guardar> --}}
                     {{-- <x-cerrar></x-cerrar> --}}
                     <span class="mt-3 flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                        <a href="{{ URL::to('/admin/pdf/informes') }}" target="_blank">
+                        {{-- <a href="#" target="_blank"> --}}
+
+                            {{-- <img class="p-2" src="img/pdf.png" alt="" width="50px"> --}}
+                            <button class="btn btn-warning">
+                                PDF
+                            </button>
+                        </a>
+                        <a href="{{ URL::to('/test') }}" target="_blank">
+                            {{-- <a href="#" target="_blank"> --}}
+    
+                                {{-- <img class="p-2" src="img/pdf.png" alt="" width="50px"> --}}
+                                <button class="btn btn-warning">
+                                    PDF Test
+                                </button>
+                            </a>
+                        <button wire:click="showPDF()" type="button"
+                            class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-green-300 text-base leading-6 font-bold text-gray-700 shadow-sm hover:bg-green-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                            PDF wire
+                        </button>
                         <button wire:click="closeModalInformeEspecifico()" type="button"
                             class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-yellow-300 text-base leading-6 font-bold text-gray-700 shadow-sm hover:bg-yellow-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             Cerrar
                         </button>
                     </span>
                 </div>
-            </form>
+            {{-- </form> --}}
         </div>
     </div>
 </div>

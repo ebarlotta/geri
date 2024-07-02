@@ -83,7 +83,7 @@
             @if ($isModalOpenGestionar) @include('livewire.actores.createactores2') @endif
             @if ($modalpreguntas) @include('livewire.actores.modalpreguntas') @endif
 
-            <table class="table-fixed w-full">
+            <table class="table-fixed">
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 col-3">Apellido y Nombre</th>
